@@ -1,0 +1,3 @@
+product_id,institute,model,experiment,frequency,modeling_realm,mip_table,ensemble_member,variable,temporal_subset,version,path
+output,NOAA-GFDL,GFDL-ESM4,histSST,mon,atmos,Amon,r1i1p1,rlut,196101-200512,v20180701,/Users/ar46/data_cmip6/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/histSST/r1i1p1f1/Amon/rlut/gr1/v20180701/rlut_Amon_GFDL-ESM4_histSST_r1i1p1f1_gr1_185001-194912.nc
+output,NOAA-GFDL,GFDL-ESM4,histSST,mon,atmos,Amon,r1i1p1,rlut,196101-200512,v20180701,/Users/ar46/data_cmip6/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/histSST/r1i1p1f1/Amon/rlut/gr1/v20180701/rlut_Amon_GFDL-ESM4_histSST_r1i1p1f1_gr1_195001-201412.nc
