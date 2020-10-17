@@ -1,0 +1,6 @@
+Amon:
+    frequency: mon
+    modeling_realm: atmos
+Omon:
+    frequency: mon
+    modeling_realm: ocean
