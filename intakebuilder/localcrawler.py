@@ -14,6 +14,8 @@ def crawlLocal(projectdir, dictInfo):
     listfiles = []
     for dirpath, dirs, files in os.walk(projectdir):
         for filename in files:
+            dictInfo = {}
+            getinfo.getProject(projectdir, dictInfo)
             # get info from filename
             print(filename)
             filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
