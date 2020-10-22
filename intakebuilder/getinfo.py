@@ -26,8 +26,14 @@ def getinfoFromYAML(dictInfo,yamlfile,miptable=None):
         for k, v in mappings.items():
               print(k, "->", v)
         if(miptable):
-            dictInfo["frequency"] = mappings[miptable]["frequency"]
-            dictInfo["modeling_realm"] = mappings[miptable]["modeling_realm"]
+            try:
+                dictInfo["frequency"] = mappings[miptable]["frequency"]
+            except KeyError:
+                dictInfo["frequency"] = "NA"
+            try:
+                dictInfo["modeling_realm"] = mappings[miptable]["modeling_realm"]
+            except KeyError:
+                dictInfo["modeling_realm"]  = "NA"
     return(dictInfo)
 
 def getStem(dirpath,projectdir):
@@ -58,7 +64,10 @@ def getInfoFromFilename(filename,dictInfo):
         dictInfo["ensemble_member"] = ens
         grid = ncfilename[5]
         dictInfo["grid_label"] = grid
-        tsubset = ncfilename[6]
+        try:
+           tsubset = ncfilename[6]
+        except IndexError:
+           tsubset = "null" #For fx fields
         dictInfo["temporal subset"] = tsubset
     else:
         sys.exit("Filename not compatible with this version of the builder:",filename)
