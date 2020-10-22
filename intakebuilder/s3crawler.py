@@ -25,6 +25,7 @@ def sss_crawler(projectdir,dictFilter,project_root, dictInfo):
         pat = re.compile('({}/)'.format(dictFilter["miptable"]))
     elif(("varname") in dictFilter.keys()):
         pat = re.compile('({}/)'.format(dictFilter["varname"]))
+    orig_pat = pat
     paginator = s3client.get_paginator('list_objects')
     for result in paginator.paginate(Bucket=project_bucket, Prefix=dictFilter["source_prefix"], Delimiter=filetype):
         for prefixes in result.get('CommonPrefixes'):
@@ -32,9 +33,10 @@ def sss_crawler(projectdir,dictFilter,project_root, dictInfo):
             dictInfo = getinfo.getProject(project_root, dictInfo)
             commonprefix = prefixes.get('Prefix')
             searchpath = commonprefix
+            if (orig_pat is None):
+                pat = commonprefix #we assume matching entire path
             #filepath = '{}/{}/{}'.format(s3prefix,project_bucket,commonprefix)
           #  print("Search filters applied", dictFilter["source_prefix"], "and", pat)
-
             if(pat is not None):
                 m = re.search(pat, searchpath)
                 if m is not None:
@@ -53,4 +55,5 @@ def sss_crawler(projectdir,dictFilter,project_root, dictInfo):
                         #TODO YAML for all mip_tables
                         dictInfo = getinfo.getinfoFromYAML(dictInfo,"table.yaml",miptable=dictInfo["mip_table"])
                         listfiles.append(dictInfo)
+                        print(dictInfo)
     return listfiles

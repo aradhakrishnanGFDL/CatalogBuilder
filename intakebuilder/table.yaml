@@ -4,3 +4,6 @@ Amon:
 Omon:
     frequency: mon
     modeling_realm: ocean
+3hr:
+    frequency: 3hr
+    modeling_realm: na
