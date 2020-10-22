@@ -9,7 +9,6 @@ def main():
     dictInfo = {}
     print(project_dir)
     project_dir = project_dir.rstrip("/")
-    getinfo.getProject(project_dir, dictInfo)
     list_files = localcrawler.crawlLocal(project_dir, dictInfo)
     headers = CSVwriter.getHeader()
     if (not os.path.exists(csvfile)):

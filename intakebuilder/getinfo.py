@@ -22,7 +22,7 @@ def getinfoFromYAML(dictInfo,yamlfile,miptable=None):
     import yaml
     with open(yamlfile) as f:
         mappings = yaml.load(f, Loader=yaml.FullLoader)
-        print(mappings)
+        #print(mappings)
         for k, v in mappings.items():
               print(k, "->", v)
         if(miptable):

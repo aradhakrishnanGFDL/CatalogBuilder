@@ -18,8 +18,7 @@ def main():
     dictInfo = {}
     print(project_root)
     project_root = project_root.rstrip("/")
-    dictInfo=getinfo.getProject(project_root, dictInfo)
-    list_files = s3crawler.sss_crawler(project_root,dictFilter, dictInfo)
+    list_files = s3crawler.sss_crawler(project_root,dictFilter, project_root,dictInfo={})
     print(list_files)
     #TODO make search strings a dict for later
     #merge project_root and project_bucket as needed
