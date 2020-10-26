@@ -23,8 +23,8 @@ def getinfoFromYAML(dictInfo,yamlfile,miptable=None):
     with open(yamlfile) as f:
         mappings = yaml.load(f, Loader=yaml.FullLoader)
         #print(mappings)
-        for k, v in mappings.items():
-              print(k, "->", v)
+        #for k, v in mappings.items():
+              #print(k, "->", v)
         if(miptable):
             try:
                 dictInfo["frequency"] = mappings[miptable]["frequency"]
