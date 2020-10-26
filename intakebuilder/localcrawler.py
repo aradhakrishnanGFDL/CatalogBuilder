@@ -5,7 +5,7 @@ import re
 localcrawler crawls through the local file path, then calls helper functions in the package to getinfo.
 It finally returns a list of dict
 '''
-def crawlLocal(projectdir, dictFilter,dictInfo):
+def crawlLocal(projectdir, dictFilter,logger):
     '''
     Craw through the local directory and run through the getInfo.. functions
     :param projectdir:
@@ -21,16 +21,16 @@ def crawlLocal(projectdir, dictFilter,dictInfo):
         pat = re.compile('({}/)'.format(dictFilter["varname"]))
     orig_pat = pat
     for dirpath, dirs, files in os.walk(projectdir):
-        #print(dirpath, dictFilter["source_prefix"])
-        if(dictFilter["source_prefix"] in dirpath): #TODO improved filtering 
-            searchpath = dirpath 
+        print(dirpath, dictFilter["source_prefix"])
+        if dictFilter["source_prefix"] in dirpath: #TODO improved filtering
+            searchpath = dirpath
             if (orig_pat is None):
                 pat = dirpath  #we assume matching entire path
           #  print("Search filters applied", dictFilter["source_prefix"], "and", pat)
             if(pat is not None):
                 m = re.search(pat, searchpath)
                 for filename in files:
-                   print(filename)
+                   logger.info(filename)
 
                    dictInfo = {}
                    dictInfo = getinfo.getProject(projectdir, dictInfo)
