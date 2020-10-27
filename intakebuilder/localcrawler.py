@@ -20,6 +20,7 @@ def crawlLocal(projectdir, dictFilter,logger):
     elif(("varname") in dictFilter.keys()):
         pat = re.compile('({}/)'.format(dictFilter["varname"]))
     orig_pat = pat
+<<<<<<< HEAD
     #TODO INCLUDE filter in traversing through directories at the top
     for dirpath, dirs, files in os.walk(projectdir):
         #print(dirpath, dictFilter["source_prefix"])
@@ -32,7 +33,6 @@ def crawlLocal(projectdir, dictFilter,logger):
                 m = re.search(pat, searchpath)
                 for filename in files:
                    logger.info(dirpath+"/"+filename)
-
                    dictInfo = {}
                    dictInfo = getinfo.getProject(projectdir, dictInfo)
                    # get info from filename
