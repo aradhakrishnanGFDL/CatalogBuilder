@@ -20,8 +20,9 @@ def crawlLocal(projectdir, dictFilter,logger):
     elif(("varname") in dictFilter.keys()):
         pat = re.compile('({}/)'.format(dictFilter["varname"]))
     orig_pat = pat
+    #TODO INCLUDE filter in traversing through directories at the top
     for dirpath, dirs, files in os.walk(projectdir):
-        print(dirpath, dictFilter["source_prefix"])
+        #print(dirpath, dictFilter["source_prefix"])
         if dictFilter["source_prefix"] in dirpath: #TODO improved filtering
             searchpath = dirpath
             if (orig_pat is None):
@@ -30,7 +31,7 @@ def crawlLocal(projectdir, dictFilter,logger):
             if(pat is not None):
                 m = re.search(pat, searchpath)
                 for filename in files:
-                   logger.info(filename)
+                   logger.info(dirpath+"/"+filename)
 
                    dictInfo = {}
                    dictInfo = getinfo.getProject(projectdir, dictInfo)
@@ -39,7 +40,7 @@ def crawlLocal(projectdir, dictFilter,logger):
                    filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
                    dictInfo["path"]=filepath
 #                  print("Calling getinfo.getInfoFromFilename(filename, dictInfo)..")
-                   dictInfo = getinfo.getInfoFromFilename(filename, dictInfo)
+                   dictInfo = getinfo.getInfoFromFilename(filename, dictInfo,logger)
 #                  print("Calling getinfo.getInfoFromDRS(dirpath, projectdir, dictInfo)")
                    dictInfo = getinfo.getInfoFromDRS(dirpath, projectdir, dictInfo)
 #                  print("Calling getinfo.getInfoFromGlobalAtts(filepath, dictInfo)")

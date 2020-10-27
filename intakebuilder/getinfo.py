@@ -48,7 +48,7 @@ def getStem(dirpath,projectdir):
     return stemdir
 
 
-def getInfoFromFilename(filename,dictInfo):
+def getInfoFromFilename(filename,dictInfo,logger):
     # 5 AR: get the following from the netCDF filename e.g.rlut_Amon_GFDL-ESM4_histSST_r1i1p1f1_gr1_195001-201412.nc
     if(filename.endswith(".nc")):
         ncfilename = filename.split(".")[0].split("_")
@@ -70,7 +70,7 @@ def getInfoFromFilename(filename,dictInfo):
            tsubset = "null" #For fx fields
         dictInfo["temporal subset"] = tsubset
     else:
-        sys.exit("Filename not compatible with this version of the builder:",filename)
+        logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
 def getInfoFromDRS(dirpath,projectdir,dictInfo):
     '''

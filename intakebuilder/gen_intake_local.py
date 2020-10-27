@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 from intakebuilder import getinfo, localcrawler, CSVwriter
 
