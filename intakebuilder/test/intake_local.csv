@@ -1,3 +1,0 @@
-project,institute,model,experiment_id,frequency,modeling_realm,mip_table,ensemble_member,grid_label,variable,temporal subset,version,path
-CMIP6,NOAA-GFDL,GFDL-ESM4,histSST,mon,atmos,Amon,r1i1p1f1,gr1,rlut,185001-194912,v20180701,/Users/ar46/data_cmip6/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/histSST/r1i1p1f1/Amon/rlut/gr1/v20180701/rlut_Amon_GFDL-ESM4_histSST_r1i1p1f1_gr1_185001-194912.nc
-CMIP6,NOAA-GFDL,GFDL-ESM4,histSST,mon,atmos,Amon,r1i1p1f1,gr1,rlut,195001-201412,v20180701,/Users/ar46/data_cmip6/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/histSST/r1i1p1f1/Amon/rlut/gr1/v20180701/rlut_Amon_GFDL-ESM4_histSST_r1i1p1f1_gr1_195001-201412.nc
