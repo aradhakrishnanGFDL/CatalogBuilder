@@ -5,7 +5,7 @@
   "catalog_file": "/home/jovyan/test/CatalogBuilder/intakebuilder/test/intake_uda.csv.gz",
   "attributes": [
     {
-      "column_name": "product_id",
+      "column_name": "project",
       "vocabulary": ""
     },
     {
@@ -50,7 +50,7 @@
   "aggregation_control": {
     "variable_column_name": "variable",
     "groupby_attrs": [
-      "product_id",
+      "project",
       "institute",
       "model",
       "modeling_realm",
