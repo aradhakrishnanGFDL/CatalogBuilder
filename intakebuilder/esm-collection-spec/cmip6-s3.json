@@ -53,9 +53,7 @@
       "project",
       "institute",
       "model",
-      "modeling_realm",
       "experiment",
-      "frequency",
       "mip_table"
     ],
     "aggregations": [
