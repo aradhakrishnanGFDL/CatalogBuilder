@@ -20,7 +20,6 @@ def crawlLocal(projectdir, dictFilter,logger):
     elif(("varname") in dictFilter.keys()):
         pat = re.compile('({}/)'.format(dictFilter["varname"]))
     orig_pat = pat
-<<<<<<< HEAD
     #TODO INCLUDE filter in traversing through directories at the top
     for dirpath, dirs, files in os.walk(projectdir):
         #print(dirpath, dictFilter["source_prefix"])
@@ -38,13 +37,21 @@ def crawlLocal(projectdir, dictFilter,logger):
                    # get info from filename
                    #print(filename)
                    filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
+                   if not filename.endswith(".nc"):
+                        logger.debug("FILE does not end with .nc. Skipping", filepath)
+                        continue
                    dictInfo["path"]=filepath
-#                  print("Calling getinfo.getInfoFromFilename(filename, dictInfo)..")
+#                  print("Callin:g getinfo.getInfoFromFilename(filename, dictInfo)..")
                    dictInfo = getinfo.getInfoFromFilename(filename, dictInfo,logger)
 #                  print("Calling getinfo.getInfoFromDRS(dirpath, projectdir, dictInfo)")
                    dictInfo = getinfo.getInfoFromDRS(dirpath, projectdir, dictInfo)
 #                  print("Calling getinfo.getInfoFromGlobalAtts(filepath, dictInfo)")
 #                  dictInfo = getinfo.getInfoFromGlobalAtts(filepath, dictInfo)
+                   #eliminate bad DRS filenames spotted
+                   list_bad_modellabel = ["","piControl","land-hist","piClim-SO2","abrupt-4xCO2","hist-piAer","hist-piNTCF","piClim-ghg","piClim-OC","hist-GHG","piClim-BC","1pctCO2"]
+                   if(dictInfo["model"] in list_bad_modellabel):
+                      logger.debug("Found experiment name in model column, skipping this possibly bad DRS filename", dictInfo["experiment"],filepath)
+                      continue
                    listfiles.append(dictInfo)
                    #print(listfiles)
     return listfiles
