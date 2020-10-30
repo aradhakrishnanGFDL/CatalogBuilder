@@ -17,7 +17,7 @@
       "vocabulary": ""
     },
     {
-      "column_name": "experiment-id",
+      "column_name": "experiment_id",
       "vocabulary": ""
     },
     { "column_name": "ensemble_member", "vocabulary": "" },
@@ -53,7 +53,7 @@
       "project",
       "institute",
       "model",
-      "experiment-id",
+      "experiment_id",
       "mip_table"
     ],
     "aggregations": [
