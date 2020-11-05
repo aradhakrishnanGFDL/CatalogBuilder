@@ -16,10 +16,12 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
+        $CONDA/bin/conda --version
         # $CONDA is an environment variable pointing to the root of the miniconda directory
-        $CONDA/bin/conda env update --file environment_intake.yml --name base
+        $CONDA/bin/conda env update --file environment.yml --name base
     - name: Lint with flake8
       run: |
+        $CONDA/bin/conda --version 
         $CONDA/bin/conda install flake8
         # stop the build if there are Python syntax errors or undefined names
         $CONDA/bin/flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
