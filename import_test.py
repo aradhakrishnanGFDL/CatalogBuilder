@@ -4,7 +4,6 @@ try:
   try:
      from intakebuilder import getinfo, localcrawler, CSVwriter
      print("Imported getinfo, localcrawler, CSVwriter")
-     return -99
   except ImportError:
      print("Unable to import",  "getinfo, localcrawler, CSVwriter")
      return -98
