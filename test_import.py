@@ -1,6 +1,6 @@
 def test_import():
  try:
-  import intakebuildeer
+  import intakebuilder
   print("Imported intakebuilder")
   try:
      from intakebuilder import getinfo, localcrawler, CSVwriter
