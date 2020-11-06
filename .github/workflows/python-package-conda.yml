@@ -22,4 +22,4 @@ jobs:
         $CONDA/bin/conda install -n intake -c conda-forge pandas xarray botocore boto3 pytest
     - name: tests_prelim
       run: |
-        $CONDA/bin/pytest pytest
+        $CONDA/envs/intake/bin/pytest pytest
