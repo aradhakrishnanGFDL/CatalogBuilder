@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build-linux:
-    runs-on: macos-10.15
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
 
@@ -18,7 +18,8 @@ jobs:
       run: |
         $CONDA/bin/conda --version
         # $CONDA is an environment variable pointing to the root of the miniconda directory
-        $CONDA/bin/conda env update -n intake -c conda-forge pandas xarray csv botocore boto3 
+        $CONDA/bin/conda create -n intake
+        $CONDA/bin/conda install -n intake -c conda-forge pandas xarray botocore boto3 
     - name: Lint with flake8
       run: |
         $CONDA/bin/conda --version 
