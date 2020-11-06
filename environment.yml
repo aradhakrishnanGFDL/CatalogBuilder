@@ -2,6 +2,9 @@ name: intake
 channels:
   - defaults
 dependencies:
+  - pip:
+    - libcxx
+    - libgfortran
   - blas=1.0
   - boto3=1.16.0
   - botocore=1.19.1
@@ -22,10 +25,8 @@ dependencies:
   - jpeg=9b
   - krb5=1.18.2
   - libcurl=7.71.1
-  - libcxx=11.0.0
   - libedit=3.1.20191231
   - libffi=3.3
-  - libgfortran=3.0.0
   - libnetcdf=4.7.3
   - libssh2=1.9.0
   - mkl=2019.4
