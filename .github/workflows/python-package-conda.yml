@@ -22,4 +22,4 @@ jobs:
         $CONDA/bin/conda install -n intake -c conda-forge pandas xarray botocore boto3 
     - name: import_test 
       run: |
-        python import_test.py
+        python tests/import_test.py
