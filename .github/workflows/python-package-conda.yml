@@ -22,5 +22,6 @@ jobs:
         $CONDA/bin/conda install -n intake -c conda-forge pandas xarray botocore boto3 
     - name: import_test 
       run: |
-        conda activate intake
+        $CONDA/bin/conda init bash 
+        $CONDA/bin/conda activate intake
         python import_test.py
