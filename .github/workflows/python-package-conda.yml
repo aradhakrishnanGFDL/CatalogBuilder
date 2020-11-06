@@ -19,7 +19,7 @@ jobs:
         $CONDA/bin/conda --version
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         $CONDA/bin/conda create -n intake
-        $CONDA/bin/conda install -n intake -c conda-forge pandas xarray botocore boto3 
+        $CONDA/bin/conda install -n intake -c conda-forge pandas xarray botocore boto3 pytest
     - name: import_test 
       run: |
-        python import_test.py
+        pytest
