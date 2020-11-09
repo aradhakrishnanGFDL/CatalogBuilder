@@ -18,7 +18,7 @@ def sss_crawler(projectdir,dictFilter,project_root, dictInfo):
     #######################################################
     listfiles = []
     pat = None
-    print(dictFilter.keys())
+    logger.debug(dictFilter.keys())
     if("miptable" in dictFilter.keys()) & (("varname") in dictFilter.keys()):
         pat = re.compile('({}/{}/)'.format(dictFilter["miptable"],dictFilter["varname"]))
     elif("miptable" in dictFilter.keys()):
@@ -45,15 +45,15 @@ def sss_crawler(projectdir,dictFilter,project_root, dictInfo):
                         filepath = '{}/{}/{}'.format(s3prefix,project_bucket,commonprefix)
                         #TODO if filepath already exists in csv we skip
                         dictInfo["path"]=filepath
-                        print(filepath)
+                        logger.debug(filepath)
                         filename = filepath.split("/")[-1]
                         dirpath = "/".join(filepath.split("/")[0:-1])
                         #projectdird passed to sss_crawler should be s3://bucket/project
-                        dictInfo = getinfo.getInfoFromFilename(filename, dictInfo)
+                        dictInfo = getinfo.getInfoFromFilename(filename, dictInfo,logger)
                         dictInfo = getinfo.getInfoFromDRS(dirpath, projectdir, dictInfo)
                         #Using YAML instead of this to get frequency and modeling_realm  dictInfo = getinfo.getInfoFromGlobalAtts(filepath, dictInfo)
                         #TODO YAML for all mip_tables
                         dictInfo = getinfo.getinfoFromYAML(dictInfo,"table.yaml",miptable=dictInfo["mip_table"])
                         listfiles.append(dictInfo)
-                        print(dictInfo)
+                        logger.debug(dictInfo)
     return listfiles
