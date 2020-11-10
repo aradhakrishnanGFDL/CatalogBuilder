@@ -7,7 +7,7 @@ from intakebuilder import getinfo
 s3 crawler crawls through the S3 bucket, passes the bucket path to the helper functions to getinfo.
 Finally it returns a list of dictionaries. 
 '''
-def sss_crawler(projectdir,dictFilter,project_root, dictInfo):
+def sss_crawler(projectdir,dictFilter,project_root, logger):
     region = 'us-west-2'
     s3client = boto3.client('s3', region_name=region,
                             config=botocore.client.Config(signature_version=botocore.UNSIGNED))
