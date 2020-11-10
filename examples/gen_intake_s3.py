@@ -1,11 +1,18 @@
+#!/usr/bin/env python3
 import os
 from intakebuilder import getinfo, s3crawler, CSVwriter
-
+import os
+from intakebuilder import localcrawler, CSVwriter
+import logging
+logger = logging.getLogger('local')
+hdlr = logging.FileHandler('/Users/ar46/logs/local.log')
+logger.addHandler(hdlr)
+logger.setLevel(logging.INFO)
 
 def main():
     #######INPUT HERE OR USE FROM A CONFIG FILE LATER######
     region = 'us-east-1' #which region is the bucket in?
-    project_root = 's3://gfdl-esgf/CMIP6/' #DRS Compliant bucket
+    project_root = 's3://esgf-world/CMIP6/' #DRS Compliant bucket
     csvfile = "/Users/ar46/PycharmProjects/CatalogBuilder/intakebuilder/test/intake_s3.csv"
     ######### SEARCH FILTERS ###########################
     dictFilter = {}
@@ -18,7 +25,8 @@ def main():
     dictInfo = {}
     print(project_root)
     project_root = project_root.rstrip("/")
-    list_files = s3crawler.sss_crawler(project_root,dictFilter, project_root,dictInfo={})
+    logger.info("Running s3crawler.sss_crawler")
+    list_files = s3crawler.sss_crawler(project_root,dictFilter, project_root,logger)
     print(list_files)
     #TODO make search strings a dict for later
     #merge project_root and project_bucket as needed
@@ -26,8 +34,7 @@ def main():
     if (not os.path.exists(csvfile)):
         os.makedirs(os.path.dirname(csvfile), exist_ok=True)
     CSVwriter.listdict_to_csv(list_files, headers, csvfile)
-    print("CSV generated at:", os.path.abspath(csvfile))
-
+    logger.info("CSV generated at"+ os.path.abspath(csvfile))
 
 if __name__ == '__main__':
     main()
