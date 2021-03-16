@@ -7,7 +7,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: actions/CatalogBuilder
+      uses: actions/CatalogBuilder@vtest
       with:
         who-to-greet: 'test user'
     # Use the output from the `hello` step
