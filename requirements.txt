@@ -20,7 +20,7 @@ pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1594392929924/work
 PySocks @ file:///opt/concourse/worker/volumes/live/85a5b906-0e08-41d9-6f59-084cee4e9492/volume/pysocks_1594394636991/work
 python-dateutil==2.8.1
 pytz==2020.1
-PyYAML==5.3.1
+PyYAML==5.4
 s3transfer @ file:///opt/concourse/worker/volumes/live/31c45537-6259-49bc-5762-82231d9ec4b5/volume/s3transfer_1594419224140/work
 six==1.15.0
 urllib3 @ file:///tmp/build/80754af9/urllib3_1603305693037/work
