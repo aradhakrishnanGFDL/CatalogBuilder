@@ -11,7 +11,7 @@ def main():
     #######INPUT HERE OR USE FROM A CONFIG FILE LATER######
     region = 'us-east-1' #which region is the bucket in?
     project_root = 's3://esgf-world/CMIP6/' #DRS Compliant bucket
-    csvfile = "/Users/ar46/PycharmProjects/CatalogBuilder/intakebuilder/test/intake_s3.csv"
+    csvfile = "intake_s3.csv"
     ######### SEARCH FILTERS ###########################
     dictFilter = {}
     dictFilter["source_prefix"]= 'CMIP6/' #/CMIP/NOAA-GFDL/GFDL-ESM4/' #Must specify something here, at least the project level
