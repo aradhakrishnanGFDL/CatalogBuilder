@@ -1,4 +1,5 @@
 # CatalogBuilder
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5196586.svg)](https://doi.org/10.5281/zenodo.5196586)
 
 The CatalogBuilder API will collect building blocks necessary to build a data catalog which can then be ingested in climate analysis scripts/workflow, leveraging the use of intake-esm and xarray.
 
@@ -21,5 +22,6 @@ conda env create -f environment_intake.yml
 3. pip install git+https://github.com/aradhakrishnanGFDL/CatalogBuilder.git
 4. Test: import intakebuilder 
 5. See examples in examples directory, gen_intake_local.py runs on UDA , gen_intake_s3.py  runs on S3 bucket
+
 
 
