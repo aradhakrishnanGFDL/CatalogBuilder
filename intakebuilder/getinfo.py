@@ -15,8 +15,11 @@ def getProject(projectdir,dictInfo):
     :param drsstructure:
     :return: dictionary with project key
     '''
-    project = projectdir.split("/")[-1]
-    dictInfo["project"]=project
+    if ("archive" in projectdir or "pp" in projectdir): 
+       project = "dev" 
+    else: 
+       projectdir.split("/")[-1]
+    dictInfo["activity_id"]=project
     return dictInfo
 def getinfoFromYAML(dictInfo,yamlfile,miptable=None):
     import yaml
@@ -68,10 +71,72 @@ def getInfoFromFilename(filename,dictInfo,logger):
            tsubset = ncfilename[6]
         except IndexError:
            tsubset = "null" #For fx fields
-        dictInfo["temporal subset"] = tsubset
+        dictInfo["temporal_subset"] = tsubset
     else:
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
+
+def getInfoFromGFDLFilename(filename,dictInfo,logger):
+    # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
+    if(filename.endswith(".nc")):
+        ncfilename = filename.split(".")
+        varname = ncfilename[-2]
+        dictInfo["variable_id"] = varname
+        #miptable = "" #ncfilename[1]
+        #dictInfo["mip_table"] = miptable
+        #modelname = ncfilename[2]
+        #dictInfo["model"] = modelname
+        #expname = ncfilename[3]
+        #dictInfo["experiment_id"] = expname
+        #ens = ncfilename[4]
+        #dictInfo["ensemble_member"] = ens
+        #grid = ncfilename[5]
+        #dictInfo["grid_label"] = grid
+        try:
+           tsubset = ncfilename[1]
+        except IndexError:
+           tsubset = "null" #For fx fields
+        dictInfo["temporal_subset"] = tsubset
+    else:
+        logger.debug("Filename not compatible with this version of the builder:"+filename)
+    return dictInfo
+
+def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
+    '''
+    Returns info from project directory and the DRS path to the file
+    :param dirpath:
+    :param drsstructure:
+    :return:
+    '''
+   # we need thise dict keys "project", "institute", "model", "experiment_id",
+   #               "frequency", "modeling_realm", "mip_table",
+   #               "ensemble_member", "grid_label", "variable",
+   #               "temporal subset", "version", "path"]
+ 
+#/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_historical_D1/gfdl.ncrc4-intel16-prod-openmp/pp/atmos/ts/monthly/5yr/DO_NOT_USE/atmos.201001-201412.alb_sfc.nc
+
+    stemdir = dirpath.split("/")  # drsstructure is the root
+    try:
+        realm = stemdir[-4] 
+    except:
+        realm = "NA"
+    try:
+        frequency = stemdir[-2]
+    except:
+        frequency = "NA"
+    chunk_freq = stemdir[-1]
+    model = stemdir[-9]
+    exp = stemdir[-7]
+    platform = stemdir[-6]
+    dictInfo["modeling_realm"] = realm 
+    dictInfo["frequency"] = frequency 
+    dictInfo["chunk_freq"] = chunk_freq
+    dictInfo["source_id"] = model
+    dictInfo["experiment_id"] = exp
+    dictInfo["institution_id"] = "GFDL" 
+    dictInfo["platform"] = platform 
+    return dictInfo
+
 def getInfoFromDRS(dirpath,projectdir,dictInfo):
     '''
     Returns info from project directory and the DRS path to the file

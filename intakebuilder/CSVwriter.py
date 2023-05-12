@@ -6,10 +6,10 @@ def getHeader():
     returns header that is the first line in the csv file
     :return: headerlist with all columns
     '''
-    headerlist = ["project", "institute", "model", "experiment_id",
-                  "frequency", "modeling_realm", "mip_table",
-                  "ensemble_member", "grid_label", "variable",
-                  "temporal subset", "version", "path"]
+    headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
+                  "frequency", "modeling_realm", "table_id",
+                  "member_id", "grid_label", "variable_id",
+                  "temporal_subset", "chunk_freq","grid_label","platform","path"]
     return headerlist
 def writeHeader(csvfile):
   '''
@@ -18,10 +18,10 @@ def writeHeader(csvfile):
   :return: csv writer object
   '''
   # list containing header values
-  headerlist = ["project", "institute", "model", "experiment_id",
-                  "frequency", "modeling_realm", "mip_table",
-                  "ensemble_member", "grid_label", "variable",
-                  "temporal subset", "version", "path"]
+  headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
+                  "frequency", "modeling_realm", "table_id",
+                  "member_id", "grid_label", "variable_id",
+                  "temporal_subset", "chunk_freq","grid_label","platform","path"]
     # inputting these headers into a csv
   with open(csvfile, "w+", newline="") as f:
         writerobject = csv.writer(f)
@@ -45,6 +45,7 @@ def listdict_to_csv(dict_info,headerlist, csvfile):
     try:
         with open(csvfile, 'w+') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=headerlist)
+            print("writing..")
             writer.writeheader()
             for data in dict_info:
                 writer.writerow(data)
