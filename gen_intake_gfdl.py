@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from intakebuilder import gfdlcrawler, CSVwriter
+from intakebuilder import gfdlcrawler, CSVwriter, catalogcols
 import logging
 logger = logging.getLogger('local')
 hdlr = logging.FileHandler('/nbhome/a1r/logs/local.log')
@@ -13,7 +13,7 @@ def main():
 #   project_dir = "/Users/ar46/data_cmip6/CMIP6/"  # DRS COMPLIANT PROJECT DIR
     project_dir = "/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-intel16-prod-openmp/pp/"
     #CMIP/NOAA-GFDL/GFDL-ESM4/"
-    csvfile = "/nbhome/a1r/intakebuilder_cats/intake_gfdl.csv" ##"/Users/ar46/PycharmProjects/CatalogBuilder/intakebuilder/test/intake_local.csv"
+    csvfile = "/nbhome/a1r/intakebuilder_cats/intake_gfdl2.csv" ##"/Users/ar46/PycharmProjects/CatalogBuilder/intakebuilder/test/intake_local.csv"
     #######################################################
     ######### SEARCH FILTERS ###########################
     dictFilter = {}

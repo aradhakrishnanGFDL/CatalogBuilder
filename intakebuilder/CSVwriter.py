@@ -1,16 +1,17 @@
 import csv
 from csv import writer
-
+from intakebuilder import catalogcols
 def getHeader():
     '''
-    returns header that is the first line in the csv file
+    returns header that is the first line in the csv file, refers catalogcols.py
     :return: headerlist with all columns
     '''
-    headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
-                  "frequency", "modeling_realm", "table_id",
-                  "member_id", "grid_label", "variable_id",
-                  "temporal_subset", "chunk_freq","grid_label","platform","path"]
-    return headerlist
+    #TODO move headerlist outside in a separate configuration or 
+    #headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
+    #              "frequency", "modeling_realm", "table_id",
+    #              "member_id", "grid_label", "variable_id",
+    #              "temporal_subset", "chunk_freq","grid_label","platform","dimensions","cell_methods","path"]
+    return catalogcols.headerlist
 def writeHeader(csvfile):
   '''
   writing header for the csv
@@ -18,14 +19,10 @@ def writeHeader(csvfile):
   :return: csv writer object
   '''
   # list containing header values
-  headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
-                  "frequency", "modeling_realm", "table_id",
-                  "member_id", "grid_label", "variable_id",
-                  "temporal_subset", "chunk_freq","grid_label","platform","path"]
-    # inputting these headers into a csv
+  # inputting these headers into a csv
   with open(csvfile, "w+", newline="") as f:
         writerobject = csv.writer(f)
-        writerobject.writerow(headerlist)
+        writerobject.writerow(catalogcols.headerlist)
 
 def file_appender(dictinputs, csvfile):
     '''
