@@ -2,36 +2,34 @@
 
 import os
 from intakebuilder import gfdlcrawler, CSVwriter, catalogcols
+import builderconfig
 import logging
 logger = logging.getLogger('local')
-hdlr = logging.FileHandler('/nbhome/a1r/logs/local.log')
+hdlr = logging.FileHandler(builderconfig.logfile)
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 
 def main():
-    #######INPUT HERE OR USE FROM A CONFIG FILE LATER######
-#   project_dir = "/Users/ar46/data_cmip6/CMIP6/"  # DRS COMPLIANT PROJECT DIR
-    project_dir = "/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-intel16-prod-openmp/pp/"
-    #CMIP/NOAA-GFDL/GFDL-ESM4/"
-    csvfile = "/nbhome/a1r/intakebuilder_cats/intake_gfdl2.csv" ##"/Users/ar46/PycharmProjects/CatalogBuilder/intakebuilder/test/intake_local.csv"
-    #######################################################
+    project_dir = builderconfig.project_dir  
+    csvfile =  builderconfig.csvfile 
     ######### SEARCH FILTERS ###########################
-    dictFilter = {}
+    dictFilter = builderconfig.dictFilter 
+    dictFilterIgnore = builderconfig.dictFilterIgnore
+  
+    ''' Override config file if necessary for dev
+    project_dir = "/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-intel16-prod-openmp/pp/"
+    csvfile =  "/nbhome/a1r/intakebuilder_cats/intake_gfdl2.csv" 
     dictFilterIgnore = {}
     dictFilter["modeling_realm"]= 'atmos_cmip'
     dictFilter["frequency"] = "monthly"
     dictFilter["chunk_freq"] = "5yr"
     dictFilterIgnore["remove"]= 'DO_NOT_USE'
-   #COMMENT  dictFilter["miptable"] = "Amon" #Remove this if you don't want to filter by miptable
-   #COMMENT dictFilter["varname"] = "tas"   #Remove this if you don't want to filter by variable name
+    '''
     #########################################################
     dictInfo = {}
     project_dir = project_dir.rstrip("/")
     logger.info("Calling gfdlcrawler.crawlLocal") 
-  #  print("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
-  # print(list_files)
-
     headers = CSVwriter.getHeader()
     if (not os.path.exists(csvfile)):
         os.makedirs(os.path.dirname(csvfile), exist_ok=True)
