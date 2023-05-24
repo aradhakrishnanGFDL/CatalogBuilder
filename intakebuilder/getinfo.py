@@ -80,25 +80,19 @@ def getInfoFromFilename(filename,dictInfo,logger):
 
 def getInfoFromGFDLFilename(filename,dictInfo,logger):
     # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
+    #output_file_template = ['modeling_realm','temporal_subset','variable_id']
+
     if(filename.endswith(".nc")):
-        ncfilename = filename.split(".")
-        varname = ncfilename[-2]
-        dictInfo["variable_id"] = varname
-        #miptable = "" #ncfilename[1]
-        #dictInfo["mip_table"] = miptable
-        #modelname = ncfilename[2]
-        #dictInfo["model"] = modelname
-        #expname = ncfilename[3]
-        #dictInfo["experiment_id"] = expname
-        #ens = ncfilename[4]
-        #dictInfo["ensemble_member"] = ens
-        #grid = ncfilename[5]
-        #dictInfo["grid_label"] = grid
-        try:
-           tsubset = ncfilename[1]
-        except IndexError:
-           tsubset = "null" #For fx fields
-        dictInfo["temporal_subset"] = tsubset
+        ncfile = filename.split(".nc")
+        ncfilename = ncfile[0].split(".")
+
+    nlen = len(builderconfig.output_file_template) # ['modeling_realm','temporal_subset','variable_id']
+    #lets go backwards and match given input directory to the template, add things to dictInfo
+    for i in range(1,nlen+1):
+      try:
+          dictInfo[builderconfig.output_file_template[nlen-i]] = ncfilename[-i]
+      except:
+          sys.exit("oops in getInfoFromGFDLFilename")
     else:
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
