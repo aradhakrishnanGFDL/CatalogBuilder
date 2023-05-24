@@ -1,9 +1,9 @@
 import csv
 from csv import writer
-from intakebuilder import catalogcols
+from intakebuilder import builderconfig 
 def getHeader():
     '''
-    returns header that is the first line in the csv file, refers catalogcols.py
+    returns header that is the first line in the csv file, refers builderconfig.py
     :return: headerlist with all columns
     '''
     #TODO move headerlist outside in a separate configuration or 
@@ -11,7 +11,7 @@ def getHeader():
     #              "frequency", "modeling_realm", "table_id",
     #              "member_id", "grid_label", "variable_id",
     #              "temporal_subset", "chunk_freq","grid_label","platform","dimensions","cell_methods","path"]
-    return catalogcols.headerlist
+    return builderconfig.headerlist
 def writeHeader(csvfile):
   '''
   writing header for the csv
@@ -22,7 +22,7 @@ def writeHeader(csvfile):
   # inputting these headers into a csv
   with open(csvfile, "w+", newline="") as f:
         writerobject = csv.writer(f)
-        writerobject.writerow(catalogcols.headerlist)
+        writerobject.writerow(builderconfig.headerlist)
 
 def file_appender(dictinputs, csvfile):
     '''

@@ -5,6 +5,8 @@ from csv import writer
 import os
 import xarray as xr
 import shutil as sh
+from intakebuilder import builderconfig 
+
 '''
 getinfo.py provides helper functions to get information (from filename, DRS, file/global attributes) needed to populate the catalog
 '''
@@ -115,26 +117,14 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
  
 #/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_historical_D1/gfdl.ncrc4-intel16-prod-openmp/pp/atmos/ts/monthly/5yr/DO_NOT_USE/atmos.201001-201412.alb_sfc.nc
 
-    stemdir = dirpath.split("/")  # drsstructure is the root
-    try:
-        realm = stemdir[-4] 
-    except:
-        realm = "NA"
-    try:
-        frequency = stemdir[-2]
-    except:
-        frequency = "NA"
-    chunk_freq = stemdir[-1]
-    model = stemdir[-9]
-    exp = stemdir[-7]
-    platform = stemdir[-6]
-    dictInfo["modeling_realm"] = realm 
-    dictInfo["frequency"] = frequency 
-    dictInfo["chunk_freq"] = chunk_freq
-    dictInfo["source_id"] = model
-    dictInfo["experiment_id"] = exp
-    dictInfo["institution_id"] = "GFDL" 
-    dictInfo["platform"] = platform 
+    stemdir = dirpath.split("/") 
+    nlen = len(builderconfig.output_path_template)
+    #lets go backwards and match given input directory to the template, add things to dictInfo 
+    for i in range(1,nlen+1):
+      try:
+          dictInfo[builderconfig.output_path_template[nlen-i]] = stemdir[-i]
+      except:
+          sys.exit("oops in getInfoFromGFDLDRS")
     return dictInfo
 
 def getInfoFromDRS(dirpath,projectdir,dictInfo):

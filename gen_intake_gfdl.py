@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from intakebuilder import gfdlcrawler, CSVwriter, catalogcols
-import builderconfig
+from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
 import logging
 logger = logging.getLogger('local')
 hdlr = logging.FileHandler(builderconfig.logfile)
