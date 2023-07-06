@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import click
 import os
 from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
 import logging
@@ -8,9 +9,15 @@ hdlr = logging.FileHandler(builderconfig.logfile)
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 
-def main():
-    project_dir = builderconfig.project_dir  
-    csvfile =  builderconfig.csvfile 
+@click.command()
+@click.argument("inputdir", required=True, nargs=1) 
+@click.argument("outputdir", required=True, nargs=1)
+
+def main(inputdir,outputdir):
+    #project_dir = builderconfig.project_dir  
+    project_dir = inputdir
+    #csvfile =  builderconfig.csvfile 
+    csvfile = outputdir
     ######### SEARCH FILTERS ###########################
     dictFilter = builderconfig.dictFilter 
     dictFilterIgnore = builderconfig.dictFilterIgnore

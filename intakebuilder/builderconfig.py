@@ -5,7 +5,10 @@ project_dir = "/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-inte
 
 #what kind of directory structure to expect? 
 
-output_path_template = ['source_id','activity_id','experiment_id','platform','custom_pp','modeling_realm','custom_cell_methods','frequency','chunk_freq']
+output_path_template = ['activity_id', 'institution_id', 'source_id','experiment_id',
+                  'frequency', 'modeling_realm','table_id',
+                  'member_id', 'grid_label', 'variable_id',
+                  'temporal_subset', 'chunk_freq','grid_label','platform','dimensions','cell_methods','path']
 
 output_file_template = ['modeling_realm','temporal_subset','variable_id']
 
