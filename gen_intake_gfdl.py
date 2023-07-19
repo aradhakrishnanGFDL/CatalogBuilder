@@ -12,16 +12,27 @@ logger.setLevel(logging.INFO)
 @click.command()
 @click.argument("inputdir", required=True, nargs=1) 
 @click.argument("outputdir", required=True, nargs=1)
-
-def main(inputdir,outputdir):
+@click.option('--filter_realm', nargs=1)
+@click.option('--filter_freq', nargs=1)
+@click.option('--filter_chunk', nargs=1)
+def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk):
     #project_dir = builderconfig.project_dir  
     project_dir = inputdir
     #csvfile =  builderconfig.csvfile 
     csvfile = outputdir
     ######### SEARCH FILTERS ###########################
-    dictFilter = builderconfig.dictFilter 
-    dictFilterIgnore = builderconfig.dictFilterIgnore
-  
+    #dictFilter = builderconfig.dictFilter 
+    #dictFilterIgnore = builderconfig.dictFilterIgnore
+    
+    dictFilter = {}
+    dictFilterIgnore = {}
+    if filter_realm:
+        dictFilter["modeling_realm"] = filter_realm
+    if filter_freq:
+        dictFilter["frequency"] = filter_freq
+    if filter_chunk:
+        dictFilter["chunk_freq"] = filter_chunk
+
     ''' Override config file if necessary for dev
     project_dir = "/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-intel16-prod-openmp/pp/"
     csvfile =  "/nbhome/a1r/intakebuilder_cats/intake_gfdl2.csv" 
