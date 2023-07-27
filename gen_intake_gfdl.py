@@ -15,14 +15,12 @@ logger.setLevel(logging.INFO)
 @click.option('--filter_realm', nargs=1)
 @click.option('--filter_freq', nargs=1)
 @click.option('--filter_chunk', nargs=1)
-def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk):
-    #project_dir = builderconfig.project_dir  
+@click.option('--append', is_flag=True, default=False) 
+def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,append):
     project_dir = inputdir
-    #csvfile =  builderconfig.csvfile 
     csvfile = outputdir
+   
     ######### SEARCH FILTERS ###########################
-    #dictFilter = builderconfig.dictFilter 
-    #dictFilterIgnore = builderconfig.dictFilterIgnore
     
     dictFilter = {}
     dictFilterIgnore = {}
@@ -50,7 +48,7 @@ def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk):
     headers = CSVwriter.getHeader()
     if (not os.path.exists(csvfile)):
         os.makedirs(os.path.dirname(csvfile), exist_ok=True)
-    CSVwriter.listdict_to_csv(list_files, headers, csvfile)
+    CSVwriter.listdict_to_csv(list_files, headers, csvfile, append)
     print("CSV generated at:", os.path.abspath(csvfile))
     logger.info("CSV generated at"+ os.path.abspath(csvfile))
 if __name__ == '__main__':
