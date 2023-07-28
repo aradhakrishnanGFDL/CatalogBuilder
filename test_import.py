@@ -1,4 +1,4 @@
-def test_import():
+def check_import():
  try:
   import intakebuilder
   print("Imported intakebuilder")
@@ -12,3 +12,5 @@ def test_import():
      raise ImportError("Unable to import",  "getinfo, localcrawler, CSVwriter")
      return -98
  return True
+def test_import():
+    assert check_import() == True
