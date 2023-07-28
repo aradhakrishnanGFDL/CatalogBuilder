@@ -22,4 +22,4 @@ jobs:
         $CONDA/bin/conda install -n catalogbuilder -c conda-forge pytest
     - name: tests_prelim
       run: |
-        $CONDA/envs/intake/bin/pytest 
+        $CONDA/envs/catalogbuilder/bin/pytest 
