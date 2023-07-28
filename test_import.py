@@ -11,4 +11,4 @@ def test_import():
  except ImportError:
   raise ImportError('Error importing intakebuilder')
   return -97
- return 0
+ assert 0
