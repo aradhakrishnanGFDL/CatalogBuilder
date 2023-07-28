@@ -11,4 +11,3 @@ def test_import():
  except ImportError:
      raise ImportError("Unable to import",  "getinfo, localcrawler, CSVwriter")
      return -98
- assert 0
