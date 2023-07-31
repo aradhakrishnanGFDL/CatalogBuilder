@@ -5,6 +5,8 @@ from csv import writer
 import os
 import xarray as xr
 import shutil as sh
+from intakebuilder import builderconfig 
+
 '''
 getinfo.py provides helper functions to get information (from filename, DRS, file/global attributes) needed to populate the catalog
 '''
@@ -15,8 +17,11 @@ def getProject(projectdir,dictInfo):
     :param drsstructure:
     :return: dictionary with project key
     '''
-    project = projectdir.split("/")[-1]
-    dictInfo["project"]=project
+    if ("archive" in projectdir or "pp" in projectdir): 
+       project = "dev" 
+    else: 
+       projectdir.split("/")[-1]
+    dictInfo["activity_id"]=project
     return dictInfo
 def getinfoFromYAML(dictInfo,yamlfile,miptable=None):
     import yaml
@@ -68,10 +73,54 @@ def getInfoFromFilename(filename,dictInfo,logger):
            tsubset = ncfilename[6]
         except IndexError:
            tsubset = "null" #For fx fields
-        dictInfo["temporal subset"] = tsubset
+        dictInfo["temporal_subset"] = tsubset
     else:
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
+
+def getInfoFromGFDLFilename(filename,dictInfo,logger):
+    # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
+    #output_file_template = ['modeling_realm','temporal_subset','variable_id']
+
+    if(filename.endswith(".nc")):
+        ncfile = filename.split(".nc")
+        ncfilename = ncfile[0].split(".")
+
+    nlen = len(builderconfig.output_file_template) # ['modeling_realm','temporal_subset','variable_id']
+    #lets go backwards and match given input directory to the template, add things to dictInfo
+    for i in range(1,nlen+1):
+      try:
+          dictInfo[builderconfig.output_file_template[nlen-i]] = ncfilename[-i]
+      except:
+          sys.exit("oops in getInfoFromGFDLFilename")
+    else:
+        logger.debug("Filename not compatible with this version of the builder:"+filename)
+    return dictInfo
+
+def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
+    '''
+    Returns info from project directory and the DRS path to the file
+    :param dirpath:
+    :param drsstructure:
+    :return:
+    '''
+   # we need thise dict keys "project", "institute", "model", "experiment_id",
+   #               "frequency", "modeling_realm", "mip_table",
+   #               "ensemble_member", "grid_label", "variable",
+   #               "temporal subset", "version", "path"]
+ 
+#/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_historical_D1/gfdl.ncrc4-intel16-prod-openmp/pp/atmos/ts/monthly/5yr/DO_NOT_USE/atmos.201001-201412.alb_sfc.nc
+
+    stemdir = dirpath.split("/") 
+    nlen = len(builderconfig.output_path_template)
+    #lets go backwards and match given input directory to the template, add things to dictInfo 
+    for i in range(1,nlen+1):
+      try:
+          dictInfo[builderconfig.output_path_template[nlen-i]] = stemdir[-i]
+      except:
+          sys.exit("oops in getInfoFromGFDLDRS")
+    return dictInfo
+
 def getInfoFromDRS(dirpath,projectdir,dictInfo):
     '''
     Returns info from project directory and the DRS path to the file
