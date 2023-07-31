@@ -1,14 +1,11 @@
-def test_import():
+def check_import():
  try:
   import intakebuilder
-  print("Imported intakebuilder")
-  try:
-     from intakebuilder import getinfo, localcrawler, CSVwriter
-     print("Imported getinfo, localcrawler, CSVwriter")
-  except ImportError:
-     raise ImportError("Unable to import",  "getinfo, localcrawler, CSVwriter")
-     return -98
+  from intakebuilder import getinfo, localcrawler, CSVwriter
+  print("Imported intakebuilder and getinfo, localcrawler, CSVwriter ")
  except ImportError:
-  raise ImportError('Error importing intakebuilder')
+  raise ImportError('Error importing intakebuilder and other packages')
   return -97
- return 0
+ return True
+def test_import():
+    assert check_import() == True
