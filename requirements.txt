@@ -1,7 +1,7 @@
 boto3 @ file:///tmp/build/80754af9/boto3_1603222673683/work
 botocore @ file:///tmp/build/80754af9/botocore_1603297996270/work
 brotlipy==0.7.0
-certifi==2020.6.20
+certifi==2023.7.22
 cffi @ file:///opt/concourse/worker/volumes/live/b9607b09-b777-4ff7-53dc-287727eb8574/volume/cffi_1600699191154/work
 cftime @ file:///opt/concourse/worker/volumes/live/be4e1388-f441-4805-4f65-8527069c60e4/volume/cftime_1595380105609/work
 cryptography @ file:///opt/concourse/worker/volumes/live/aeb63a26-659e-4edb-5405-74ba8e0c76f2/volume/cryptography_1601046839724/work
