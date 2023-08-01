@@ -5,7 +5,6 @@ channels:
 dependencies:
   - conda
   - python=3.7
-  - python.app
   - conda-env
   - conda-build
   - conda-verify
