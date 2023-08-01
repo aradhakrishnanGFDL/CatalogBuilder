@@ -1,10 +1,10 @@
 name: catalogbuilder 
 channels:
   - conda-forge 
+  - default
 dependencies:
   - conda
   - python=3.7
-  - python.app
   - conda-env
   - conda-build
   - conda-verify
@@ -17,5 +17,5 @@ dependencies:
   - cftime
   - cartopy
   - xgcm
-  - xarray
   - pandas
+  - xarray
