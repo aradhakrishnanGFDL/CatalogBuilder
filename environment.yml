@@ -17,3 +17,5 @@ dependencies:
   - cftime
   - cartopy
   - xgcm
+  - pandas
+  - xarray
