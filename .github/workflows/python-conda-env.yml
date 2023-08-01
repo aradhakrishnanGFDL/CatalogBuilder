@@ -20,8 +20,8 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Install dependencies
       run: |
-        conda env create -f environment.yml --name catbuilder
+        conda env create -f environment.yml --name catalogbuilder
     - name: Test with pytest
       run: |
         conda install pytest
-        pytest -m
+        $CONDA/envs/catalogbuilder/bin/pytest
