@@ -1,6 +1,7 @@
 name: catalogbuilder 
 channels:
   - conda-forge 
+  - default
 dependencies:
   - conda
   - python=3.7
