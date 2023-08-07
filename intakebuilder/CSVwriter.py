@@ -40,9 +40,24 @@ def file_appender(dictinputs, csvfile):
         # add contents of list as last row in the csv file
         csv_writer.writerow(dictinputs)
 
-def listdict_to_csv(dict_info,headerlist, csvfile, append):
+def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
     try:
-        if not append:
+        if overwrite:
+            with open(csvfile, 'w') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=headerlist)
+                print("writing..")
+                writer.writeheader()
+                for data in dict_info:
+                    writer.writerow(data)       
+        if append:
+            with open(csvfile, 'a') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=headerlist)
+                print("writing..")
+                writer.writeheader()
+                for data in dict_info:
+                    writer.writerow(data)
+
+        if not any((overwrite, append)):
             if os.path.isfile(csvfile):
                 user_input = ''
                 while True:
@@ -68,12 +83,5 @@ def listdict_to_csv(dict_info,headerlist, csvfile, append):
                         break
                     else:
                         print('Type y/n')
-        else:
-           with open(csvfile, 'a') as csvfile:
-                writer = csv.DictWriter(csvfile, fieldnames=headerlist)
-                print("writing..")
-                writer.writeheader()
-                for data in dict_info:
-                    writer.writerow(data)
     except IOError:
         print("I/O error")

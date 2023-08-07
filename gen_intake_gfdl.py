@@ -15,8 +15,9 @@ logger.setLevel(logging.INFO)
 @click.option('--filter_realm', nargs=1)
 @click.option('--filter_freq', nargs=1)
 @click.option('--filter_chunk', nargs=1)
+@click.option('--overwrite', is_flag=True, default=False)
 @click.option('--append', is_flag=True, default=False) 
-def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,append):
+def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,overwrite,append):
     project_dir = inputdir
     csvfile = outputdir
    
@@ -48,7 +49,7 @@ def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,append):
     headers = CSVwriter.getHeader()
     if (not os.path.exists(csvfile)):
         os.makedirs(os.path.dirname(csvfile), exist_ok=True)
-    CSVwriter.listdict_to_csv(list_files, headers, csvfile, append)
+    CSVwriter.listdict_to_csv(list_files, headers, csvfile, overwrite, append)
     print("CSV generated at:", os.path.abspath(csvfile))
     logger.info("CSV generated at"+ os.path.abspath(csvfile))
 if __name__ == '__main__':
