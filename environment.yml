@@ -19,3 +19,4 @@ dependencies:
   - xgcm
   - pandas
   - xarray
+  - click
