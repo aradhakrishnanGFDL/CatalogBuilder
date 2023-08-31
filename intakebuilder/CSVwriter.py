@@ -73,15 +73,21 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
                         break
                     
                     elif user_input.lower() == 'n':
-                        print("appending to existing file...")
                         with open(csvfile, 'a') as csvfile:
                             writer = csv.DictWriter(csvfile, fieldnames=headerlist)
-                            print("writing..")
+                            print("appending to existing file...")
                             writer.writeheader()
                             for data in dict_info:
                                 writer.writerow(data)
                         break
                     else:
                         print('Type y/n')
+            else:
+                with open(csvfile, 'w') as csvfile:
+                    writer = csv.DictWriter(csvfile, fieldnames=headerlist)
+                    print("writing..")
+                    writer.writeheader()
+                    for data in dict_info:
+                        writer.writerow(data)
     except IOError:
         print("I/O error")

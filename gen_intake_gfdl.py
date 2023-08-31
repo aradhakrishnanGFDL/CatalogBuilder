@@ -44,7 +44,7 @@ def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,overwrite,appe
     #########################################################
     dictInfo = {}
     project_dir = project_dir.rstrip("/")
-    logger.info("Calling gfdlcrawler.crawlLocal") 
+    logger.info("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
     headers = CSVwriter.getHeader()
     if (not os.path.exists(csvfile)):

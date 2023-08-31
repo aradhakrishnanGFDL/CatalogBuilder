@@ -88,13 +88,13 @@ def getInfoFromGFDLFilename(filename,dictInfo,logger):
 
     nlen = len(builderconfig.output_file_template) # ['modeling_realm','temporal_subset','variable_id']
     #lets go backwards and match given input directory to the template, add things to dictInfo
-    for i in range(1,nlen+1):
-      try:
-          dictInfo[builderconfig.output_file_template[nlen-i]] = ncfilename[-i]
-      except:
-          sys.exit("oops in getInfoFromGFDLFilename")
-    else:
-        logger.debug("Filename not compatible with this version of the builder:"+filename)
+    #for i in range(1,nlen+1):
+    #    try:
+    #        dictInfo[builderconfig.output_file_template[nlen-i]] = ncfilename[-i]
+    #  except:
+    #      sys.exit("oops in getInfoFromGFDLFilename")
+    #else:
+    #    logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
 
 def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
@@ -133,7 +133,7 @@ def getInfoFromDRS(dirpath,projectdir,dictInfo):
     try:
         institute = stemdir[2]
     except:
-            institute = "NA"
+        institute = "NA"
     try:
         version = stemdir[9]
     except:

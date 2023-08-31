@@ -21,51 +21,49 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger):
     orig_pat = pat
     #TODO INCLUDE filter in traversing through directories at the top
     for dirpath, dirs, files in os.walk(projectdir):
-      if "atmos/ts/monthly/5yr" in dirpath: #TODO improved filtering
-            searchpath = dirpath
-            if (orig_pat is None):
-                pat = dirpath  #we assume matching entire path
-            if(pat is not None):
-                m = re.search(pat, searchpath)
-                for filename in files:
-                   logger.info(dirpath+"/"+filename)
-                   dictInfo = {}
-                   dictInfo = getinfo.getProject(projectdir, dictInfo)
-                   # get info from filename
-                   #print(filename)
-                   filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
-                   if not filename.endswith(".nc"):
-                        logger.debug("FILE does not end with .nc. Skipping", filepath)
-                        continue
-                   dictInfo["path"]=filepath
-                   #print("Calling getinfo.getInfoFromGFDLFilename(filename, dictInfo)..")
-                   dictInfo = getinfo.getInfoFromGFDLFilename(filename, dictInfo,logger)
-                   #print("from file name ", dictInfo)
-#                  print("Calling getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)")
-                   dictInfo = getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)
-#                  print("Calling getinfo.getInfoFromGlobalAtts(filepath, dictInfo)")
-#                  dictInfo = getinfo.getInfoFromGlobalAtts(filepath, dictInfo)
-                   #eliminate bad DRS filenames spotted
-                   list_bad_modellabel = ["","piControl","land-hist","piClim-SO2","abrupt-4xCO2","hist-piAer","hist-piNTCF","piClim-ghg","piClim-OC","hist-GHG","piClim-BC","1pctCO2"]
-                   list_bad_chunklabel = ['DO_NOT_USE']
-                   if "source_id" in dictInfo: 
-                     if(dictInfo["source_id"] in list_bad_modellabel):
-                        logger.debug("Found experiment name in model column, skipping this possibly bad DRS filename",filepath)
+        searchpath = dirpath
+        if (orig_pat is None):
+            pat = dirpath  #we assume matching entire path
+        if(pat is not None):
+            m = re.search(pat, searchpath)
+            for filename in files:
+               logger.info(dirpath+"/"+filename)
+               dictInfo = {}
+               dictInfo = getinfo.getProject(projectdir, dictInfo)
+               # get info from filename
+               #print(filename)
+               filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
+               if not filename.endswith(".nc"):
+                    logger.debug("FILE does not end with .nc. Skipping", filepath)
+                    continue
+               dictInfo["path"]=filepath
+               dictInfo = getinfo.getInfoFromGFDLFilename(filename, dictInfo,logger)
+               #print("from file name ", dictInfo)
+#              print("Calling getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)")
+               dictInfo = getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)
+#              print("Calling getinfo.getInfoFromGlobalAtts(filepath, dictInfo)")
+#              dictInfo = getinfo.getInfoFromGlobalAtts(filepath, dictInfo)
+               #eliminate bad DRS filenames spotted
+               list_bad_modellabel = ["","piControl","land-hist","piClim-SO2","abrupt-4xCO2","hist-piAer","hist-piNTCF","piClim-ghg","piClim-OC","hist-GHG","piClim-BC","1pctCO2"]
+               list_bad_chunklabel = ['DO_NOT_USE']
+               if "source_id" in dictInfo: 
+                   if(dictInfo["source_id"] in list_bad_modellabel):
+                       logger.debug("Found experiment name in model column, skipping this possibly bad DRS filename",filepath)
                    #   continue
-                   if "chunk_freq" in dictInfo:
-                     if(dictInfo["chunk_freq"] in list_bad_chunklabel):
-                        logger.debug("Found bad chunk, skipping this possibly bad DRS filename",filepath)
-                        continue     
+               if "chunk_freq" in dictInfo:
+                   if(dictInfo["chunk_freq"] in list_bad_chunklabel):
+                       logger.debug("Found bad chunk, skipping this possibly bad DRS filename",filepath)
+                       continue     
  
-                   # remove those keys that are not CSV headers 
-                   # move it so its one time 
-                   rmkeys = []
-                   for dkeys in dictInfo.keys():
-                      if dkeys not in builderconfig.headerlist:
-                          rmkeys.append(dkeys) 
-                   rmkeys = list(set(rmkeys))
+               # remove those keys that are not CSV headers 
+               # move it so its one time 
+               rmkeys = []
+               for dkeys in dictInfo.keys():
+                  if dkeys not in builderconfig.headerlist:
+                      rmkeys.append(dkeys) 
+               rmkeys = list(set(rmkeys))
 
-                   for k in rmkeys: dictInfo.pop(k,None)
+               for k in rmkeys: dictInfo.pop(k,None)
  
-                   listfiles.append(dictInfo)
+               listfiles.append(dictInfo)
     return listfiles
