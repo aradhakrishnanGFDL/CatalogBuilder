@@ -18,7 +18,7 @@ def load_cat(catspec=None):
     print("Can't load this catalog",str(e))
   return cat
 def test_loadcat():
-  catspec = "/nbhome/a1r/ciheim/out/gfdl_spec.json"
+  catspec = "cats/gfdl_test1.json"
   cat = load_cat(catspec)
   assert isinstance(cat.df, pd.DataFrame)
 
