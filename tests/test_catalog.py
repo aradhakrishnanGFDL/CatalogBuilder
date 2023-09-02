@@ -22,7 +22,6 @@ def test_loadcat():
   catspec = "cats/gfdl_spec.json"
   cat = load_cat(catspec)
   try:
-    assert isinstance(cat.df, pd.DataFrame):"Assertion failed"
+    assert isinstance(cat.df, pd.DataFrame),"test failed"
   except BaseException e
      assert cat!=None,"opening of esm datastore failed"+str(e))
-
