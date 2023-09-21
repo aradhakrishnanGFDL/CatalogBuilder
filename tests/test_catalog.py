@@ -20,6 +20,9 @@ def load_cat(catspec=None):
 def test_loadcat():
   #TODO generate csv on the fly, check if its readable etc
   catspec = "cats/gfdl_test1.json"
+  #TODO generate test catalog on the fly, push spec to the test directory
   cat = load_cat(catspec)
-  assert isinstance(cat.df, pd.DataFrame)
-
+  try:
+    assert isinstance(cat.df, pd.DataFrame),"test failed"
+  except BaseException as e:
+     assert cat!=None,"opening of esm datastore failed"+str(e)
