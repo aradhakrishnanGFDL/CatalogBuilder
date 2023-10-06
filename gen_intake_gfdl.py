@@ -5,8 +5,6 @@ import os
 from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
 import logging
 logger = logging.getLogger('local')
-hdlr = logging.FileHandler(builderconfig.logfile)
-logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 
 @click.command()
