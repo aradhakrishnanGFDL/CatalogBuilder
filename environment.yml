@@ -20,3 +20,4 @@ dependencies:
   - pandas
   - xarray
   - click
+  - intake-esm 

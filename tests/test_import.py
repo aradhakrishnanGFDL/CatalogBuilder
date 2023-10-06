@@ -1,6 +1,5 @@
 def check_import():
  try:
-  import intakebuilder
   from intakebuilder import getinfo, localcrawler, CSVwriter
   print("Imported intakebuilder and getinfo, localcrawler, CSVwriter ")
  except ImportError:
