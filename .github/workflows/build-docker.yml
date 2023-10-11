@@ -15,4 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag catalogbuilder:latest
+    - uses: addnab/docker-run-action@v3
+      with:
+        image: test-image:latest
+        run: python -c "from intakebuilder import getinfo, localcrawler, CSVwriter"
+        
