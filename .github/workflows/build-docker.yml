@@ -15,9 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag catalogbuilder:latest
+      run: docker build . --file Dockerfile --tag aparnadotnoaa/catalogbuilder:latest
     - uses: addnab/docker-run-action@v3
       with:
         image: catalogbuilder:latest
-        run: python -c "from intakebuilder import getinfo, localcrawler, CSVwriter"
-        
+        run: "conda activate catalogbuilder"
