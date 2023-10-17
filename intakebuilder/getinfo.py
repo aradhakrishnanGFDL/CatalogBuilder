@@ -111,14 +111,27 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
  
 #/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_historical_D1/gfdl.ncrc4-intel16-prod-openmp/pp/atmos/ts/monthly/5yr/DO_NOT_USE/atmos.201001-201412.alb_sfc.nc
 
-    stemdir = dirpath.split("/") 
-    nlen = len(builderconfig.output_path_template)
+    stemdir = dirpath.split("/")
+    if stemdir[len(stemdir)-3] == "ts":
+        dictInfo['experiment_id'] = stemdir[len(stemdir)-7]
+        dictInfo['frequency'] = stemdir[len(stemdir)-2]
+        dictInfo['member_id'] = 'n/a'
+        dictInfo['modeling_realm'] = stemdir[len(stemdir)-4]
+
+        #Finds last (a) and second to last (b) periods and grabs value between them
+        a = dictInfo['path'].rfind('.')
+        b = dictInfo['path'].rfind('.',0,dictInfo['path'].rfind('.')-1)
+        dictInfo['variable_id'] = dictInfo['path'][b+1:a]
+        dictInfo['chunk_frequency'] = stemdir[len(stemdir)-1]
+
+
+    #nlen = len(builderconfig.output_path_template)
     #lets go backwards and match given input directory to the template, add things to dictInfo 
-    for i in range(1,nlen+1):
-      try:
-          dictInfo[builderconfig.output_path_template[nlen-i]] = stemdir[-i]
-      except:
-          sys.exit("oops in getInfoFromGFDLDRS")
+    #for i in range(1,nlen+1):
+    #  try:
+    #      dictInfo[builderconfig.output_path_template[nlen-i]] = stemdir[-i]
+    #  except:
+    #      sys.exit("oops in getInfoFromGFDLDRS")
     return dictInfo
 
 def getInfoFromDRS(dirpath,projectdir,dictInfo):

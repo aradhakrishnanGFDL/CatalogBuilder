@@ -48,7 +48,8 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
                 print("writing..")
                 writer.writeheader()
                 for data in dict_info:
-                    writer.writerow(data)       
+                    if len(data.keys()) > 2:
+                        writer.writerow(data)
         if append:
             with open(csvfile, 'a') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=headerlist)
