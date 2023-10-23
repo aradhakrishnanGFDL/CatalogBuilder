@@ -20,7 +20,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag chamodshehanka/node-test:$(date +%s)
+      run: docker build . --file Dockerfile --tag aparnadotnoaa/catalogbuilder-image:$(date +%s)
       
     - name: Docker Push
       run: docker push aparnadotnoaa/catalogbuilder-image 
