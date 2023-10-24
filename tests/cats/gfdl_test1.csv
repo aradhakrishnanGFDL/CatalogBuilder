@@ -1,2 +1,0 @@
-activity_id,institution_id,source_id,experiment_id,frequency,modeling_realm,table_id,member_id,grid_label,variable_id,temporal_subset,chunk_freq,grid_label,platform,dimensions,cell_methods,path
-dev,,AM5,historical,P1D,atmos_cmip_2deg_daily_3D,,r1i1p1f1,,rsdscs,,P8D,,na,,,/ptmp/Ciheim.Brown/ptmp/ppdir/atmos_cmip_2deg_daily_3D/ts/P1D/P8D/atmos_cmip_2deg_daily_3D.19790101-19790108.rsdscs.nc
