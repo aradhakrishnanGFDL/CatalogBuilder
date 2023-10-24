@@ -8,6 +8,8 @@ __maintainer__ = "GFDL MSD workflow team"
 import intake
 import intake_esm
 import pandas as pd 
+import os
+import pathlib
 
 def load_cat(catspec=None):
   """Checks if the json and associated csv can be opened by intake_esm""" 
