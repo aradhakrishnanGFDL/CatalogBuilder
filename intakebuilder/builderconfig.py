@@ -1,8 +1,3 @@
-#project_dir = "/Users/ar46/data_cmip6/CMIP6/"  # DRS COMPLIANT PROJECT DIR
-project_dir = "/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-intel16-prod-openmp/pp/"
-
-#/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-intel16-prod-openmp/pp/atmos/ts/monthly/5yr/atmos.014601-015012.evap.nc 
-
 #what kind of directory structure to expect? 
 
 output_path_template = ['source_id','activity_id','experiment_id','platform','custom_pp','modeling_realm','custom_cell_methods','frequency','chunk_freq']

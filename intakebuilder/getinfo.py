@@ -78,25 +78,6 @@ def getInfoFromFilename(filename,dictInfo,logger):
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
 
-def getInfoFromGFDLFilename(filename,dictInfo,logger):
-    # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
-    #output_file_template = ['modeling_realm','temporal_subset','variable_id']
-
-    if(filename.endswith(".nc")):
-        ncfile = filename.split(".nc")
-        ncfilename = ncfile[0].split(".")
-
-    nlen = len(builderconfig.output_file_template) # ['modeling_realm','temporal_subset','variable_id']
-    #lets go backwards and match given input directory to the template, add things to dictInfo
-    #for i in range(1,nlen+1):
-    #    try:
-    #        dictInfo[builderconfig.output_file_template[nlen-i]] = ncfilename[-i]
-    #  except:
-    #      sys.exit("oops in getInfoFromGFDLFilename")
-    #else:
-    #    logger.debug("Filename not compatible with this version of the builder:"+filename)
-    return dictInfo
-
 def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     '''
     Returns info from project directory and the DRS path to the file
@@ -109,8 +90,7 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
    #               "ensemble_member", "grid_label", "variable",
    #               "temporal subset", "version", "path"]
  
-#/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_historical_D1/gfdl.ncrc4-intel16-prod-openmp/pp/atmos/ts/monthly/5yr/DO_NOT_USE/atmos.201001-201412.alb_sfc.nc
-
+#Grab values based on their expected position in path 
     stemdir = dirpath.split("/")
     if stemdir[len(stemdir)-3] == "ts":
         dictInfo['experiment_id'] = stemdir[len(stemdir)-7]
@@ -125,13 +105,6 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
         dictInfo['chunk_frequency'] = stemdir[len(stemdir)-1]
 
 
-    #nlen = len(builderconfig.output_path_template)
-    #lets go backwards and match given input directory to the template, add things to dictInfo 
-    #for i in range(1,nlen+1):
-    #  try:
-    #      dictInfo[builderconfig.output_path_template[nlen-i]] = stemdir[-i]
-    #  except:
-    #      sys.exit("oops in getInfoFromGFDLDRS")
     return dictInfo
 
 def getInfoFromDRS(dirpath,projectdir,dictInfo):

@@ -9,6 +9,7 @@ hdlr = logging.FileHandler(builderconfig.logfile)
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 
+#Setting up argument parsing/flags
 @click.command()
 @click.argument("inputdir", required=True, nargs=1) 
 @click.argument("outputdir", required=True, nargs=1)

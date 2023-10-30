@@ -31,19 +31,12 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger):
                dictInfo = {}
                dictInfo = getinfo.getProject(projectdir, dictInfo)
                # get info from filename
-               #print(filename)
                filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
                if not filename.endswith(".nc"):
                     logger.debug("FILE does not end with .nc. Skipping", filepath)
                     continue
                dictInfo["path"]=filepath
-               dictInfo = getinfo.getInfoFromGFDLFilename(filename, dictInfo,logger)
-               #print("from file name ", dictInfo)
-#              print("Calling getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)")
                dictInfo = getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)
-#              print("Calling getinfo.getInfoFromGlobalAtts(filepath, dictInfo)")
-#              dictInfo = getinfo.getInfoFromGlobalAtts(filepath, dictInfo)
-               #eliminate bad DRS filenames spotted
                list_bad_modellabel = ["","piControl","land-hist","piClim-SO2","abrupt-4xCO2","hist-piAer","hist-piNTCF","piClim-ghg","piClim-OC","hist-GHG","piClim-BC","1pctCO2"]
                list_bad_chunklabel = ['DO_NOT_USE']
                if "source_id" in dictInfo: 

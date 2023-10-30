@@ -1,0 +1,12 @@
+How to test:
+
+The catalog builder wrapper accepts two arguments: an input path where data is stored and an output path to which the final CSV file will be generated.
+
+In order to overwrite any existing CSV file at the given output path, the  '--overwrite' flag can be used.
+In order to append any existing CSV file at the given output path, the  '--append' flag can be used.
+
+The following example generates a sample catalog called ‘output.csv’ to the home directory: 
+/gen_intake_gfdl.py /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp ~/output.csv
+
+NOTE: Currently only time series output files are included in output CSV.
+

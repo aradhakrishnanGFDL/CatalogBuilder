@@ -42,6 +42,7 @@ def file_appender(dictinputs, csvfile):
 
 def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
     try:
+        #Open the CSV file in write mode and add any data with atleast 3 values associated with it
         if overwrite:
             with open(csvfile, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=headerlist)
@@ -50,14 +51,16 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
                 for data in dict_info:
                     if len(data.keys()) > 2:
                         writer.writerow(data)
+        #Open the CSV file in append mode and add any data with atleast 3 values associated with it
         if append:
             with open(csvfile, 'a') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=headerlist)
                 print("writing..")
                 writer.writeheader()
                 for data in dict_info:
-                    writer.writerow(data)
-
+                    if len(data.keys()) > 2:
+                        writer.writerow(data)
+        #If neither overwrite nor append flags are found, check if a csv file already exists. If so, prompt user on what to do. If not, write to the file. 
         if not any((overwrite, append)):
             if os.path.isfile(csvfile):
                 user_input = ''
@@ -81,6 +84,7 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
                             for data in dict_info:
                                 writer.writerow(data)
                         break
+                    #If the user types anything besides y/n, keep asking
                     else:
                         print('Type y/n')
             else:
