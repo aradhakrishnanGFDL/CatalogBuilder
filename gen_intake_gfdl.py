@@ -7,6 +7,7 @@ import logging
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
 
+#Setting up argument parsing/flags
 @click.command()
 @click.argument("inputdir", required=True, nargs=1) 
 @click.argument("outputdir", required=True, nargs=1)
@@ -42,7 +43,7 @@ def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,overwrite,appe
     #########################################################
     dictInfo = {}
     project_dir = project_dir.rstrip("/")
-    logger.info("Calling gfdlcrawler.crawlLocal") 
+    logger.info("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
     headers = CSVwriter.getHeader()
     if (not os.path.exists(csvfile)):
