@@ -3,7 +3,8 @@ name: create-gfdl-catalog
 on:
   pull_request:
     branches:
-      - 'master'
+      - 'main'
+      - 'pytest_sampledata'
 jobs:
   catalog-upload:
     runs-on: ubuntu-latest
