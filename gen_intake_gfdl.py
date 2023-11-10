@@ -33,7 +33,7 @@ def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,overwrite,appe
 
     ''' Override config file if necessary for dev
     project_dir = "/archive/oar.gfdl.cmip6/ESM4/DECK/ESM4_1pctCO2_D1/gfdl.ncrc4-intel16-prod-openmp/pp/"
-    csvfile =  "/nbhome/a1r/intakebuilder_cats/intake_gfdl2.csv" 
+    #for dev csvfile =  "/nbhome/$USER/intakebuilder_cats/intake_gfdl2.csv" 
     dictFilterIgnore = {}
     dictFilter["modeling_realm"]= 'atmos_cmip'
     dictFilter["frequency"] = "monthly"
@@ -46,7 +46,9 @@ def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,overwrite,appe
     logger.info("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
     headers = CSVwriter.getHeader()
-    if (not os.path.exists(csvfile)):
+    #When we pass relative path or just the filename the following still needs to not choke
+    #so we check if it's a directory first
+    if os.path.isdir(os.path.dirname(csvfile)):
         os.makedirs(os.path.dirname(csvfile), exist_ok=True)
     CSVwriter.listdict_to_csv(list_files, headers, csvfile, overwrite, append)
     print("CSV generated at:", os.path.abspath(csvfile))
