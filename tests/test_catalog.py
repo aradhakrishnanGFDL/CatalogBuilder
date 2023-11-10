@@ -8,6 +8,8 @@ __maintainer__ = "GFDL MSD workflow team"
 import intake
 import intake_esm
 import pandas as pd 
+import os
+import pathlib
 
 def load_cat(catspec=None):
   """Checks if the json and associated csv can be opened by intake_esm""" 
@@ -19,9 +21,9 @@ def load_cat(catspec=None):
   return cat
 def test_loadcat():
   #TODO generate csv on the fly, check if its readable etc
-  catspec = "tests/cats/gfdl_test1.json"
+  catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'cats/gfdl_test1.json'
   #TODO generate test catalog on the fly, push spec to the test directory
-  cat = load_cat(catspec)
+  cat = load_cat((str(catspec)))
   try:
     assert isinstance(cat.df, pd.DataFrame),"test failed"
   except BaseException as e:
