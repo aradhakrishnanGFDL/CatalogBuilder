@@ -34,5 +34,9 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: csv
-          path: gfdl_autocatalog.csv
+          path: gfdl_autotest.csv
+    - name: Test with pytest
+      run: |
+        conda install pytest
+        $CONDA/envs/catalogbuilder/bin/pytest
    
