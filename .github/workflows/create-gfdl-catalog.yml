@@ -29,10 +29,10 @@ jobs:
     - name: Make sample data
       run: python tests/make_sample_data.py
     - name: 'Generate catalog'
-        run: python CatalogBuilder/gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp ~/gfdl_autocatalog.csv
-      - name: Upload csv
-        uses: actions/upload-artifact@v3
-        with:
+      run: python CatalogBuilder/gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp gfdl_autocatalog.csv
+    - name: Upload csv
+      uses: actions/upload-artifact@v3
+      with:
           name: csv
           path: gfdl_autocatalog.csv
    
