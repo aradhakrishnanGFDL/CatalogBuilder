@@ -1,0 +1,38 @@
+name: create-gfdl-catalog
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+env:
+    AWS_REGION: us-east-2
+jobs:
+  catalog-upload:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Add conda to system path
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+    - name: Install dependencies
+      run: |
+        conda env create -f environment.yml --name catalogbuilder
+    - name: Test with pytest
+      run: |
+        conda install pytest
+        $CONDA/envs/catalogbuilder/bin/pytest
+    - name: Make sample data
+      run: python tests/make_sample_data.py
+    - name: 'Generate catalog'
+        run: python CatalogBuilder/gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp ~/gfdl_autocatalog.csv
+      - name: Upload csv
+        uses: actions/upload-artifact@v3
+        with:
+          name: csv
+          path: gfdl_autocatalog.csv
+   
