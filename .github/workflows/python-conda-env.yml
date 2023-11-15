@@ -1,4 +1,4 @@
-name: Use Conda enviroment yaml in the repo to import catalogbuilder and run pytests. Use artifact for one test.
+name: Use Conda enviroment yaml in the repo to import catalogbuilder and run pytests
 
 on: [push]
 
@@ -28,4 +28,9 @@ jobs:
     - name: Test with pytest
       run: |
         conda install pytest
-        $CONDA/envs/catalogbuilder/bin/pytest
+        $CONDA/envs/catalogbuilder/bin/pytest tests/test_import.py 
+
+    - name: Test with pytest
+      run: |
+        conda install pytest
+        $CONDA/envs/catalogbuilder/bin/pytest tests/test_catalog.py 
