@@ -9,7 +9,6 @@ on:
   pull_request:
     branches:
       - 'main'
-      - 'pytest_sampledata'
 jobs:
   catalog-upload:
     runs-on: ubuntu-latest
