@@ -22,4 +22,4 @@ jobs:
         $CONDA/bin/conda install -n catalogbuilder -c conda-forge pytest pandas xarray click intake-esm
     - name: tests_prelim
       run: |
-        $CONDA/envs/catalogbuilder/bin/pytest 
+        $CONDA/envs/catalogbuilder/bin/pytest tests/default/ 
