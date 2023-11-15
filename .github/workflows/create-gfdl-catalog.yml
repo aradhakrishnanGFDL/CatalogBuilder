@@ -1,4 +1,9 @@
 name: create-gfdl-catalog
+#This actions workflow generates sample input directory structure/files (empty ATM) on the fly
+#runs catalog builder to generate a csv file which is also cached and saved as an artifact for reference in the
+#actions pipeline.
+#pytests are run, which also comprises of one test that runs intake-esm open calls on the dynamic catalog (corresponding
+#esm collection spec is in the repo
 
 on:
   pull_request:
