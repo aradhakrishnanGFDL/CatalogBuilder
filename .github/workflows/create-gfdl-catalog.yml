@@ -39,4 +39,4 @@ jobs:
     - name: Test with pytest
       run: |
         conda install pytest
-        $CONDA/envs/catalogbuilder/bin/pytest -v
+        $CONDA/envs/catalogbuilder/bin/pytest -v --runxfail
