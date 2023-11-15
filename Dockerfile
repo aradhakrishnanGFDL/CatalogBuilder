@@ -15,7 +15,5 @@ ENV PATH="${PATH}:/app/catalogbuilder"
 RUN echo "conda activate catalogbuilder" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
 
-# The code to run when container is started:
-#ENTRYPOINT ["./entrypoint.sh"]
 CMD ["/bin/bash"]
 
