@@ -1,3 +1,17 @@
+"""
+This script generates a sampple directory structure with a few PP components and empty netcdf files. 
+There is a subdirs.py in the tests directory that provides info as to how the structure can be, while the root structure is defined in the script below.
+In the near future, this will allow us to add more patterns and directory structure expectations, components,different chunks, time series/time average etc and expand
+the following script and the subdirs.py. 
+
+Context for this script- We use this in our GitHub Actions workflow to create sample directories on the fly before running the GFDL catalog builder 
+script dynamically.
+
+Author: A.Radhakrishnan and workflow team
+Date: Nov 15, 2023
+
+"""
+
 import os
 import subdirs
 from subdirs import *
@@ -8,7 +22,6 @@ root_dir = 'archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-de
 freq_mapping = [freq]
 chunk_freq = '1yr'
 
-#atmos.000301-000312.vas.nc
 def main():
     # Create directory
     realm_ctr = (len(subdirs.realm))
