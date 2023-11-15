@@ -24,9 +24,4 @@ jobs:
     - name: Test with pytest
       run: |
         conda install pytest
-        $CONDA/envs/catalogbuilder/bin/pytest tests/test_import.py 
-
-    - name: Test with pytest
-      run: |
-        conda install pytest
-        $CONDA/envs/catalogbuilder/bin/pytest tests/test_catalog.py 
+        $CONDA/envs/catalogbuilder/bin/pytest tests/default/ 
