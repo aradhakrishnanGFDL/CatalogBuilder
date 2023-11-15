@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
-""" Tests to load the catalog and extend the test capabilities """
+""" 
+Tests to load a (dynamically generated) catalog and extend the test capabilities in the actions workflow . We check if a pandas data frame is 
+returned while opening the data catalog with intake-esm. TODO: For more visual tests, we need more than empty files as input. 
+"""
 
 __author__ = "A.Radhakrishnan"
 __maintainer__ = "GFDL MSD workflow team"
