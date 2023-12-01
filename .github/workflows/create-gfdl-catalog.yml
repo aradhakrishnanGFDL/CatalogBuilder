@@ -1,0 +1,41 @@
+name: create-gfdl-catalog
+#This actions workflow generates sample input directory structure/files (empty ATM) on the fly
+#runs catalog builder to generate a csv file which is also cached and saved as an artifact for reference in the
+#actions pipeline.
+#pytests are run, which also comprises of one test that runs intake-esm open calls on the dynamic catalog (corresponding
+#esm collection spec is in the repo
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+jobs:
+  catalog-upload:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Add conda to system path
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+    - name: Install dependencies
+      run: |
+        conda env create -f environment.yml --name catalogbuilder
+    - name: Make sample data
+      run: python tests/make_sample_data.py
+    - name: 'Generate catalog'
+      run: |
+        $CONDA/envs/catalogbuilder/bin/python gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp cats/gfdl_autotest.csv
+    - name: Upload csv
+      uses: actions/upload-artifact@v3
+      with:
+          name: csv
+          path: cats/gfdl_autotest.csv
+    - name: Test with pytest
+      run: |
+        conda install pytest
+        $CONDA/envs/catalogbuilder/bin/pytest -v --runxfail
