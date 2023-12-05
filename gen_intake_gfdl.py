@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import click
 import os
 from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
@@ -45,6 +46,13 @@ def main(inputdir,outputdir,filter_realm,filter_freq,filter_chunk,overwrite,appe
     project_dir = project_dir.rstrip("/")
     logger.info("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
+    with open("gfdl_test1.json", "r") as jsonFile:
+        data = json.load(jsonFile)
+
+    data["catalog_file"] = os.path.abspath(outputdir)
+
+    with open("gfdl_test1.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent=4)
     headers = CSVwriter.getHeader()
     #When we pass relative path or just the filename the following still needs to not choke
     #so we check if it's a directory first

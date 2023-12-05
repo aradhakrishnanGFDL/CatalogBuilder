@@ -55,8 +55,7 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
         if append:
             with open(csvfile, 'a') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=headerlist)
-                print("writing..")
-                writer.writeheader()
+                print("writing (without header)..")
                 for data in dict_info:
                     if len(data.keys()) > 2:
                         writer.writerow(data)
@@ -73,16 +72,17 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
                             print("writing..")
                             writer.writeheader()
                             for data in dict_info:
-                                writer.writerow(data)
+                                if len(data.keys()) > 2:
+                                    writer.writerow(data)
                         break
                     
                     elif user_input.lower() == 'n':
                         with open(csvfile, 'a') as csvfile:
                             writer = csv.DictWriter(csvfile, fieldnames=headerlist)
-                            print("appending to existing file...")
-                            writer.writeheader()
+                            print("appending (without header) to existing file...")
                             for data in dict_info:
-                                writer.writerow(data)
+                                if len(data.keys()) > 2:
+                                    writer.writerow(data)
                         break
                     #If the user types anything besides y/n, keep asking
                     else:
@@ -93,6 +93,7 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
                     print("writing..")
                     writer.writeheader()
                     for data in dict_info:
-                        writer.writerow(data)
+                        if len(data.keys()) > 2:
+                            writer.writerow(data)
     except IOError:
         print("I/O error")
