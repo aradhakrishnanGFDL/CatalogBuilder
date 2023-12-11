@@ -29,7 +29,7 @@ jobs:
       run: python tests/make_sample_data.py
     - name: 'Generate catalog'
       run: |
-        $CONDA/envs/catalogbuilder/bin/python gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp cats/gfdl_autotest.csv
+        $CONDA/envs/catalogbuilder/bin/python gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp cats/gfdl_autotest
     - name: Upload csv
       uses: actions/upload-artifact@v3
       with:
