@@ -48,14 +48,16 @@ def main(input_path,output_path,filter_realm,filter_freq,filter_chunk,overwrite,
     project_dir = project_dir.rstrip("/")
     logger.info("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
+
+    #Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
     with open("cats/gfdl_test1.json", "r") as jsonTemplate:
         data = json.load(jsonTemplate)
         data["catalog_file"] = os.path.abspath(csv_path)
- 
     jsonFile = open(json_path, "w")
-    json.dump(data, jsonFile, indent=4)
+    json.dump(data, jsonFile, indent=2)
     jsonFile.close()
     headers = CSVwriter.getHeader()
+
     #When we pass relative path or just the filename the following still needs to not choke
     #so we check if it's a directory first
     if os.path.isdir(os.path.dirname(csv_path)):
