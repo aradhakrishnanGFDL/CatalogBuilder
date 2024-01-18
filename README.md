@@ -43,13 +43,14 @@ From GFDL workstations.
 
 To work with GFDL PP data, please use the following instructions as we refine the instructions and code base to be more unified.
 1. module load conda
-2. Install your own conda  environment by using the environment_intake.yml in the repo OR use the conda environment here by doing
+2. Install your own conda  environment by using the environment_intake.yml in the repo OR use the conda environment here by doing <br>
     conda env create -f environment_intake.yml
     conda activate [new_env]
 
    You can also activate this environment directly for testing:
    conda activate /nbhome/a1r/miniconda3/envs/intake
-4. Run the gen_intake_gfdl.py in the cloned repo with the PP directory as the first argument and the name of the output file as the second.  
+4. git clone this repository.
+5. Run the gen_intake_gfdl.py in the cloned repo with the PP directory as the first argument and the name of the output file as the second.  
 
 The following example generates a sample catalog called ‘output.csv’ to the home directory: 
 /gen_intake_gfdl.py /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp  /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp/output
