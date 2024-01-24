@@ -1,4 +1,12 @@
 #what kind of directory structure to expect? 
+#For a directory structure like /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp
+# the output_path_template is set as follows.
+#We have NA in those values that do not match up with any of the expected headerlist (CSV columns), otherwise we
+#simply specify the associated header name in the appropriate place. E.g. The third directory in the PP path example
+#above is the model (source_id), so the third list value in output_path_template is set to 'source_id'. We make sure
+#this is a valid value in headerlist as well.
+#The fourth directory is am5f3b1r0 which does not map to an existing header value. So we simply NA in output_path_template
+#for the fourth value.
 
 output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
 
