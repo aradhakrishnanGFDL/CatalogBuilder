@@ -1,6 +1,6 @@
 #what kind of directory structure to expect? 
 
-output_path_template = ['source_id','activity_id','experiment_id','platform','custom_pp','modeling_realm','custom_cell_methods','frequency','chunk_freq']
+output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
 
 output_file_template = ['modeling_realm','temporal_subset','variable_id']
 
@@ -13,7 +13,8 @@ headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
 
 #OUTPUT FILE  
 
-csvfile = "/nbhome/a1r/intakebuilder_cats/intake_gfdl.csv" 
+csvfile = "/nbhome/a1r/intakebuilder_cats/test_catalog.csv"
+jsonfile = "/nbhome/a1r/intakebuilder_cats/test_catalog.json"
 logfile = "/tmp/intakegfdl.log"
 #######################################################
 ######### ADDITIONAL SEARCH FILTERS ###########################

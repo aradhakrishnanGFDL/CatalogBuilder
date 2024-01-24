@@ -78,6 +78,32 @@ def getInfoFromFilename(filename,dictInfo,logger):
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
 
+#adding this back to trace back some old errors
+def getInfoFromGFDLFilename(filename,dictInfo,logger):
+    # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
+    if(filename.endswith(".nc")):
+        ncfilename = filename.split(".")
+        varname = ncfilename[-2]
+        dictInfo["variable_id"] = varname
+        #miptable = "" #ncfilename[1]
+        #dictInfo["mip_table"] = miptable
+        #modelname = ncfilename[2]
+        #dictInfo["model"] = modelname
+        #expname = ncfilename[3]
+        #dictInfo["experiment_id"] = expname
+        #ens = ncfilename[4]
+        #dictInfo["ensemble_member"] = ens
+        #grid = ncfilename[5]
+        #dictInfo["grid_label"] = grid
+        try:
+           tsubset = ncfilename[1]
+        except IndexError:
+           tsubset = "null" #For fx fields
+        dictInfo["temporal_subset"] = tsubset
+    else:
+        logger.debug("Filename not compatible with this version of the builder:"+filename)
+    return dictInfo
+
 def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     '''
     Returns info from project directory and the DRS path to the file
@@ -92,6 +118,27 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
  
 #Grab values based on their expected position in path 
     stemdir = dirpath.split("/")
+   # adding back older versions to ensure we get info from builderconfig
+    stemdir = dirpath.split("/")
+    nlen = len(builderconfig.output_path_template)
+    #lets go backwards and match given input directory to the template, add things to dictInfo
+    j = -1
+    cnt = 1
+    for i in range(nlen-1,0,-1):
+      try:
+          if(builderconfig.output_path_template[i] != "NA"):
+             dictInfo[builderconfig.output_path_template[i]] = stemdir[(j)]
+      except:
+          sys.exit("oops in getInfoFromGFDLDRS"+str(i)+str(j)+builderconfig.output_path_template[i]+stemdir[j])
+      j = j - 1
+    cnt = cnt + 1
+    # WE do not want to work with anythi:1
+    # ng that's not time series
+    if (dictInfo["cell_methods"] != "ts"):
+       print("Skipping non-timeseries data")
+       return {}
+    return dictInfo
+    '''
     if stemdir[len(stemdir)-3] == "ts":
         dictInfo['experiment_id'] = stemdir[len(stemdir)-7]
         dictInfo['frequency'] = stemdir[len(stemdir)-2]
@@ -106,6 +153,7 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
 
 
     return dictInfo
+    '''
 
 def getInfoFromDRS(dirpath,projectdir,dictInfo):
     '''
@@ -114,8 +162,8 @@ def getInfoFromDRS(dirpath,projectdir,dictInfo):
     :param drsstructure:
     :return:
     '''
-    stemdir = getStem(dirpath, projectdir)
-    #stemdir = dirpath.split(projectdir)[1].split("/")  # drsstructure is the root
+    #stemdir = getStem(dirpath, projectdir)
+    stemdir = dirpath.split(projectdir)[1].split("/")  # drsstructure is the root
     try:
         institute = stemdir[2]
     except:
