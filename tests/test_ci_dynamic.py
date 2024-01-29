@@ -30,8 +30,7 @@ def test_loadcat():
   #todo check if its readable etc
   #we are using the dynamically generated csv and json for testing in this routine
   #leveraging GitHub actions CI workflow and manifests and caches
-  #catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'gfdl_autotest.json'
-  catspec = 'gfdl_autotest.json'
+  catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'workflow-artifacts1/gfdl_autotest.json'
   #TODO generate test catalog on the fly, push spec to the test directory
   cat = load_cat((str(catspec)))
   try:
