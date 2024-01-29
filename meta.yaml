@@ -21,7 +21,7 @@ requirements:
     - pandas
     - xarray
     - pytest
-    - 'intake-esm>=2023.7.7'
+    - conda-forge::intake-esm=2023.7.7
 test:
   imports:
     - intakebuilder 
