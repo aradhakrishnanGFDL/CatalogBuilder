@@ -26,8 +26,11 @@ def load_cat(catspec=None):
 
 @pytest.mark.xfail
 def test_loadcat():
-  #generate csv and json on the fly, check if its readable etc
-  catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'cats/gfdl_autotest.json'
+  #generate csv and json on the fly
+  #todo check if its readable etc
+  #we are using the dynamically generated csv and json for testing in this routine
+  #leveraging GitHub actions CI workflow and manifests and caches
+  catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'gfdl_autotest.json'
   #TODO generate test catalog on the fly, push spec to the test directory
   cat = load_cat((str(catspec)))
   try:
