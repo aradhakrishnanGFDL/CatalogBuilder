@@ -30,10 +30,10 @@ jobs:
     - name: 'Generate catalog'
       run: |
         $CONDA/envs/catalogbuilder/bin/python gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp cats/gfdl_autotest
-    - name: Upload csv and json
+    - name: artifacts1
       uses: actions/upload-artifact@v3
       with:
-          name: csv
+          name: csvjson
           path: |
             cats/gfdl_autotest.csv
             cats/gfdl_autotest.json
