@@ -39,8 +39,6 @@ jobs:
             cats/gfdl_autotest.json
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v4
-      with:
-          name: cats/gfdl_autotest.json
     - name: Test with pytest
       run: |
         conda install pytest
