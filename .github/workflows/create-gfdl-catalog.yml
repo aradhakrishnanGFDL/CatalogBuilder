@@ -1,7 +1,7 @@
 name: create-gfdl-catalog
 #This actions workflow generates sample input directory structure/files (empty ATM) on the fly
-#runs catalog builder to generate a csv file which is also cached and saved as an artifact for reference in the
-#actions pipeline.
+#runs catalog builder to generate a csv file and the json file which is also cached and saved as an artifact for reference in the
+#actions pipeline. We download the artifacts and use them in the dynamic pytests.
 #pytests are run, which also comprises of one test that runs intake-esm open calls on the dynamic catalog (corresponding
 #esm collection spec is in the repo
 
@@ -30,11 +30,15 @@ jobs:
     - name: 'Generate catalog'
       run: |
         $CONDA/envs/catalogbuilder/bin/python gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp cats/gfdl_autotest
-    - name: Upload csv
-      uses: actions/upload-artifact@v3
+    - name: upload-artifacts1
+      uses: actions/upload-artifact@v4
       with:
-          name: csv
-          path: cats/gfdl_autotest.csv
+          name: workflow-artifacts1 
+          path: |
+            cats/gfdl_autotest.csv
+            cats/gfdl_autotest.json
+    - name: Download all workflow run artifacts
+      uses: actions/download-artifact@v4
     - name: Test with pytest
       run: |
         conda install pytest
