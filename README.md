@@ -43,7 +43,7 @@ From GFDL workstations.
 
 To work with GFDL PP data, please use the following instructions as we refine the instructions and code base to be more unified.
 1. module load conda
-2. Install your own conda  environment by using the environment_intake.yml in the repo OR use the conda environment here by doing <br>
+2. Install your own conda  environment by using the environment_intake.yml in the repo OR use the conda environment here by doing
     conda env create -f environment_intake.yml
     conda activate [new_env]
 
@@ -52,15 +52,15 @@ To work with GFDL PP data, please use the following instructions as we refine th
 4. git clone this repository.
 5. Run the gen_intake_gfdl.py in the cloned repo with the PP directory as the first argument and the name of the output file as the second.  
 
-The following example generates a sample catalog called ‘output.csv’ to the home directory: 
-/gen_intake_gfdl.py /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp  /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp/output
+The following example generates a sample catalog called output.csv to the home directory: 
+/gen_intake_gfdl.py /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp  ~/output
 
 The above creates an output.csv and an output.json. 
 
-Additional flags 
+Additional flags: 
 
-In order to overwrite any existing CSV file at the given output path, the  '--overwrite' flag can be used.
-In order to append any existing CSV file at the given output path, the  '--append' flag can be used.
+To overwrite an existing catalog at the given output path, use the '--overwrite' flag.
+To append to an existing catalog at the given output path, use the '--append' flag.
 
 The catalog builder wrapper accepts two arguments: an input path where data is stored and an output path to which the final CSV file will be generated.
 
