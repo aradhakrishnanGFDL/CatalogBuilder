@@ -3,6 +3,8 @@
 """ 
 Tests to load a (dynamically generated) catalog and extend the test capabilities in the actions workflow . We check if a pandas data frame is 
 returned while opening the data catalog with intake-esm. TODO: For more visual tests, we need more than empty files as input. 
+This test is run from a dynamically generated csv and json using GitHub actions workflow. See workflow create-gfdl-catalog for more info.
+We refer to the csv with the artifact path, the one downloaded via actions workflow. See catspec path to connect the dots.
 """
 
 __author__ = "A.Radhakrishnan"
@@ -26,9 +28,11 @@ def load_cat(catspec=None):
 
 @pytest.mark.xfail
 def test_loadcat():
-  #TODO generate csv on the fly, check if its readable etc
-  catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'cats/gfdl_autotest.json'
-  #TODO generate test catalog on the fly, push spec to the test directory
+  #generate csv and json on the fly
+  #todo check if its readable etc
+  #we are using the dynamically generated csv and json for testing in this routine
+  #leveraging GitHub actions CI workflow and manifests and caches
+  catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'workflow-artifacts1/gfdl_autotest.json'
   cat = load_cat((str(catspec)))
   try:
     assert isinstance(cat.df, pd.DataFrame),"test failed"

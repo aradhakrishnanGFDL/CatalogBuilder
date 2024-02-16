@@ -1,6 +1,5 @@
 import os.path
 import csv
-import gen_intake_gfdl
 from csv import writer
 from intakebuilder import builderconfig 
 def getHeader():
