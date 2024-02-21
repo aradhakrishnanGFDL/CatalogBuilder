@@ -8,11 +8,14 @@ from pathlib import Path
 import logging
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
-
-#Setting up argument parsing/flags
 @click.command()
-@click.argument("input_path", required=True, nargs=1) 
-@click.argument("output_path", required=True, nargs=1)
+#TODO arguments dont have help message. So consider changing arguments to options?
+@click.argument('input_path',required=True, type=click.Path(exists=True),nargs=1)
+#,help='The directory path with the datasets to be cataloged. E.g a GFDL PP path till /pp')
+@click.argument('output_path',required=True,nargs=1)
+#,help='Specify output filename suffix only. e.g. catalog')
+@click.argument('config',required=False,nargs=1)
+#,help='Pass the yaml config file; This is not required if you pass input_path and output_path as command-line args')
 @click.option('--filter_realm', nargs=1)
 @click.option('--filter_freq', nargs=1)
 @click.option('--filter_chunk', nargs=1)
