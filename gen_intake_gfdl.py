@@ -6,8 +6,11 @@ import os
 from intakebuilder import gfdlcrawler, CSVwriter, builderconfig, configparser
 from pathlib import Path
 import logging
+
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
+
+
 @click.command()
 #TODO arguments dont have help message. So consider changing arguments to options?
 @click.argument('input_path',required=False,nargs=1)
@@ -15,25 +18,25 @@ logger.setLevel(logging.INFO)
 @click.argument('output_path',required=False,nargs=1)
 #,help='Specify output filename suffix only. e.g. catalog')
 @click.option('--config',required=False,type=click.Path(exists=True),nargs=1,help='Path to your yaml config, Use the config_template in intakebuilder repo')
-#,help='Pass the yaml config file; This is not required if you pass input_path and output_path as command-line args')
 @click.option('--filter_realm', nargs=1)
 @click.option('--filter_freq', nargs=1)
 @click.option('--filter_chunk', nargs=1)
 @click.option('--overwrite', is_flag=True, default=False)
 @click.option('--append', is_flag=True, default=False)
+def main(input_path=None, output_path=None, config=None, filter_realm=None, filter_freq=None, filter_chunk=None,
+         overwrite=False, append=False):
+    # TODO error catching
+    if (input_path is None):
+        configyaml = configparser.Config(config)
+        input_path = configyaml.input_path
+        output_path = configyaml.output_path
 
-def main(input_path=None,output_path=None,config=None,filter_realm=None,filter_freq=None,filter_chunk=None,overwrite=False,append=False):
-    #TODO error catchign
-    if(input_path is None):
-      builderconfig = configparser.Config(config)
-      input_path = builderconfig.input_path
-      output_path =  builderconfig.output_path
     project_dir = input_path
-    csv_path = output_path+".csv"
-    json_path = output_path+".json"
- 
+    csv_path = output_path + ".csv"
+    json_path = output_path + ".json"
+
     ######### SEARCH FILTERS ###########################
-    
+
     dictFilter = {}
     dictFilterIgnore = {}
     if filter_realm:
@@ -56,10 +59,10 @@ def main(input_path=None,output_path=None,config=None,filter_realm=None,filter_f
     dictInfo = {}
     project_dir = project_dir.rstrip("/")
     logger.info("Calling gfdlcrawler.crawlLocal")
-    list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
+    list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore, logger)
+    # Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
 
-    #Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
-    with open("intakebuilder/templates/gfdl_template.json", "r") as jsonTemplate:
+    with open("cats/gfdl_template.json", "r") as jsonTemplate:
         data = json.load(jsonTemplate)
         data["catalog_file"] = os.path.abspath(csv_path)
     jsonFile = open(json_path, "w")
@@ -67,13 +70,15 @@ def main(input_path=None,output_path=None,config=None,filter_realm=None,filter_f
     jsonFile.close()
     headers = CSVwriter.getHeader()
 
-    #When we pass relative path or just the filename the following still needs to not choke
-    #so we check if it's a directory first
+    # When we pass relative path or just the filename the following still needs to not choke
+    # so we check if it's a directory first
     if os.path.isdir(os.path.dirname(csv_path)):
         os.makedirs(os.path.dirname(csv_path), exist_ok=True)
     CSVwriter.listdict_to_csv(list_files, headers, csv_path, overwrite, append)
     print("JSON generated at:", os.path.abspath(json_path))
     print("CSV generated at:", os.path.abspath(csv_path))
-    logger.info("CSV generated at"+ os.path.abspath(csv_path))
+    logger.info("CSV generated at" + os.path.abspath(csv_path))
+
+
 if __name__ == '__main__':
     main()
