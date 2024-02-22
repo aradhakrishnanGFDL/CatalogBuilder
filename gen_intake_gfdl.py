@@ -60,8 +60,7 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
     project_dir = project_dir.rstrip("/")
     logger.info("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore, logger)
-    # Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
-
+    #Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
     with open("cats/gfdl_template.json", "r") as jsonTemplate:
         data = json.load(jsonTemplate)
         data["catalog_file"] = os.path.abspath(csv_path)
