@@ -3,25 +3,31 @@
 import json
 import click
 import os
-from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
+from intakebuilder import gfdlcrawler, CSVwriter, builderconfig, configparser
 from pathlib import Path
 import logging
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
 @click.command()
 #TODO arguments dont have help message. So consider changing arguments to options?
-@click.argument('input_path',required=True, type=click.Path(exists=True),nargs=1)
+@click.argument('input_path',required=False,nargs=1)
 #,help='The directory path with the datasets to be cataloged. E.g a GFDL PP path till /pp')
-@click.argument('output_path',required=True,nargs=1)
+@click.argument('output_path',required=False,nargs=1)
 #,help='Specify output filename suffix only. e.g. catalog')
-@click.argument('config',required=False,nargs=1)
+@click.option('--config',required=False,type=click.Path(exists=True),nargs=1,help='Path to your yaml config, Use the config_template in intakebuilder repo')
 #,help='Pass the yaml config file; This is not required if you pass input_path and output_path as command-line args')
 @click.option('--filter_realm', nargs=1)
 @click.option('--filter_freq', nargs=1)
 @click.option('--filter_chunk', nargs=1)
 @click.option('--overwrite', is_flag=True, default=False)
-@click.option('--append', is_flag=True, default=False) 
-def main(input_path,output_path,filter_realm,filter_freq,filter_chunk,overwrite,append):
+@click.option('--append', is_flag=True, default=False)
+
+def main(input_path=None,output_path=None,config=None,filter_realm=None,filter_freq=None,filter_chunk=None,overwrite=False,append=False):
+    #TODO error catchign
+    if(input_path is None):
+      builderconfig = configparser.Config(config)
+      input_path = builderconfig.input_path
+      output_path =  builderconfig.output_path
     project_dir = input_path
     csv_path = output_path+".csv"
     json_path = output_path+".json"
