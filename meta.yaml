@@ -10,16 +10,7 @@ build:
       script: "{{ PYTHON }} -m pip install . -vv"
       number: 0
       noarch: python
-      always_include_files:
-          - gen_intake_gfdl.py
-          - cats/gfdl_template.json
-outputs:
-    - name: intakebuilder
-      files:
-        - intakebuilder/*
-        - gen_intake_gfdl.py
-        - cats/gfdl_template.json
-        
+      
 requirements:
   host: 
     - python
