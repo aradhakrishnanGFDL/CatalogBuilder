@@ -1,2 +1,3 @@
 include gen_intake_gfdl.py
-recursive-include cats *
+include cats/gfdl_template.json
+include README.md
