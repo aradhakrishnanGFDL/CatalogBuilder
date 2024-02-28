@@ -15,8 +15,8 @@ build:
           - cats/gfdl_template.json
 outputs:
     - name: intakebuilder
-    - name: gen_intake_gfdl
       files:
+        - intakebuilder/*
         - gen_intake_gfdl.py
         - cats/gfdl_template.json
         
