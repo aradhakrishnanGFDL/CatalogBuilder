@@ -11,8 +11,8 @@ build:
       number: 0
       noarch: python
       always_include_files:
-           gen_intake_gfdl.py
-           cats/*
+          - gen_intake_gfdl.py
+          - cats/gfdl_template.json
 requirements:
   host: 
     - python
