@@ -11,9 +11,6 @@ jobs:
     steps:
     - name: Checkout Files
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        ref: aradhakrishnanGFDL-conda-test
     - name: Run Docker to Build and Upload
       run: |
         conda config --append channels conda-forge
