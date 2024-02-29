@@ -9,6 +9,9 @@ import logging
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
 
+package_dir = os.path.dirname(os.path.abspath(__file__))
+template_path = os.path.join(package_dir, '../cats/gfdl_template.json')
+
 #Setting up argument parsing/flags
 @click.command()
 @click.argument("input_path", required=True, nargs=1) 
@@ -50,7 +53,7 @@ def main(input_path,output_path,filter_realm,filter_freq,filter_chunk,overwrite,
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
 
     #Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
-    with open("cats/gfdl_template.json", "r") as jsonTemplate:
+    with open(template_path, "r") as jsonTemplate:
         data = json.load(jsonTemplate)
         data["catalog_file"] = os.path.abspath(csv_path)
     jsonFile = open(json_path, "w")

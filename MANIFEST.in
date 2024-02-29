@@ -1,2 +1,2 @@
-include gen_intake_gfdl.py
 recursive-include cats *
+
