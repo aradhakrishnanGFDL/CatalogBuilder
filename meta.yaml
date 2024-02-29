@@ -25,6 +25,7 @@ requirements:
 test:
   imports:
     - intakebuilder 
+    - gen_intake_gfdl
 
 about:
   home:
