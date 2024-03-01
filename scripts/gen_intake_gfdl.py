@@ -1,13 +1,31 @@
 #!/usr/bin/env python
 
 import json
+import sys
 import click
 import os
-from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
 from pathlib import Path
 import logging
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
+
+try:
+   from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
+except ModuleNotFoundError:
+    print("The module 'module_name' is not installed. Do you have intakebuilder in your sys.path or have you activated the conda environment with the intakebuilder package in it? ")
+    print("Attempting again with adjusted sys.path ")
+    try:
+       sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    except:
+       print("Unable to adjust sys.path")
+    print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    try:
+        from intakebuilder import gfdlcrawler, CSVwriter, builderconfig
+    except ModuleNotFoundError:
+        sys.exit("The module 'module_name' is not installed. Do you have intakebuilder in your sys.path or have you activated the conda environment with the intakebuilder package in it? ")
+
+package_dir = os.path.dirname(os.path.abspath(__file__))
+template_path = os.path.join(package_dir, '../cats/gfdl_template.json')
 
 #Setting up argument parsing/flags
 @click.command()
@@ -50,7 +68,7 @@ def main(input_path,output_path,filter_realm,filter_freq,filter_chunk,overwrite,
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore,logger)
 
     #Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
-    with open("cats/gfdl_template.json", "r") as jsonTemplate:
+    with open(template_path, "r") as jsonTemplate:
         data = json.load(jsonTemplate)
         data["catalog_file"] = os.path.abspath(csv_path)
     jsonFile = open(json_path, "w")

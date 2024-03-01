@@ -3,16 +3,13 @@ package:
   version: 2.0.1
 
 source:
-  #git_url: https://github.com/aradhakrishnanGFDL/CatalogBuilder.git
+  git_url: https://github.com/aradhakrishnanGFDL/CatalogBuilder.git
   path: .
 
 build:
       script: "{{ PYTHON }} -m pip install . -vv"
       number: 0
       noarch: python
-      always_include_files:
-          - gen_intake_gfdl.py
-          - cats/gfdl_template.json
 requirements:
   host: 
     - python
