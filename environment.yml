@@ -21,3 +21,4 @@ dependencies:
   - xarray
   - click
   - intake-esm 
+  - pyyaml
