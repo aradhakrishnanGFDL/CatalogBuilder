@@ -1,16 +1,34 @@
 #!/usr/bin/env python
 
 import json
+import sys
 import click
 import os
-from intakebuilder import gfdlcrawler, CSVwriter, builderconfig, configparser
 from pathlib import Path
 import logging
 
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
 
+try:
+   from intakebuilder import gfdlcrawler, CSVwriter, builderconfig, configparser
+except ModuleNotFoundError:
+    print("The module intakebuilder is not installed. Do you have intakebuilder in your sys.path or have you activated the conda environment with the intakebuilder package in it? ")
+    print("Attempting again with adjusted sys.path ")
+    try:
+       sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    except:
+       print("Unable to adjust sys.path")
+    #print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    try:
+        from intakebuilder import gfdlcrawler, CSVwriter, builderconfig, configparser
+    except ModuleNotFoundError:
+        sys.exit("The module 'intakebuilder' is still not installed. Do you have intakebuilder in your sys.path or have you activated the conda environment with the intakebuilder package in it? ")
 
+package_dir = os.path.dirname(os.path.abspath(__file__))
+template_path = os.path.join(package_dir, '../cats/gfdl_template.json')
+
+#Setting up argument parsing/flags
 @click.command()
 #TODO arguments dont have help message. So consider changing arguments to options?
 @click.argument('input_path',required=False,nargs=1)
@@ -26,14 +44,15 @@ logger.setLevel(logging.INFO)
 def main(input_path=None, output_path=None, config=None, filter_realm=None, filter_freq=None, filter_chunk=None,
          overwrite=False, append=False):
     # TODO error catching
+    print("input-path",input_path, config)
     if (input_path is None):
         configyaml = configparser.Config(config)
         input_path = configyaml.input_path
         output_path = configyaml.output_path
 
     project_dir = input_path
-    csv_path = output_path + ".csv"
-    json_path = output_path + ".json"
+    csv_path = "{0}.csv".format(output_path)
+    json_path = "{0}.json".format(output_path) 
 
     ######### SEARCH FILTERS ###########################
 
@@ -61,7 +80,7 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
     logger.info("Calling gfdlcrawler.crawlLocal")
     list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore, logger)
     #Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
-    with open("cats/gfdl_template.json", "r") as jsonTemplate:
+    with open(template_path, "r") as jsonTemplate:
         data = json.load(jsonTemplate)
         data["catalog_file"] = os.path.abspath(csv_path)
     jsonFile = open(json_path, "w")
