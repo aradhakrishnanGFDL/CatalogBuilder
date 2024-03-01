@@ -24,7 +24,7 @@ requirements:
 test:
   imports:
     - intakebuilder 
-    - from scripts import gen_intake_gfdl
+    - import scripts.gen_intake_gfdl
 
 about:
   home:
