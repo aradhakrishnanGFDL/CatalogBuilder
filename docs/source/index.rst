@@ -6,19 +6,13 @@
 Welcome to Catalog Builder's documentation!
 ===========================================
 
+The Catalog Builder API will collect building blocks necessary to build a data catalog which can then be ingested in climate analysis scripts/workflow, leveraging the use of intake-esm and xarray.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   usage
    generation
+   usage
    configuration
 
-The CatalogBuilder API will collect building blocks necessary to build a data catalog which can then be ingested in climate analysis scripts/workflow, leveraging the use of intake-esm and xarray.
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
