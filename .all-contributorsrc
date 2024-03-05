@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Ciheim",
+      "name": "Ciheim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43519680?v=4",
+      "profile": "https://github.com/Ciheim",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "CatalogBuilder",
+  "projectOwner": "aradhakrishnanGFDL"
+}
