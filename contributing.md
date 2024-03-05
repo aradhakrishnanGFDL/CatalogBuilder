@@ -36,7 +36,7 @@ Thanks!
 
 #### THANK YOU 
 
-We encourage you to pitch in. Many thanks to our wonderful [contributors](link tba)
+We encourage you to pitch in. Many thanks to our wonderful [contributors](https://github.com/aradhakrishnanGFDL/CatalogBuilder/graphs/contributors)
 
 ## Contributors
 
