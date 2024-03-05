@@ -89,7 +89,7 @@ This code of conduct document will be reviewed periodically. Reporting process w
 
 ## Your contributions 
    
-Our community values every contribution to this open-source repository. Please follow the contributorship guidelines [in the works] to see how you can contribute.
+Our community values every contribution to this open-source repository. Please follow the [contributorship guidelines](https://github.com/aradhakrishnanGFDL/CatalogBuilder/add-contrib-link/contributing.md)] to see how you can contribute.
 We encourage you to pitch in and join our growing community! 
 
 ### References
