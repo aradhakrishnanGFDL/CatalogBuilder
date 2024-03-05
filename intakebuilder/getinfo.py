@@ -7,6 +7,8 @@ import xarray as xr
 import shutil as sh
 from intakebuilder import builderconfig 
 
+warning_count = 0;
+
 '''
 getinfo.py provides helper functions to get information (from filename, DRS, file/global attributes) needed to populate the catalog
 '''
@@ -54,7 +56,8 @@ def getStem(dirpath,projectdir):
 
 
 def getInfoFromFilename(filename,dictInfo,logger):
-    # 5 AR: get the following from the netCDF filename e.g.rlut_Amon_GFDL-ESM4_histSST_r1i1p1f1_gr1_195001-201412.nc
+    # 5 AR: WE need to rework this, not being used in gfdl set up  get the following from the netCDF filename e.g.rlut_Amon_GFDL-ESM4_histSST_r1i1p1f1_gr1_195001-201412.nc
+    #print(filename)
     if(filename.endswith(".nc")):
         ncfilename = filename.split(".")[0].split("_")
         varname = ncfilename[0]
@@ -124,6 +127,7 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     #lets go backwards and match given input directory to the template, add things to dictInfo
     j = -1
     cnt = 1
+    global warning_count
     for i in range(nlen-1,0,-1):
       try:
           if(builderconfig.output_path_template[i] != "NA"):
@@ -134,8 +138,10 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     cnt = cnt + 1
     # WE do not want to work with anythi:1
     # ng that's not time series
-    if (dictInfo["cell_methods"] != "ts"):
+    #TODO have verbose option to print message
+    if (dictInfo["cell_methods"] != "ts" and warning_count < 1):
        print("Skipping non-timeseries data")
+       warning_count = 1
        return {}
     return dictInfo
     '''
