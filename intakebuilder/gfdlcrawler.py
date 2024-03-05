@@ -36,6 +36,7 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger):
                     logger.debug("FILE does not end with .nc. Skipping", filepath)
                     continue
                dictInfo["path"]=filepath
+               dictInfo = getinfo.getInfoFromGFDLFilename(filename,dictInfo, logger)
                dictInfo = getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)
                #sys.exit()
                list_bad_modellabel = ["","piControl","land-hist","piClim-SO2","abrupt-4xCO2","hist-piAer","hist-piNTCF","piClim-ghg","piClim-OC","hist-GHG","piClim-BC","1pctCO2"]
