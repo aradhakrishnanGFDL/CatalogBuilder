@@ -20,6 +20,10 @@
 
 * Look for answers in the documentation. If not, please open an issue with the question, [open a new one]([](https://github.com/aradhakrishnanGFDL/CatalogBuilder/issues/new)
 
+#### How to cite this work?
+
+Go to the [main project](https://github.com/aradhakrishnanGFDL/CatalogBuilder) page. You'll see a link named "Cite this repository" to the right under About.
+
 #### How can I add myself to the contributors page?
 
 Thank you for pitching in! Please check [this](https://allcontributors.org/docs/en/bot/usage) out to see how you can add your name to the contributor list. It's just one important step away!  
