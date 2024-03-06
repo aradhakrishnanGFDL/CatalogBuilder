@@ -66,5 +66,3 @@ Now, we execute our query:
  cat.df["path"][0]
 
 Intake will return the path to the file(s) that match these search parameters.
-
-
