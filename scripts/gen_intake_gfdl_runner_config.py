@@ -5,5 +5,5 @@ import sys
 
 sys.argv = ['input_path','--config', '/home/a1r/github/CatalogBuilder/scripts/configs/config-example.yml']
 print(sys.argv)
-scripts.gen_intake_gfdl.main()
+gen_intake_gfdl.main()
 
