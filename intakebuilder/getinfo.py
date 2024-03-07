@@ -139,9 +139,11 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     # WE do not want to work with anythi:1
     # ng that's not time series
     #TODO have verbose option to print message
+    
     if (dictInfo["cell_methods"] != "ts" and warning_count < 1):
        print("Skipping non-timeseries data")
        warning_count = 1
+        
        return {}
     return dictInfo
     '''
