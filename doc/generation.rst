@@ -20,6 +20,11 @@ and create your conda environment using the `environment.yml <https://github.com
 
    conda env create -f environment_intake.yml 
 
+Expected output
+================
+
+A JSON catalog specification file and a CSV catalog in the specfied output directory with the specified name. 
+
 Generation using conda package
 ------------------------------
 
@@ -67,14 +72,14 @@ You may also run a simple `python script <https://github.com/aradhakrishnanGFDL/
 
 #!/usr/bin/env python
 
-from scripts import gen_intake_gfdl
-import sys
+  from scripts import gen_intake_gfdl
+  import sys
 
-input_path = "/archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp/"
-output_path = "test"
-sys.argv = ['INPUT_PATH', input_path, output_path]
-print(sys.argv)
-gen_intake_gfdl.main()
+  input_path = "/archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp/"
+  output_path = "$HOME/catalog"
+  sys.argv = ['INPUT_PATH', input_path, output_path]
+  print(sys.argv)
+  gen_intake_gfdl.main()
 
 Generation using FRE-CLI (GFDL only)
 ------------------------------------
