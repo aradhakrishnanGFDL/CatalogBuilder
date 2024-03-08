@@ -7,8 +7,11 @@ Installation
 ------------
 
 Recommended approach: Install as a `conda package <https://anaconda.org/NOAA-GFDL/intakebuilder>`_
+.. code-block:: console
 
-You may also clone the `git repository <https://github.com/aradhakrishnanGFDL/CatalogBuilder.git>`_
+  conda install intakebuilder -c noaa-gfdl
+
+Alternatively, you may clone the `git repository <https://github.com/aradhakrishnanGFDL/CatalogBuilder.git>`_
 and create your conda environment using the `environment.yml <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/environment.yml>`_ in the git repository. 
 
 .. code-block:: console
