@@ -64,6 +64,9 @@ Generation from Jupyter Notebook
 
 Refer to this `notebook <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_notebook.ipynb>`_ to see how you can generate catalogs from a Jupyter Notebook
 
+.. image:: _static/notebook.png
+  :alt: Screenshot of a notebook showing catalog generation
+
 You may also run a simple `python script <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_runner.py>`_ and generate the catalogs.
 `Here <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_runner_config.py>`_ is another example of a runner script that uses a configuration file. 
 
