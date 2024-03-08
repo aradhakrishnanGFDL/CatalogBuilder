@@ -1,5 +1,5 @@
-Welcome to Catalog Builder's documentation!
-===========================================
+Background
+==========
 
 The catalog builder project is a “python community package ecosystem” that allows you to generate data catalogs compatible with intake-esm.  Available as a Conda package. 
 
