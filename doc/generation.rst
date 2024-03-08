@@ -57,9 +57,9 @@ See `Flags`_ here.
 Generation from Jupyter Notebook
 --------------------------------
 
-Refer to this `notebook <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_notebook.ipynb>'_ to see how you can generate catalogs from a Jupyter Notebook
+Refer to this `notebook <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_notebook.ipynb>`_ to see how you can generate catalogs from a Jupyter Notebook
 
-You may also run a simple `python script <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_runner.py>'_ and generate the catalogs.
+You may also run a simple `python script <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_runner.py>`_ and generate the catalogs.
 `Here <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_runner_config.py>`_ is another example of a runner script that uses a configuration file. 
 
 
