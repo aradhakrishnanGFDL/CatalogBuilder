@@ -20,7 +20,7 @@ See our `Github repository <https://github.com/aradhakrishnanGFDL/CatalogBuilder
    background
    generation
    usage
-   configuration
+   presentations 
 
 Indices and tables
 ==================
