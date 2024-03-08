@@ -3,36 +3,16 @@ Generating data catalogs
 
 There are a few ways to use the catalog builder.
 
-Configuration
---------------
+Installation
+------------
 
-Before generating a catalog, the tool must be configured. Catalog headers (column names) are set with the *HEADER LIST* variable. The *OUTPUT PATH TEMPLATE* variable controls the expected directory structure of input data. Both can be configured by editing intakebuilder/builderconfig.py.
+Recommended approach: Install as a `conda package <https://anaconda.org/NOAA-GFDL/intakebuilder>`_
+You may also clone the `git repository <https://github.com/aradhakrishnanGFDL/CatalogBuilder.git>`_
+and create your conda environment using the `environment.yml<https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/environment.yml>`_ in the git repository. 
 
-.. code-block:: python
-   
- #Catalog Headers
-
-
- #The headerlist is expected column names in your catalog/csv file. This is usually determined by the users in conjuction
- #with the ESM collection specification standards and the appropriate workflows.
-
- headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
-                   "frequency", "modeling_realm", "table_id",
-                   "member_id", "grid_label", "variable_id",
-                   "temporal_subset", "chunk_freq","grid_label","platform","dimensions","cell_methods","path"]
-
-
- #Expected Directory Structure
- 
- #For a directory structure like /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp the output_path_template is set as follows:
-
- #We have NA in values that do not match up with any of the expected headerlist (CSV columns), otherwise we simply specify the associated header name in the appropriate place. E.g. The third directory in the PP path example above is the model (source_id), so the third list value in output_path_template is set to 'source_id'. We make sure this is a valid value in headerlist as well.
-
- #The fourth directory is am5f3b1r0 which does not map to an existing header value. So we simply set NA in output_path_template for the fourth value.
-
- output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
-
- output_file_template = ['modeling_realm','temporal_subset','variable_id']
+.. code-block:: console
+   git clone https://github.com/aradhakrishnanGFDL/CatalogBuilder.git
+   conda env create -f environment_intake.yml 
 
 Generation using conda package
 ------------------------------
@@ -44,7 +24,6 @@ Generation using conda package
   conda install intakebuilder -c noaa-gfdl
 
 This package contains all dependencies needed to run the catalog builder.
-
 
 **2. Add conda environment's site packages to PATH**
 
@@ -96,6 +75,37 @@ See `Flags`_ here.
 Generation from Jupyter Notebook
 --------------------------------
 
+
+Optional Configuration
+----------------------
+
+Before generating a catalog, the tool must be configured. Catalog headers (column names) are set with the *HEADER LIST* variable. The *OUTPUT PATH TEMPLATE* variable controls the expected directory structure of input data. Both can be configured by editing intakebuilder/builderconfig.py.
+
+.. code-block:: python
+   
+ #Catalog Headers
+
+
+ #The headerlist is expected column names in your catalog/csv file. This is usually determined by the users in conjuction
+ #with the ESM collection specification standards and the appropriate workflows.
+
+ headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
+                   "frequency", "modeling_realm", "table_id",
+                   "member_id", "grid_label", "variable_id",
+                   "temporal_subset", "chunk_freq","grid_label","platform","dimensions","cell_methods","path"]
+
+
+ #Expected Directory Structure
+ 
+ #For a directory structure like /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp the output_path_template is set as follows:
+
+ #We have NA in values that do not match up with any of the expected headerlist (CSV columns), otherwise we simply specify the associated header name in the appropriate place. E.g. The third directory in the PP path example above is the model (source_id), so the third list value in output_path_template is set to 'source_id'. We make sure this is a valid value in headerlist as well.
+
+ #The fourth directory is am5f3b1r0 which does not map to an existing header value. So we simply set NA in output_path_template for the fourth value.
+
+ output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
+
+ output_file_template = ['modeling_realm','temporal_subset','variable_id']
 
 
 Flags
