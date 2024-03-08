@@ -11,11 +11,10 @@ We are collecting examples that use the intake-esm API with the catalogs generat
 Community examples
 
 - `An example from the MDTF <https://nbviewer.org/github/wrongkindofdoctor/MDTF-diagnostics/blob/refactor_pp/diagnostics/example_multicase/example_multirun_demo.ipynb>`_
-
-`GitHub reference <https://github.com/wrongkindofdoctor/MDTF-diagnostics/blob/refactor_pp/diagnostics/example_multicase/example_multirun_demo.ipynb>`_
+   `GitHub reference <https://github.com/wrongkindofdoctor/MDTF-diagnostics/blob/refactor_pp/diagnostics/example_multicase/example_multirun_demo.ipynb>`_
 
 - `An example using a GFDL experiment (dev only) <https://nbviewer.org/github/aradhakrishnanGFDL/canopy-cats/blob/main/notebooks/om_example.ipynb>`_
-`GitHub reference <https://github.com/aradhakrishnanGFDL/canopy-cats/blob/main/notebooks/om_example.ipynb>`_
+   `GitHub reference <https://github.com/aradhakrishnanGFDL/canopy-cats/blob/main/notebooks/om_example.ipynb>`_
 
 - `Generate intake-esm example that uses our CMIP6 collection in the AWS cloud <https://github.com/aradhakrishnanGFDL/gfdl-aws-analysis>`_
 - `Examples from DKRZ <https://easy.gems.dkrz.de/Processing/Intake/index.html>`_
