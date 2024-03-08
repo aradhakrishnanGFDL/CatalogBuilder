@@ -17,6 +17,7 @@ See our `Github repository <https://github.com/aradhakrishnanGFDL/CatalogBuilder
    :maxdepth: 2
    :caption: Contents:
 
+   background
    generation
    usage
    configuration
