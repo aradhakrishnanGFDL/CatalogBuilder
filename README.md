@@ -1,8 +1,8 @@
 # CatalogBuilder
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5196586.svg)](https://doi.org/10.5281/zenodo.5196586)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5196586.svg)](https://doi.org/10.5281/zenodo.10787602)
 
 See our [project documentation site ](https://aradhakrishnangfdl.github.io/CatalogBuilder/).
 
