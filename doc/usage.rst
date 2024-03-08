@@ -27,7 +27,7 @@ Community examples
 How to ingest using Intake-ESM
 ------------------------------
 
-**Import needed packages - depends on what your python analysis needs**
+**Import needed packages - depends on what your python analysis needs. Only intake and intake-esm are necessary for data exploration with intake-esm package**
 
 
 .. code-block:: python
