@@ -1,5 +1,5 @@
-How to generate 
-===============
+Generating data catalogs
+========================
 
 There are a few ways to use the catalog builder.
 
