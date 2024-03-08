@@ -27,7 +27,7 @@ Community examples
 How to ingest using Intake-ESM
 ------------------------------
 
-**Import needed packages**
+**Import needed packages - depends on what your python analysis needs**
 
 
 .. code-block:: python
