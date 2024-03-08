@@ -54,6 +54,27 @@ This would create an catalog.csv and catalog.json in the user's home directory.
 
 See `Flags`_ here.
 
+Generation from Jupyter Notebook
+--------------------------------
+
+Refer to this `notebook <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_notebook.ipynb>'_ to see how you can generate catalogs from a Jupyter Notebook
+
+You may also run a simple `python script <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_runner.py>'_ and generate the catalogs.
+`Here <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_runner_config.py>`_ is another example of a runner script that uses a configuration file. 
+
+
+.. code-block:: console
+
+#!/usr/bin/env python
+
+from scripts import gen_intake_gfdl
+import sys
+
+input_path = "/archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp/"
+output_path = "test"
+sys.argv = ['INPUT_PATH', input_path, output_path]
+print(sys.argv)
+gen_intake_gfdl.main()
 
 Generation using FRE-CLI (GFDL only)
 ------------------------------------
