@@ -10,19 +10,18 @@ We are collecting examples that use the intake-esm API with the catalogs generat
 
 Community examples
 
-- An example from the MDTF <https://nbviewer.org/github/wrongkindofdoctor/MDTF-diagnostics/blob/refactor_pp/diagnostics/example_multicase/example_multirun_demo.ipynb>
+- `An example from the MDTF <https://nbviewer.org/github/wrongkindofdoctor/MDTF-diagnostics/blob/refactor_pp/diagnostics/example_multicase/example_multirun_demo.ipynb>`_
 
-GitHub reference <https://github.com/wrongkindofdoctor/MDTF-diagnostics/blob/refactor_pp/diagnostics/example_multicase/example_multirun_demo.ipynb>
+`GitHub reference <https://github.com/wrongkindofdoctor/MDTF-diagnostics/blob/refactor_pp/diagnostics/example_multicase/example_multirun_demo.ipynb>`_
 
+- `An example using a GFDL experiment (dev only) <https://nbviewer.org/github/aradhakrishnanGFDL/canopy-cats/blob/main/notebooks/om_example.ipynb>`_
+`GitHub reference <https://github.com/aradhakrishnanGFDL/canopy-cats/blob/main/notebooks/om_example.ipynb>`_
 
-- An example using a GFDL experiment (dev only) <https://nbviewer.org/github/aradhakrishnanGFDL/canopy-cats/blob/main/notebooks/om_example.ipynb>
-GitHub reference <https://github.com/aradhakrishnanGFDL/canopy-cats/blob/main/notebooks/om_example.ipynb>
-
-- Generate intake-esm example that uses our CMIP6 collection in the AWS cloud <https://github.com/aradhakrishnanGFDL/gfdl-aws-analysis>
-- Examples from DKRZ <https://easy.gems.dkrz.de/Processing/Intake/index.html>
-- Pangeo CMIP6 gallery <https://gallery.pangeo.io/repos/pangeo-gallery/cmip6/intake_ESM_example.html>
-- CIMES Intern projects <https://github.com/MackenzieBlanusa/OHC_CMIP6> 
-- Student work <https://github.com/aradhakrishnanGFDL/AGU-rmonge/> 
+- `Generate intake-esm example that uses our CMIP6 collection in the AWS cloud <https://github.com/aradhakrishnanGFDL/gfdl-aws-analysis>`_
+- `Examples from DKRZ <https://easy.gems.dkrz.de/Processing/Intake/index.html>`_
+- `Pangeo CMIP6 gallery <https://gallery.pangeo.io/repos/pangeo-gallery/cmip6/intake_ESM_example.html>`_
+- `CIMES Intern projects <https://github.com/MackenzieBlanusa/OHC_CMIP6>`_
+- `Student work <https://github.com/aradhakrishnanGFDL/AGU-rmonge/>`_ 
 
 
 How to ingest using Intake-ESM
