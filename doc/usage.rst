@@ -47,7 +47,7 @@ We must provide Intake-ESM with a path to an ESM compatible collection file (JSO
  
  col_url = "<path-to-JSON>"
 
- #Ex: col_url = "~/CatalogBuilder/cats/gfdl_test1.json"
+ #E.g: col_url = "cats/gfdl_test1.json" # The template we use for current testing and for MDTF is here https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/cats/gfdl_template.json
 
  col = intake.open_esm_datastore(col_url)
 
@@ -63,7 +63,7 @@ Search parameters can be set to find specific files. Here, we search for a file 
  variable_id_filter = "evap"
  ens_filter = "r1i1p1f1"
  frequency = "monthly"
- chunk_freq = "5yr" #assuming we have 10 yr also, this will give unique ones
+ chunk_freq = "5yr" 
 
 **Search the catalog**
 
