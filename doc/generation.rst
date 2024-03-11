@@ -109,8 +109,9 @@ See `Flags`_ here.
 Optional Configuration
 ----------------------
 
-If you want to work with datasets and directories that are not quite GFDL post-processed directory oriented: 
-Before generating a catalog, the tool must be configured. Catalog headers (column names) are set with the *HEADER LIST* variable. The *OUTPUT PATH TEMPLATE* variable controls the expected directory structure of input data. Both can be configured by editing intakebuilder/builderconfig.py.
+If you want to work with datasets and directories that are *not quite* GFDL post-processed directory oriented: 
+
+Catalog headers (column names) are set with the *HEADER LIST* variable. The *OUTPUT PATH TEMPLATE* variable controls the expected directory structure of input data. Both can be configured by editing intakebuilder/builderconfig.py.
 
 .. code-block:: python
    
@@ -144,6 +145,5 @@ _____
 
 .. Reference `Flags`_.
 
-- --overwrite - Overwrite an existing catalog at the given output path
-
-- --append - Append (without headerlist) to an existing catalog at the given output path
+- overwrite - Overwrite an existing catalog at the given output path
+- append - Append (without headerlist) to an existing catalog at the given output path
