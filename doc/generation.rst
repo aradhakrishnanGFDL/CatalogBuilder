@@ -7,6 +7,7 @@ Installation
 ------------
 
 Recommended approach: Install as a `conda package <https://anaconda.org/NOAA-GFDL/intakebuilder>`_
+
 .. code-block:: console
 
   conda install intakebuilder -c noaa-gfdl
@@ -21,12 +22,12 @@ and create your conda environment using the `environment.yml <https://github.com
    conda env create -f environment_intake.yml 
 
 Expected output
-------------
+---------------
 
 A JSON catalog specification file and a CSV catalog in the specfied output directory with the specified name. 
 
-Generation using conda package
-------------------------------
+Using conda package
+-------------------
 
 **1. Install the package using conda:** 
 
@@ -59,8 +60,8 @@ This would create an catalog.csv and catalog.json in the user's home directory.
 
 See `Flags`_ here.
 
-Generation from Jupyter Notebook
---------------------------------
+From Jupyter Notebook
+---------------------
 
 Refer to this `notebook <https://github.com/aradhakrishnanGFDL/CatalogBuilder/blob/main/scripts/gen_intake_gfdl_notebook.ipynb>`_ to see how you can generate catalogs from a Jupyter Notebook
 
@@ -82,8 +83,8 @@ You may also run a simple `python script <https://github.com/aradhakrishnanGFDL/
   print(sys.argv)
   gen_intake_gfdl.main()
 
-Generation using FRE-CLI (GFDL only)
-------------------------------------
+Using FRE-CLI (GFDL only)
+-------------------------
 
 **1. Activate conda environment**
 
