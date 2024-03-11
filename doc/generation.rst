@@ -7,6 +7,7 @@ Installation
 ------------
 
 Recommended approach: Install as a `conda package <https://anaconda.org/NOAA-GFDL/intakebuilder>`_
+
 .. code-block:: console
 
   conda install intakebuilder -c noaa-gfdl
@@ -21,7 +22,7 @@ and create your conda environment using the `environment.yml <https://github.com
    conda env create -f environment_intake.yml 
 
 Expected output
-------------
+---------------
 
 A JSON catalog specification file and a CSV catalog in the specfied output directory with the specified name. 
 
