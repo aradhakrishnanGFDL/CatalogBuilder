@@ -34,6 +34,5 @@ Intake-ESM API
 - Provides a pythonic way to “query” for information in the catalogs
 - Loads the results in an xarray dataset object 
 
-`Check out our training slides here <https://docs.google.com/presentation/d/1m_1XaL5che5vvPKdRn7iscSL8Kh8DfF0f_CtBps2ARE/edit?usp=sharing>`_
 
 
