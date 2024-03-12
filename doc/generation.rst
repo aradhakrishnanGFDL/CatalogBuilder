@@ -55,8 +55,11 @@ Output path argumment should end with the desired output filename WITHOUT a file
 
  gen_intake_gfdl.py /archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp $HOME/catalog
 
-This would create an catalog.csv and catalog.json in the user's home directory.
+This would create a catalog.csv and catalog.json in the user's home directory.
 
+.. image:: _static/ezgif-4-786144c287.gif
+ :width: 1000px
+ :alt: Catalog generation demonstration
 
 See `Flags`_ here.
 
