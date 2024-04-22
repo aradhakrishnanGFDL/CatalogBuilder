@@ -30,8 +30,11 @@ def main(json_path,json_template):
  
     #Look for empty values under required columns    
     for column in req:
-        if(catalog[column].isnull().values.any()):
-            print(catalog[column].name, 'contains empty values')
+        try:
+            if(catalog[column].isnull().values.any()):
+                print(catalog[column].name, 'contains empty values')
+        except:
+            print("Can't validate",column, "column. Check for typos.")
     
 
     #Read JSON and find optional headers
