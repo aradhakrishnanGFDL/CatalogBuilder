@@ -13,12 +13,13 @@ def main(json_path,json_template):
     
     #Open JSON
     j = json.load(open(json_path))
+    json_template = json.load(open(json_template))
     
-    #Validate JSON against JSON template (need to refine this for better validation)
+    #Validate JSON against JSON template
     comp = (diff(j,json_template))
-    if(len(comp)>1):
-        print("Multiple JSON diffs found")
-        print('DIFF:',comp)
+    for key in comp.keys():
+        if key != 'catalog_file':
+            print(key, 'section of JSON does not refect template')
 
     #Get CSV from JSON and open it
     csv_path = j["catalog_file"]
