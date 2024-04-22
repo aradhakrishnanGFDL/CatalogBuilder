@@ -13,9 +13,6 @@ def main(json_path,json_template):
     
     #Open JSON
     j = json.load(open(json_path))
-
-    #Get required columns
-    req = (j["aggregation_control"]["groupby_attrs"])    
     
     #Validate JSON against JSON template (need to refine this for better validation)
     comp = (diff(j,json_template))
@@ -25,11 +22,12 @@ def main(json_path,json_template):
 
     #Get CSV from JSON and open it
     csv_path = j["catalog_file"]
-
-    #with open(csv_path, "r+", newline="") as catalog:
     catalog = pd.read_csv(csv_path)
-    
-        
+   
+    #Get required columns
+    req = (j["aggregation_control"]["groupby_attrs"])
+ 
+    #Look for empty values under required columns    
     for column in req:
         if(catalog[column].isnull().values.any()):
             print(catalog[column].name, 'contains empty values')
