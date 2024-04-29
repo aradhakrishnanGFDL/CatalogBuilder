@@ -84,7 +84,7 @@ def getInfoFromFilename(filename,dictInfo,logger):
 #adding this back to trace back some old errors
 def getInfoFromGFDLFilename(filename,dictInfo,logger):
     # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
-    if(filename.endswith(".nc")):
+    if(filename.endswith(".nc") and not filename.startswith(".")):
         ncfilename = filename.split(".")
         varname = ncfilename[-2]
         dictInfo["variable_id"] = varname
@@ -131,8 +131,12 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     for i in range(nlen-1,0,-1):
       try:
           if(builderconfig.output_path_template[i] != "NA"):
-             dictInfo[builderconfig.output_path_template[i]] = stemdir[(j)]
-      except:
+              try:
+                  dictInfo[builderconfig.output_path_template[i]] = stemdir[(j)]
+              except IndexError:
+                  print("Check configuration. Is output path template set correctly?")
+                  exit()
+      except IndexError:
           sys.exit("oops in getInfoFromGFDLDRS"+str(i)+str(j)+builderconfig.output_path_template[i]+stemdir[j])
       j = j - 1
     cnt = cnt + 1

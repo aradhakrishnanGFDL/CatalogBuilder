@@ -19,6 +19,7 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger):
         pat = re.compile('({}/{}/{}/{})'.format(dictFilter["modeling_realm"],"ts",dictFilter["frequency"],dictFilter["chunk_freq"]))
     
     orig_pat = pat
+
     #TODO INCLUDE filter in traversing through directories at the top
     for dirpath, dirs, files in os.walk(projectdir):
         searchpath = dirpath
@@ -27,14 +28,17 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger):
         if(pat is not None):
             m = re.search(pat, searchpath)
             for filename in files:
+               if filename.startswith("."):
+                   logger.debug("Skipping hidden file", filepath) 
+                   continue
+               if not filename.endswith(".nc"):
+                   logger.debug("FILE does not end with .nc. Skipping", filepath)
+                   continue
                logger.info(dirpath+"/"+filename)
                dictInfo = {}
                dictInfo = getinfo.getProject(projectdir, dictInfo)
                # get info from filename
                filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
-               if not filename.endswith(".nc"):
-                    logger.debug("FILE does not end with .nc. Skipping", filepath)
-                    continue
                dictInfo["path"]=filepath
                dictInfo = getinfo.getInfoFromGFDLFilename(filename,dictInfo, logger)
                dictInfo = getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo)
