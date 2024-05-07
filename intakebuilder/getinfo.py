@@ -7,8 +7,6 @@ import xarray as xr
 import shutil as sh
 from intakebuilder import builderconfig, configparser 
 
-warning_count = 0;
-
 '''
 getinfo.py provides helper functions to get information (from filename, DRS, file/global attributes) needed to populate the catalog
 '''
@@ -133,7 +131,6 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,config):
         print('IT WORKED')
     else:
         output_path_template = builderconfig.output_path_template 
-    global warning_count
     for i in range(nlen-1,0,-1):
       try:
           if(output_path_template[i] != "NA"):
@@ -149,11 +146,8 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,config):
     # WE do not want to work with anythi:1
     # ng that's not time series
     #TODO have verbose option to print message
-    print(dictInfo) 
-    if (dictInfo["cell_methods"] != "ts" and warning_count < 1):
-       print("Skipping non-timeseries data")
-       warning_count = 1
-        
+    if (dictInfo["cell_methods"] != "ts"):
+       #print("Skipping non-timeseries data")
        return {}
     return dictInfo
     '''
