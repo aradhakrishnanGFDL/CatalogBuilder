@@ -1,18 +1,19 @@
 import os.path
 import csv
 from csv import writer
-from intakebuilder import builderconfig 
-def getHeader():
+from intakebuilder import builderconfig, configparser 
+
+def getHeader(config):
     '''
     returns header that is the first line in the csv file, refers builderconfig.py
     :return: headerlist with all columns
     '''
-    #TODO move headerlist outside in a separate configuration or 
-    #headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
-    #              "frequency", "modeling_realm", "table_id",
-    #              "member_id", "grid_label", "variable_id",
-    #              "temporal_subset", "chunk_freq","grid_label","platform","dimensions","cell_methods","path"]
-    return builderconfig.headerlist
+    if config:
+        configyaml = configparser.Config(config)
+        return configyaml.headerlist
+    else:
+        return builderconfig.headerlist
+
 def writeHeader(csvfile):
   '''
   writing header for the csv

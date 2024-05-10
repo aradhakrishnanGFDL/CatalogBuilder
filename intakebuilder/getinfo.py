@@ -5,7 +5,7 @@ from csv import writer
 import os
 import xarray as xr
 import shutil as sh
-from intakebuilder import builderconfig 
+from intakebuilder import builderconfig, configparser 
 
 warning_count = 0;
 
@@ -107,7 +107,7 @@ def getInfoFromGFDLFilename(filename,dictInfo,logger):
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
 
-def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
+def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,config):
     '''
     Returns info from project directory and the DRS path to the file
     :param dirpath:
@@ -127,23 +127,29 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     #lets go backwards and match given input directory to the template, add things to dictInfo
     j = -1
     cnt = 1
+    if config:
+        configyaml = configparser.Config(config)
+        output_path_template = configyaml.output_path_template
+        print('IT WORKED')
+    else:
+        output_path_template = builderconfig.output_path_template 
     global warning_count
     for i in range(nlen-1,0,-1):
       try:
-          if(builderconfig.output_path_template[i] != "NA"):
+          if(output_path_template[i] != "NA"):
               try:
-                  dictInfo[builderconfig.output_path_template[i]] = stemdir[(j)]
+                  dictInfo[output_path_template[i]] = stemdir[(j)]
               except IndexError:
                   print("Check configuration. Is output path template set correctly?")
                   exit()
       except IndexError:
-          sys.exit("oops in getInfoFromGFDLDRS"+str(i)+str(j)+builderconfig.output_path_template[i]+stemdir[j])
+          sys.exit("oops in getInfoFromGFDLDRS"+str(i)+str(j)+output_path_template[i]+stemdir[j])
       j = j - 1
     cnt = cnt + 1
     # WE do not want to work with anythi:1
     # ng that's not time series
     #TODO have verbose option to print message
-    
+    print(dictInfo) 
     if (dictInfo["cell_methods"] != "ts" and warning_count < 1):
        print("Skipping non-timeseries data")
        warning_count = 1
