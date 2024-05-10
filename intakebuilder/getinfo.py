@@ -116,10 +116,18 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
    #               "frequency", "modeling_realm", "mip_table",
    #               "ensemble_member", "grid_label", "variable",
    #               "temporal subset", "version", "path"]
- 
-#Grab values based on their expected position in path 
+    ############ set default for the aggregate columns ###############
+    dictInfo["member_id"] = "na"
+    dictInfo["source_id"] = "na"
+    dictInfo["experiment_id"] = "na"
+    dictInfo["frequency"] = "na"
+    dictInfo["modeling_realm"] = "na"
+    dictInfo["variable_id"] = "na"
+    dictInfo["chunk_freq"] = "na"
+    ################################################################## 
+    #Grab values based on their expected position in path 
     stemdir = dirpath.split("/")
-   # adding back older versions to ensure we get info from builderconfig
+    #adding back older versions to ensure we get info from builderconfig
     stemdir = dirpath.split("/")
     nlen = len(builderconfig.output_path_template)
     #lets go backwards and match given input directory to the template, add things to dictInfo

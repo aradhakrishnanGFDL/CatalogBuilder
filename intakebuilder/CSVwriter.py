@@ -68,7 +68,6 @@ def listdict_to_csv(dict_info,headerlist, csvfile, overwrite, append):
                     if user_input.lower() == 'y':
                         with open(csvfile, 'w') as csvfile:
                             writer = csv.DictWriter(csvfile, fieldnames=headerlist)
-                            print("writing..")
                             writer.writeheader()
                             for data in dict_info:
                                 if len(data.keys()) > 2:
