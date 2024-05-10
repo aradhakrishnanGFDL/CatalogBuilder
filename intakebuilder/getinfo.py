@@ -4,8 +4,8 @@ import csv
 from csv import writer
 import os
 import xarray as xr
-import shutil as sh
 from intakebuilder import builderconfig, configparser 
+
 
 '''
 getinfo.py provides helper functions to get information (from filename, DRS, file/global attributes) needed to populate the catalog
@@ -128,9 +128,9 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,config):
     if config:
         configyaml = configparser.Config(config)
         output_path_template = configyaml.output_path_template
-        print('IT WORKED')
     else:
         output_path_template = builderconfig.output_path_template 
+
     for i in range(nlen-1,0,-1):
       try:
           if(output_path_template[i] != "NA"):
