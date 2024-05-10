@@ -29,7 +29,14 @@ headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
 
 output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
 
-output_file_template = ['modeling_realm','temporal_subset','variable_id']
+output_path_template = ['NA','NA','NA','NA','experiment_id','frequency']
+
+#/nbhome/a1r/mdtf]/mdtf_test_data/CMIP_Synthetic_r1i1p1f1_gr1_19900101-20091231/mon/ 
+
+output_file_template = ['experiment_id','variable_id','frequency']
+ 
+# ['modeling_realm','temporal_subset','variable_id']
+#CMIP_Synthetic_r1i1p1f1_gr1_19900101-20091231.hfls.mon.nc
 
 #OUTPUT FILE INFO is currently passed as command-line argument.
 #We will revisit adding a csvfile, jsonfile and logfile configuration to the builder configuration file in the future.
