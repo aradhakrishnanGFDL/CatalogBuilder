@@ -9,6 +9,7 @@ import logging
 
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
+configyaml = None
 
 try:
    from intakebuilder import gfdlcrawler, CSVwriter, builderconfig, configparser
