@@ -118,12 +118,6 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
    #               "temporal subset", "version", "path"]
     ############ set default for the aggregate columns ###############
     dictInfo["member_id"] = "na"
-    dictInfo["source_id"] = "na"
-    dictInfo["experiment_id"] = "na"
-    dictInfo["frequency"] = "na"
-    dictInfo["modeling_realm"] = "na"
-    dictInfo["variable_id"] = "na"
-    dictInfo["chunk_freq"] = "na"
     ################################################################## 
     #Grab values based on their expected position in path 
     stemdir = dirpath.split("/")
@@ -152,7 +146,7 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
     if stemdir[len(stemdir)-3] == "ts":
         dictInfo['experiment_id'] = stemdir[len(stemdir)-7]
         dictInfo['frequency'] = stemdir[len(stemdir)-2]
-        dictInfo['member_id'] = 'n/a'
+        #dictInfo['member_id'] = 'n/a'
         dictInfo['modeling_realm'] = stemdir[len(stemdir)-4]
 
         #Finds last (a) and second to last (b) periods and grabs value between them
