@@ -3,13 +3,13 @@ import csv
 from csv import writer
 from intakebuilder import builderconfig, configparser 
 
-def getHeader(config):
+def getHeader(configyaml):
     '''
     returns header that is the first line in the csv file, refers builderconfig.py
     :return: headerlist with all columns
     '''
-    if config:
-        configyaml = configparser.Config(config)
+    if configyaml:
+        #configyaml = configparser.Config(config)
         return configyaml.headerlist
     else:
         return builderconfig.headerlist

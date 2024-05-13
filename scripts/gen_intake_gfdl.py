@@ -45,8 +45,12 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
          overwrite=False, append=False):
     # TODO error catching
     #print("input path: ",input_path, " output path: ", output_path)
-    if (input_path is None):
+    if input_path is None or output_path is None:
+        print("No paths given, using yaml configuration")
         configyaml = configparser.Config(config)
+        if configyaml.input_path is None or not configyaml.input_path :
+            sys.exit("Can't find paths, is yaml configured?")
+            
         input_path = configyaml.input_path
         output_path = configyaml.output_path
 
@@ -78,7 +82,7 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
     dictInfo = {}
     project_dir = project_dir.rstrip("/")
     logger.info("Calling gfdlcrawler.crawlLocal")
-    list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore, logger, config)
+    list_files = gfdlcrawler.crawlLocal(project_dir, dictFilter, dictFilterIgnore, logger, configyaml)
     #Grabbing data from template JSON, changing CSV path to match output path, and dumping data in new JSON
     with open(template_path, "r") as jsonTemplate:
         data = json.load(jsonTemplate)
@@ -86,7 +90,7 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
     jsonFile = open(json_path, "w")
     json.dump(data, jsonFile, indent=2)
     jsonFile.close()
-    headers = CSVwriter.getHeader(config)
+    headers = CSVwriter.getHeader(configyaml)
 
     # When we pass relative path or just the filename the following still needs to not choke
     # so we check if it's a directory first

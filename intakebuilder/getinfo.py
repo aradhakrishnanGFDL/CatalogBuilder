@@ -105,7 +105,7 @@ def getInfoFromGFDLFilename(filename,dictInfo,logger):
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
 
-def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,config):
+def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,configyaml):
     '''
     Returns info from project directory and the DRS path to the file
     :param dirpath:
@@ -117,20 +117,21 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,config):
    #               "ensemble_member", "grid_label", "variable",
    #               "temporal subset", "version", "path"]
  
-#Grab values based on their expected position in path 
+   #Grab values based on their expected position in path 
     stemdir = dirpath.split("/")
    # adding back older versions to ensure we get info from builderconfig
     stemdir = dirpath.split("/")
-    nlen = len(builderconfig.output_path_template)
+
     #lets go backwards and match given input directory to the template, add things to dictInfo
     j = -1
     cnt = 1
-    if config:
-        configyaml = configparser.Config(config)
+
+    if configyaml:
         output_path_template = configyaml.output_path_template
     else:
         output_path_template = builderconfig.output_path_template 
-
+   
+    nlen = len(output_path_template) 
     for i in range(nlen-1,0,-1):
       try:
           if(output_path_template[i] != "NA"):
