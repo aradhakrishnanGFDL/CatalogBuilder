@@ -9,7 +9,6 @@ import logging
 
 logger = logging.getLogger('local')
 logger.setLevel(logging.INFO)
-configyaml = None
 
 try:
    from intakebuilder import gfdlcrawler, CSVwriter, builderconfig, configparser
@@ -58,6 +57,7 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
     project_dir = input_path
     csv_path = "{0}.csv".format(output_path)
     json_path = "{0}.json".format(output_path) 
+    configyaml = None
 
     ######### SEARCH FILTERS ###########################
 
