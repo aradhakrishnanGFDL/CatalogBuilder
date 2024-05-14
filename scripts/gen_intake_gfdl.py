@@ -43,6 +43,8 @@ template_path = os.path.join(package_dir, '../cats/gfdl_template.json')
 @click.option('--append', is_flag=True, default=False)
 def main(input_path=None, output_path=None, config=None, filter_realm=None, filter_freq=None, filter_chunk=None,
          overwrite=False, append=False):
+
+    configyaml = None
     # TODO error catching
     #print("input path: ",input_path, " output path: ", output_path)
     if input_path is None or output_path is None:
@@ -57,7 +59,6 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
     project_dir = input_path
     csv_path = "{0}.csv".format(output_path)
     json_path = "{0}.json".format(output_path) 
-    configyaml = None
 
     ######### SEARCH FILTERS ###########################
 
