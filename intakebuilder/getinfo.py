@@ -125,12 +125,14 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,configyaml):
     #lets go backwards and match given input directory to the template, add things to dictInfo
     j = -1
     cnt = 1
-
     if configyaml:
         output_path_template = configyaml.output_path_template
     else:
-        output_path_template = builderconfig.output_path_template 
-   
+        try:
+            output_path_template = builderconfig.output_path_template 
+        except:
+            sys.exit("No output_path_template found in builderconfig.py. Check configuration.")
+
     nlen = len(output_path_template) 
     for i in range(nlen-1,0,-1):
       try:
