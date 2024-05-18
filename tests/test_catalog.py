@@ -1,30 +1,41 @@
 #!/usr/bin/env python
 
-""" Tests to load the catalog and extend the test capabilities """
+import click
+import json
+from jsondiff import diff
+import csv
+import pandas as pd
+import sys
 
-__author__ = "A.Radhakrishnan"
-__maintainer__ = "GFDL MSD workflow team"
+@click.command()
+@click.argument('json_path', nargs = 1 , required = True)
+def main(json_path):
 
-import intake
-import intake_esm
-import pandas as pd 
-import os
-import pathlib
+    #Open JSON
+    j = json.load(open(json_path))
+    json_template = json.load(open('cats/gfdl_template.json'))
 
-def load_cat(catspec=None):
-  """Checks if the json and associated csv can be opened by intake_esm""" 
-  cat = None
-  try:
-    cat = intake.open_esm_datastore(catspec)
-  except BaseException as e:
-    print("Can't load this catalog",str(e))
-  return cat
-def test_loadcat():
-  #TODO generate csv on the fly, check if its readable etc
-  catspec = pathlib.Path(os.path.dirname(__file__)).parent / 'cats/gfdl_test1.json'
-  #TODO generate test catalog on the fly, push spec to the test directory
-  cat = load_cat((str(catspec)))
-  try:
-    assert isinstance(cat.df, pd.DataFrame),"test failed"
-  except BaseException as e:
-     assert cat!=None,"opening of esm datastore failed"+str(e)
+    #Validate JSON against JSON template
+    comp = (diff(j,json_template))
+    for key in comp.keys():
+        if key != 'catalog_file':
+            sys.exit(key, 'section of JSON does not refect template')
+
+    #Get CSV from JSON and open it
+    csv_path = j["catalog_file"]
+    catalog = pd.read_csv(csv_path)
+   
+    #Get required columns
+    req = (j["aggregation_control"]["groupby_attrs"])
+ 
+    #Look for empty values under required columns    
+    for column in req:
+        try:
+            if(catalog[column].isnull().values.any()):
+                sys.exit(catalog[column].name, 'contains empty values')
+        except:
+            sys.exit("Can't validate",column, "column. Check for typos.")
+
+if __name__ == '__main__':
+    main()
+
