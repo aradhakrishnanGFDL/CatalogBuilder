@@ -9,7 +9,6 @@ def getHeader(configyaml):
     :return: headerlist with all columns
     '''
     if configyaml:
-        #configyaml = configparser.Config(config)
         return configyaml.headerlist
     else:
         return builderconfig.headerlist

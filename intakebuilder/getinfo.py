@@ -82,7 +82,7 @@ def getInfoFromFilename(filename,dictInfo,logger):
 #adding this back to trace back some old errors
 def getInfoFromGFDLFilename(filename,dictInfo,logger):
     # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
-    if(filename.endswith(".nc") and not filename.startswith(".")):
+    if(filename.endswith(".nc")): #and not filename.startswith(".")):
         ncfilename = filename.split(".")
         varname = ncfilename[-2]
         dictInfo["variable_id"] = varname

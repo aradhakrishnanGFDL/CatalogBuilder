@@ -31,9 +31,9 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger,configyaml):
                # get info from filename
                filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
 
-               if filename.startswith("."):
-                   logger.debug("Skipping hidden file", filepath) 
-                   continue
+               #if filename.startswith("."):
+               #    logger.debug("Skipping hidden file", filepath)
+               #    continue
                if not filename.endswith(".nc"):
                    logger.debug("FILE does not end with .nc. Skipping", filepath)
                    continue
