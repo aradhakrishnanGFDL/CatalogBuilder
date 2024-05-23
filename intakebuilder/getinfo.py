@@ -4,8 +4,8 @@ import csv
 from csv import writer
 import os
 import xarray as xr
-import shutil as sh
-from intakebuilder import builderconfig 
+from intakebuilder import builderconfig, configparser 
+
 
 '''
 getinfo.py provides helper functions to get information (from filename, DRS, file/global attributes) needed to populate the catalog
@@ -82,7 +82,7 @@ def getInfoFromFilename(filename,dictInfo,logger):
 #adding this back to trace back some old errors
 def getInfoFromGFDLFilename(filename,dictInfo,logger):
     # 5 AR: get the following from the netCDF filename e.g. atmos.200501-200912.t_ref.nc
-    if(filename.endswith(".nc")):
+    if(filename.endswith(".nc")): #and not filename.startswith(".")):
         ncfilename = filename.split(".")
         varname = ncfilename[-2]
         dictInfo["variable_id"] = varname
@@ -105,7 +105,7 @@ def getInfoFromGFDLFilename(filename,dictInfo,logger):
         logger.debug("Filename not compatible with this version of the builder:"+filename)
     return dictInfo
 
-def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
+def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,configyaml):
     '''
     Returns info from project directory and the DRS path to the file
     :param dirpath:
@@ -117,20 +117,33 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo):
    #               "ensemble_member", "grid_label", "variable",
    #               "temporal subset", "version", "path"]
  
-#Grab values based on their expected position in path 
+   #Grab values based on their expected position in path 
     stemdir = dirpath.split("/")
    # adding back older versions to ensure we get info from builderconfig
     stemdir = dirpath.split("/")
-    nlen = len(builderconfig.output_path_template)
+
     #lets go backwards and match given input directory to the template, add things to dictInfo
     j = -1
     cnt = 1
+    if configyaml:
+        output_path_template = configyaml.output_path_template
+    else:
+        try:
+            output_path_template = builderconfig.output_path_template 
+        except:
+            sys.exit("No output_path_template found in builderconfig.py. Check configuration.")
+
+    nlen = len(output_path_template) 
     for i in range(nlen-1,0,-1):
       try:
-          if(builderconfig.output_path_template[i] != "NA"):
-             dictInfo[builderconfig.output_path_template[i]] = stemdir[(j)]
-      except:
-          sys.exit("oops in getInfoFromGFDLDRS"+str(i)+str(j)+builderconfig.output_path_template[i]+stemdir[j])
+          if(output_path_template[i] != "NA"):
+              try:
+                  dictInfo[output_path_template[i]] = stemdir[(j)]
+              except IndexError:
+                  print("Check configuration. Is output path template set correctly?")
+                  exit()
+      except IndexError:
+          sys.exit("oops in getInfoFromGFDLDRS"+str(i)+str(j)+output_path_template[i]+stemdir[j])
       j = j - 1
     cnt = cnt + 1
     # WE do not want to work with anythi:1
