@@ -32,9 +32,9 @@ def main(json_path):
     for column in req:
         try:
             if(catalog[column].isnull().values.any()):
-                sys.exit(catalog[column].name, 'contains empty values')
+                sys.exit(catalog[column].name + ' contains empty values')
         except:
-            sys.exit("Can't validate",column, "column. Check for typos.")
+            sys.exit("Can't validate " + column +  " column. Check for typos.")
 
 if __name__ == '__main__':
     main()
