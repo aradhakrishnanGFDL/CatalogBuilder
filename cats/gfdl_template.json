@@ -85,6 +85,7 @@
       "column_name": "dimensions",
       "vocabulary": "",
       "required": "enhanced"
+    }
   ],
   "assets": {
     "column_name": "path",
