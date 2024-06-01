@@ -3,7 +3,6 @@
 import click
 import json
 from jsondiff import diff
-import csv
 import pandas as pd
 import sys
 
@@ -32,8 +31,15 @@ def main(json_path,json_template_path):
     #Get required columns
     req = (j["aggregation_control"]["groupby_attrs"])
  
-    #Look for empty values under required columns    
+    #Check the csv headers for required columns
     for column in req:
+        if column not in catalog.columns:
+            sys.exit(f"The required column '{column}' does not exist in '{csv_path}'")
+
+    #Check for empty values for the required columns
+    for column in req:
+        if catalog[column].isnull().values.any():
+            sys.exit(f"The required column '{column}' contains empty values in '{csv_path}'")
         try:
             if(catalog[column].isnull().values.any()):
                 sys.exit(catalog[column].name + ' contains empty values')
