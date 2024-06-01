@@ -35,11 +35,6 @@ def main(json_path,json_template_path):
     for column in req:
         if column not in catalog.columns:
             sys.exit(f"The required column '{column}' does not exist in '{csv_path}'")
-
-    #Check for empty values for the required columns
-    for column in req:
-        if catalog[column].isnull().values.any():
-            sys.exit(f"The required column '{column}' contains empty values in '{csv_path}'")
         try:
             if(catalog[column].isnull().values.any()):
                 sys.exit(catalog[column].name + ' contains empty values')
