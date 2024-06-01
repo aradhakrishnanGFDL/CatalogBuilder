@@ -9,11 +9,15 @@ import sys
 
 @click.command()
 @click.argument('json_path', nargs = 1 , required = True)
-def main(json_path):
+@click.argument('json_template_path', nargs = 1 , required = False)
+def main(json_path,json_template_path):
 
     #Open JSON
     j = json.load(open(json_path))
-    json_template = json.load(open('cats/gfdl_template.json'))
+    if json_template_path:
+        json_template = json.load(open(json_template_path))
+    else:
+        json_template = json.load(open('cats/gfdl_template.json'))
 
     #Validate JSON against JSON template
     comp = (diff(j,json_template))
@@ -34,7 +38,7 @@ def main(json_path):
             if(catalog[column].isnull().values.any()):
                 sys.exit(catalog[column].name + ' contains empty values')
         except:
-            sys.exit("Can't validate " + column +  " column. Check for typos.")
+            print("Can't validate " + column +  " column. Check config file.")
 
 if __name__ == '__main__':
     main()
