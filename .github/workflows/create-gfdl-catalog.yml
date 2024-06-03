@@ -40,9 +40,15 @@ jobs:
           path: |
             cats/gfdl_autotest.csv
             cats/gfdl_autotest.json
+            cats/gfdl_autotest_from_yaml.csv
+            cats/gfdl_autotest_from_yaml.json
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v4
     - name: Test with pytest
       run: |
         conda install pytest
         $CONDA/envs/catalogbuilder/bin/pytest -v --runxfail
+    - name: Test for completeness
+      run: | 
+        $CONDA/envs/catalogbuilder/bin/python tests/test_catalog.py cats/gfdl_autotest.json
+        $CONDA/envs/catalogbuilder/bin/python tests/test_catalog.py cats/gfdl_autotest_from_yaml.json 
