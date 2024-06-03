@@ -35,13 +35,18 @@ def main(json_path,json_template_path):
     req = (j["aggregation_control"]["groupby_attrs"])
  
     #Check the csv headers for required columns/values
+    errors = 0
     for column in req:
         if column not in catalog.columns:
-            print(f"The required column '{column}' does not exist in '{csv_path}'. Double check config file.")
+            print(f"The required column '{column}' does not exist. Double check config file.")
+            errors += 1
 
         if(catalog[column].isnull().values.any()):
-            print(catalog[column].name + ' contains empty values')
-
+            print(f"'{column}' contains empty values.")
+            errors += 1
+    
+    if errors > 0:
+        sys.exit(f"Found {errors} errors.") 
 if __name__ == '__main__':
     main()
 
