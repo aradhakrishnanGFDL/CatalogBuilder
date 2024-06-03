@@ -27,19 +27,20 @@ def main(json_path,json_template_path):
     #Get CSV from JSON and open it
     csv_path = j["catalog_file"]
     catalog = pd.read_csv(csv_path)
-   
+    
+    if len(catalog.index) < 1:
+        sys.exit("Catalog has no values")
+
     #Get required columns
     req = (j["aggregation_control"]["groupby_attrs"])
  
-    #Check the csv headers for required columns
+    #Check the csv headers for required columns/values
     for column in req:
         if column not in catalog.columns:
-            sys.exit(f"The required column '{column}' does not exist in '{csv_path}'")
-        try:
-            if(catalog[column].isnull().values.any()):
-                sys.exit(catalog[column].name + ' contains empty values')
-        except:
-            print("Can't validate " + column +  " column. Check config file.")
+            print(f"The required column '{column}' does not exist in '{csv_path}'. Double check config file.")
+
+        if(catalog[column].isnull().values.any()):
+            print(catalog[column].name + ' contains empty values')
 
 if __name__ == '__main__':
     main()
