@@ -43,9 +43,11 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger,configyaml):
                # get info from filename
                #filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
                dictInfo["path"]=filepath
-               dictInfo = getinfo.getInfoFromGFDLFilename(filename,dictInfo, logger)
+               if "_" in filename:
+                 dictInfo = getinfo.getInfoFromFilename(filename,dictInfo, logger)
+               else:
+                 dictInfo = getinfo.getInfoFromGFDLFilename(filename,dictInfo, logger)
                dictInfo = getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo,configyaml)
-               #sys.exit()
                list_bad_modellabel = ["","piControl","land-hist","piClim-SO2","abrupt-4xCO2","hist-piAer","hist-piNTCF","piClim-ghg","piClim-OC","hist-GHG","piClim-BC","1pctCO2"]
                list_bad_chunklabel = ['DO_NOT_USE']
                if "source_id" in dictInfo: 
