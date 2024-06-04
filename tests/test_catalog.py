@@ -9,7 +9,8 @@ import sys
 @click.command()
 @click.argument('json_path', nargs = 1 , required = True)
 @click.argument('json_template_path', nargs = 1 , required = False)
-def main(json_path,json_template_path):
+@click.option('-tf', '--test-failure', is_flag=True, default = False, help="Errors are only printed. Program will not exit.")
+def main(json_path,json_template_path,test_failure):
 
     #Open JSON
     j = json.load(open(json_path))
@@ -29,7 +30,10 @@ def main(json_path,json_template_path):
     catalog = pd.read_csv(csv_path)
     
     if len(catalog.index) < 1:
-        sys.exit("Catalog has no values")
+        if test_failure:
+            print("Catalog has no values")
+        else:
+            sys.exit("Catalog has no values")
 
     #Get required columns
     req = (j["aggregation_control"]["groupby_attrs"])
@@ -46,7 +50,11 @@ def main(json_path,json_template_path):
             errors += 1
     
     if errors > 0:
-        sys.exit(f"Found {errors} errors.") 
+        if test_failure:
+            print(f"Found {errors} errors.")
+        else:
+            sys.exit(f"Found {errors} errors.")
+
 if __name__ == '__main__':
     main()
 
