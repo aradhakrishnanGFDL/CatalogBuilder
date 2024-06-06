@@ -22,3 +22,4 @@ dependencies:
   - click
   - intake-esm 
   - pyyaml
+  - jsondiff
