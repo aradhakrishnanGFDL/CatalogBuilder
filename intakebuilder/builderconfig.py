@@ -27,8 +27,10 @@ headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
 #The fourth directory is am5f3b1r0 which does not map to an existing header value. So we simply NA in output_path_template
 #for the fourth value.
 
-output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
 
+#output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
+
+output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
 output_file_template = ['modeling_realm','temporal_subset','variable_id']
 
 #OUTPUT FILE INFO is currently passed as command-line argument.

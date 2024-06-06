@@ -19,7 +19,7 @@
     },
     {
       "column_name": "frequency",
-      "vocabulary": ""
+      "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/CMIP6_frequency.json"
     },
     {
       "column_name": "modeling_realm",
@@ -47,7 +47,7 @@
     },
     {
       "column_name": "chunk_freq",
-      "vocabulary": ""
+      "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/GFDL_chunk_freq.json"
     },
     {
       "column_name": "grid_label",
