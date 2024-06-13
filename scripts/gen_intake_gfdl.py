@@ -56,6 +56,10 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
         input_path = configyaml.input_path
         output_path = configyaml.output_path
 
+    if not os.path.exists(input_path):
+        sys.exit("Input path does not exist. Adjust configuration.")
+    if not os.path.exists(Path(output_path).parent.absolute()):
+        sys.exit("Output path parent directory does not exist. Adjust configuration.")
     project_dir = input_path
     csv_path = "{0}.csv".format(output_path)
     json_path = "{0}.json".format(output_path) 
