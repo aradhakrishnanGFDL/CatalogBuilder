@@ -21,6 +21,7 @@ requirements:
     - xarray
     - pytest
     - conda-forge::intake-esm=2023.7.7
+    - jsondiff
 test:
   imports:
     - intakebuilder 
