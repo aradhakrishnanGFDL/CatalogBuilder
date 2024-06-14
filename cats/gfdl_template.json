@@ -3,71 +3,98 @@
   "attributes": [
     {
       "column_name": "activity_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
     },
     {
       "column_name": "institution_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
     },
     {
       "column_name": "source_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
     },
     {
       "column_name": "experiment_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": true
     },
     {
       "column_name": "frequency",
-      "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/CMIP6_frequency.json"
+      "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/CMIP6_frequency.json",
+      "required": true
     },
     {
-      "column_name": "modeling_realm",
-      "vocabulary": ""
+      "column_name": "realm",
+      "vocabulary": "",
+      "required": true
     },
     {
       "column_name": "table_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
     },
     {
       "column_name": "member_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
     },
     {
       "column_name": "grid_label",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
     },
     {
       "column_name": "variable_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": true
     },
     {
-      "column_name": "temporal_subset",
-      "vocabulary": ""
+      "column_name": "time_range",
+      "vocabulary": "",
+      "required": true
     },
     {
       "column_name": "chunk_freq",
-      "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/GFDL_chunk_freq.json"
-    },
-    {
-      "column_name": "grid_label",
-      "vocabulary": ""
+      "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/GFDL_chunk_freq.json",
+      "required": false
     },
     {
       "column_name":"platform",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
+    },
+    {
+      "column_name":"target",
+      "vocabulary": "",
+      "required": false
     },
     {
      "column_name": "cell_methods",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": "enhanced"
     },
     {
       "column_name": "path",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": true
+    },
+    {
+      "column_name": "dimensions",
+      "vocabulary": "",
+      "required": "enhanced"
     },
     {
       "column_name": "version_id",
-      "vocabulary": ""
+      "vocabulary": "",
+      "required": false
+    },
+    {
+      "column_name": "standard_name",
+      "vocabulary": "",
+      "required": "enhanced"
     }
   ],
   "assets": {
@@ -83,7 +110,7 @@
       "frequency",
       "table_id",
       "grid_label", 
-      "modeling_realm",
+      "realm",
       "member_id",
       "chunk_freq"
     ],
@@ -95,7 +122,7 @@
       },
       {
         "type": "join_existing",
-        "attribute_name": "temporal_subset",
+        "attribute_name": "time_range",
         "options": {
           "dim": "time",
           "coords": "minimal",
