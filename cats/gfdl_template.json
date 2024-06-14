@@ -59,7 +59,7 @@
     {
       "column_name": "chunk_freq",
       "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/GFDL_chunk_freq.json",
-      "required": true
+      "required": false
     },
     {
       "column_name":"platform",
@@ -90,6 +90,11 @@
       "column_name": "version_id",
       "vocabulary": "",
       "required": false
+    },
+    {
+      "column_name": "standard_name",
+      "vocabulary": "",
+      "required": "enhanced"
     }
   ],
   "assets": {
