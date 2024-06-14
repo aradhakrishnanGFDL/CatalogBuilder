@@ -27,7 +27,7 @@
       "required": true
     },
     {
-      "column_name": "modeling_realm",
+      "column_name": "realm",
       "vocabulary": "",
       "required": true
     },
@@ -52,7 +52,7 @@
       "required": true
     },
     {
-      "column_name": "temporal_subset",
+      "column_name": "time_range",
       "vocabulary": "",
       "required": true
     },
@@ -105,7 +105,7 @@
       "frequency",
       "table_id",
       "grid_label", 
-      "modeling_realm",
+      "realm",
       "member_id",
       "chunk_freq"
     ],
@@ -117,7 +117,7 @@
       },
       {
         "type": "join_existing",
-        "attribute_name": "temporal_subset",
+        "attribute_name": "time_range",
         "options": {
           "dim": "time",
           "coords": "minimal",
