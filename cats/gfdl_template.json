@@ -58,15 +58,15 @@
       "vocabulary": ""
     },
     {
-      "column_name": "platform",
-      "vocabulary": ""
-    },
-    {
      "column_name": "cell_methods",
       "vocabulary": ""
     },
     {
       "column_name": "path",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "version_id",
       "vocabulary": ""
     }
   ],
@@ -81,9 +81,10 @@
       "source_id",
       "experiment_id",
       "frequency",
-      "member_id",
+      "table_id",
+      "grid_label", 
       "modeling_realm",
-      "variable_id",
+      "member_id",
       "chunk_freq"
     ],
     "aggregations": [
