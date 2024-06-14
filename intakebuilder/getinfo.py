@@ -19,10 +19,9 @@ def getProject(projectdir,dictInfo):
     '''
     if ("archive" in projectdir or "pp" in projectdir): 
        project = "dev" 
-    else: 
-       projectdir.split("/")[-1]
-    dictInfo["activity_id"]=project
+       dictInfo["activity_id"]=project
     return dictInfo
+
 def getinfoFromYAML(dictInfo,yamlfile,miptable=None):
     import yaml
     with open(yamlfile) as f:
@@ -149,9 +148,10 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,configyaml):
     # WE do not want to work with anythi:1
     # ng that's not time series
     #TODO have verbose option to print message
-    if (dictInfo["cell_methods"] != "ts"):
-       #print("Skipping non-timeseries data")
-       return {}
+    if "cell_methods" in dictInfo.keys():
+      if (dictInfo["cell_methods"] != "ts"):
+         #print("Skipping non-timeseries data")
+         return {}
     return dictInfo
     '''
     if stemdir[len(stemdir)-3] == "ts":

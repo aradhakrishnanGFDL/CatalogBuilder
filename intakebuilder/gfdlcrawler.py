@@ -2,6 +2,7 @@ import os
 from intakebuilder import getinfo, builderconfig
 import sys
 import re
+import operator as op
 '''
 localcrawler crawls through the local file path, then calls helper functions in the package to getinfo.
 It finally returns a list of dict. eg {'project': 'CMIP6', 'path': '/uda/CMIP6/CDRMIP/NCC/NorESM2-LM/esm-pi-cdr-pulse/r1i1p1f1/Emon/zg/gn/v20191108/zg_Emon_NorESM2-LM_esm-pi-cdr-pulse_r1i1p1f1_gn_192001-192912.nc', 'variable': 'zg', 'mip_table': 'Emon', 'model': 'NorESM2-LM', 'experiment_id': 'esm-pi-cdr-pulse', 'ensemble_member': 'r1i1p1f1', 'grid_label': 'gn', 'temporal subset': '192001-192912', 'institute': 'NCC', 'version': 'v20191108'}
@@ -43,9 +44,11 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger,configyaml):
                # get info from filename
                #filepath = os.path.join(dirpath,filename)  # 1 AR: Bugfix: this needs to join dirpath and filename to get the full path to the file
                dictInfo["path"]=filepath
-               dictInfo = getinfo.getInfoFromGFDLFilename(filename,dictInfo, logger)
+               if (op.countOf(filename,".") == 1):
+                 dictInfo = getinfo.getInfoFromFilename(filename,dictInfo, logger)
+               else:
+                 dictInfo = getinfo.getInfoFromGFDLFilename(filename,dictInfo, logger)
                dictInfo = getinfo.getInfoFromGFDLDRS(dirpath, projectdir, dictInfo,configyaml)
-               #sys.exit()
                list_bad_modellabel = ["","piControl","land-hist","piClim-SO2","abrupt-4xCO2","hist-piAer","hist-piNTCF","piClim-ghg","piClim-OC","hist-GHG","piClim-BC","1pctCO2"]
                list_bad_chunklabel = ['DO_NOT_USE']
                if "source_id" in dictInfo: 

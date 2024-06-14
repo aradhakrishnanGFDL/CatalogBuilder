@@ -85,6 +85,11 @@
       "column_name": "dimensions",
       "vocabulary": "",
       "required": "enhanced"
+    },
+    {
+      "column_name": "version_id",
+      "vocabulary": "",
+      "required": false
     }
   ],
   "assets": {
@@ -98,9 +103,10 @@
       "source_id",
       "experiment_id",
       "frequency",
-      "member_id",
+      "table_id",
+      "grid_label", 
       "modeling_realm",
-      "variable_id",
+      "member_id",
       "chunk_freq"
     ],
     "aggregations": [
