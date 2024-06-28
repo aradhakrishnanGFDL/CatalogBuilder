@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+
+import click
+import json
+from jsondiff import diff
+import pandas as pd
+import sys
+
+@click.command()
+@click.argument('json_path', nargs = 1 , required = True)
+def main(json_path):
+
+    #Get/set cv path
+    cv_path = './CMIP6_frequency.json'
+
+    #Open JSON
+    cv = json.load(open(cv_path))
+    j = json.load(open(json_path))
+
+    #Get list of CVS (Need to determine how this information is passed)
+    freq_cv = []
+    for x in cv["frequency"]:
+    #    print(x)
+        freq_cv.append(x)
+    #print(freq_cv)
+ 
+    #Get CSV from JSON and open it
+    csv_path = j["catalog_file"]
+    catalog = pd.read_csv(csv_path)
+    
+    #Look for and grab all values that don't align with standard
+    bad_vocab = []
+    for y in catalog['frequency']:
+        if y not in freq_cv and y not in bad_vocab:
+            bad_vocab.append(y)
+
+    if len(bad_vocab) > 0:
+        print("Found bad frequency value(s):" + str(bad_vocab))
+    else:
+        print("Check passed.") 
+
+if __name__ == '__main__':
+    main()
+
