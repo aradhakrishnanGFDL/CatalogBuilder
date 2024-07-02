@@ -35,7 +35,7 @@ def main(json_path):
             bad_vocab.append(y)
 
     if len(bad_vocab) > 0:
-        print("Found bad frequency value(s):" + str(bad_vocab))
+        print("Found inconsistent value(s):" + str(bad_vocab))
     else:
         print("Check passed.") 
 
