@@ -54,9 +54,10 @@ def main(json_path,json_template_path,test_failure):
             print(f"The required column '{column}' does not exist in the csv. In other words, there is some inconsistency between the json and the csv file. Please check out info listed under aggregation_control and groupby_attrs in your json file and verify if those columns show up in the csv as well.")
             errors += 1
 
-        if(catalog[column].isnull().values.any()):
-            print(f"'{column}' contains empty values.")
-            errors += 1
+        if column in catalog.columns:
+            if(catalog[column].isnull().values.any()):
+                print(f"'{column}' contains empty values.")
+                errors += 1
     
     if errors > 0:
         if test_failure:
