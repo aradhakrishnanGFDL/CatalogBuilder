@@ -29,7 +29,10 @@ def main(json_path,json_template_path,test_failure):
     comp = (diff(j,json_template))
     for key in comp.keys():
         if key != 'catalog_file':
-            sys.exit(key, 'section of JSON does not refect template')
+            if test_failure:
+                print(key + ' section of JSON does not reflect template')
+            else:
+                sys.exit(key + ' section of JSON does not reflect template')
 
     #Get CSV from JSON and open it
     csv_path = j["catalog_file"]
