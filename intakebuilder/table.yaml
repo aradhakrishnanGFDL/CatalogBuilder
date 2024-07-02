@@ -1,9 +1,9 @@
 Amon:
     frequency: mon
-    modeling_realm: atmos
+    realm: atmos
 Omon:
     frequency: mon
-    modeling_realm: ocean
+    realm: ocean
 3hr:
     frequency: 3hr
-    modeling_realm: na
+    realm: na

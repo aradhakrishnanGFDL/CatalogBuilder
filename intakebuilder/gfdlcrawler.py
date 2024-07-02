@@ -16,8 +16,8 @@ def crawlLocal(projectdir, dictFilter,dictFilterIgnore,logger,configyaml):
     '''
     listfiles = []
     pat = None
-    if("modeling_realm" in dictFilter.keys()) & (("frequency") in dictFilter.keys()):
-        pat = re.compile('({}/{}/{}/{})'.format(dictFilter["modeling_realm"],"ts",dictFilter["frequency"],dictFilter["chunk_freq"]))
+    if("realm" in dictFilter.keys()) & (("frequency") in dictFilter.keys()):
+        pat = re.compile('({}/{}/{}/{})'.format(dictFilter["realm"],"ts",dictFilter["frequency"],dictFilter["chunk_freq"]))
     
     orig_pat = pat
 
