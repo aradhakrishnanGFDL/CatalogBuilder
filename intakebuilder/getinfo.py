@@ -35,9 +35,9 @@ def getinfoFromYAML(dictInfo,yamlfile,miptable=None):
             except KeyError:
                 dictInfo["frequency"] = "NA"
             try:
-                dictInfo["modeling_realm"] = mappings[miptable]["modeling_realm"]
+                dictInfo["realm"] = mappings[miptable]["realm"]
             except KeyError:
-                dictInfo["modeling_realm"]  = "NA"
+                dictInfo["realm"]  = "NA"
     return(dictInfo)
 
 def getStem(dirpath,projectdir):
@@ -112,7 +112,7 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,configyaml):
     :return:
     '''
    # we need thise dict keys "project", "institute", "model", "experiment_id",
-   #               "frequency", "modeling_realm", "mip_table",
+   #               "frequency", "realm", "mip_table",
    #               "ensemble_member", "grid_label", "variable",
    #               "temporal subset", "version", "path"]
  
@@ -153,22 +153,6 @@ def getInfoFromGFDLDRS(dirpath,projectdir,dictInfo,configyaml):
          #print("Skipping non-timeseries data")
          return {}
     return dictInfo
-    '''
-    if stemdir[len(stemdir)-3] == "ts":
-        dictInfo['experiment_id'] = stemdir[len(stemdir)-7]
-        dictInfo['frequency'] = stemdir[len(stemdir)-2]
-        dictInfo['member_id'] = 'n/a'
-        dictInfo['modeling_realm'] = stemdir[len(stemdir)-4]
-
-        #Finds last (a) and second to last (b) periods and grabs value between them
-        a = dictInfo['path'].rfind('.')
-        b = dictInfo['path'].rfind('.',0,dictInfo['path'].rfind('.')-1)
-        dictInfo['variable_id'] = dictInfo['path'][b+1:a]
-        dictInfo['chunk_frequency'] = stemdir[len(stemdir)-1]
-
-
-    return dictInfo
-    '''
 
 def getInfoFromDRS(dirpath,projectdir,dictInfo):
     '''
@@ -215,7 +199,7 @@ def getInfoFromGlobalAtts(fname,dictInfo,filexra=None):
             version = "NA"
         dictInfo["version"] = version
     realm = filexra["realm"]
-    dictInfo["modeling_realm"] = realm
+    dictInfo["realm"] = realm
     frequency = filexra["frequency"]
     dictInfo["frequency"] = frequency
     return dictInfo

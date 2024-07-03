@@ -13,7 +13,7 @@
 #with the ESM collection specification standards and the appropriate workflows.
 
 headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
-                  "frequency", "modeling_realm", "table_id",
+                  "frequency", "realm", "table_id",
                   "member_id", "grid_label", "variable_id",
                   "temporal_subset", "chunk_freq","grid_label","platform","dimensions","cell_methods","path"]
 
@@ -28,10 +28,8 @@ headerlist = ["activity_id", "institution_id", "source_id", "experiment_id",
 #for the fourth value.
 
 
-#output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
-
-output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','modeling_realm','cell_methods','frequency','chunk_freq']
-output_file_template = ['modeling_realm','temporal_subset','variable_id']
+output_path_template = ['NA','NA','source_id','NA','experiment_id','platform','custom_pp','realm','cell_methods','frequency','chunk_freq']
+output_file_template = ['realm','temporal_subset','variable_id']
 
 #OUTPUT FILE INFO is currently passed as command-line argument.
 #We will revisit adding a csvfile, jsonfile and logfile configuration to the builder configuration file in the future.
@@ -46,7 +44,7 @@ output_path = "" # ENTER NAME OF THE CSV AND JSON, THE SUFFIX ALONE. e.g catalog
 
 dictFilter = {}
 dictFilterIgnore = {}
-dictFilter["modeling_realm"]= 'atmos_cmip'
+dictFilter["realm"]= 'atmos_cmip'
 dictFilter["frequency"] = "monthly"
 dictFilter["chunk_freq"] = "5yr"
 dictFilterIgnore["remove"]= 'DO_NOT_USE'
