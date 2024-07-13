@@ -5,39 +5,84 @@ import json
 from jsondiff import diff
 import pandas as pd
 import sys
+import os
+import re
+import math
 
 @click.command()
-@click.argument('json_path', nargs = 1 , required = True)
-def main(json_path):
+@click.argument('json_path',nargs=1,required=True)
+@click.argument('cv_dir_path',nargs=1,required=False)
+def main(json_path=None, cv_dir_path=None):
 
-    #Get/set cv path
-    cv_path = './CMIP6_frequency.json'
+    bad_vocab = []
+    nan_list = []
+    vocab_list = []
 
-    #Open JSON
-    cv = json.load(open(cv_path))
+    #Open catalog json
     j = json.load(open(json_path))
 
-    #Get list of CVS (Need to determine how this information is passed)
-    freq_cv = []
-    for x in cv["frequency"]:
-    #    print(x)
-        freq_cv.append(x)
-    #print(freq_cv)
- 
     #Get CSV from JSON and open it
-    csv_path = j["catalog_file"]
+    csv_path = str(j["catalog_file"])
     catalog = pd.read_csv(csv_path)
-    
-    #Look for and grab all values that don't align with standard
-    bad_vocab = []
-    for y in catalog['frequency']:
-        if y not in freq_cv and y not in bad_vocab:
-            bad_vocab.append(y)
+
+    if cv_dir_path:
+    #Gather all CV's from CMIP6_CV Dir
+        for filename in os.listdir(cv_dir_path):
+            if str(filename).startswith("CMIP6"):
+                cv_type = re.search('CMIP6_(.*).json',str(filename)).group(1)
+
+                #Open JSON
+                cv = json.load(open(cv_dir_path+'/CMIP6_'+cv_type+'.json'))
+
+                if list(cv.keys())[0] == 'DRS':
+                    vals = list(cv.values())
+                    dir_structure = list(vals[0].values())[2]
+
+                else:
+                    vals = list(cv.values())
+
+                    if isinstance(vals[0],list):
+                        for vocab in vals[0]:
+                            vocab_list.append(vocab)
+
+                    else: 
+                        for vocab in vals[0].keys():
+                            vocab_list.append(vocab)
+                  
+                if cv_type in catalog:
+                    for y in catalog[cv_type]:
+
+                        if not isinstance(y,str) and math.isnan(y) and cv_type not in nan_list:
+                            nan_list.append(cv_type)
+
+                        if y not in vocab_list and y not in bad_vocab:
+                            if not isinstance(y,str) and math.isnan(y):
+                                continue
+                            else:
+                                bad_vocab.append(y)
+
+    else:
+        for x in j["attributes"]:
+            if list(x.values())[1] and str(list(x.values())[0]) != 'chunk_freq':
+                cv_url = list(x.values())[1]
+                df = pd.read_json(cv_url)
+                
+                for y in df['frequency'].keys():
+                    vocab_list.append(y)
+
+                for z in catalog[list(x.values())[0]]:
+                    if z not in vocab_list and z not in bad_vocab:
+                        if not isinstance(z,str) and math.isnan(z):
+                            continue
+                        else:
+                             bad_vocab.append(z)
+
+    print("WARNING: NaN's found in: " + str(nan_list))
 
     if len(bad_vocab) > 0:
         print("Found inconsistent value(s):" + str(bad_vocab))
     else:
-        print("Check passed.") 
+       print("Check passed.")
 
 if __name__ == '__main__':
     main()
