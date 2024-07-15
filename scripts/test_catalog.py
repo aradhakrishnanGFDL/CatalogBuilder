@@ -29,7 +29,10 @@ def main(json_path,json_template_path,test_failure):
     comp = (diff(j,json_template))
     for key in comp.keys():
         if key != 'catalog_file':
-            sys.exit(key, 'section of JSON does not refect template')
+            if test_failure:
+                print(key + ' section of JSON does not refect template')
+            else:
+                sys.exit(key + ' section of JSON does not refect template')
 
     #Get CSV from JSON and open it
     csv_path = j["catalog_file"]
@@ -51,9 +54,10 @@ def main(json_path,json_template_path,test_failure):
             print(f"The required column '{column}' does not exist in the csv. In other words, there is some inconsistency between the json and the csv file. Please check out info listed under aggregation_control and groupby_attrs in your json file and verify if those columns show up in the csv as well.")
             errors += 1
 
-        if(catalog[column].isnull().values.any()):
-            print(f"'{column}' contains empty values.")
-            errors += 1
+        if column in catalog.columns:
+            if(catalog[column].isnull().values.any()):
+                print(f"'{column}' contains empty values.")
+                errors += 1
     
     if errors > 0:
         if test_failure:
