@@ -14,6 +14,11 @@ import math
 @click.argument('cv_dir_path',nargs=1,required=False)
 def main(json_path=None, cv_dir_path=None):
 
+    ''' This test validates catalogs against CMIP6 or GFDL controlled vocabulary (CV) as provided by particular JSON schemas per vocabulary type. CMIP6 CV's are found in the WCRP-CMIP/CMIP6_CVs github repository. GFDL CV's are found in the NOAA-GFDL/CMIP6_CVs github repository.
+
+     JSON_PATH = Path to generated catalog JSON schema
+     CV_DIR_PATH = Path to CMIP6 CV Repository. '''
+
     bad_vocab = []
     nan_list = []
     vocab_list = []
@@ -34,13 +39,16 @@ def main(json_path=None, cv_dir_path=None):
                 #Open JSON
                 cv = json.load(open(cv_dir_path+'/CMIP6_'+cv_type+'.json'))
 
+                #Ignoring directory structure for now
                 if list(cv.keys())[0] == 'DRS':
-                    vals = list(cv.values())
-                    dir_structure = list(vals[0].values())[2]
+                    continue
+                    #vals = list(cv.values())
+                    #dir_structure = list(vals[0].values())[2]
 
                 else:
                     vals = list(cv.values())
 
+                    #Sometimes the CV formats are a little different :)
                     if isinstance(vals[0],list):
                         for vocab in vals[0]:
                             vocab_list.append(vocab)
@@ -49,27 +57,39 @@ def main(json_path=None, cv_dir_path=None):
                         for vocab in vals[0].keys():
                             vocab_list.append(vocab)
                   
+                #Sometimes our catalogs don't include the cv type as a column
                 if cv_type in catalog:
+
                     for y in catalog[cv_type]:
 
-                        if not isinstance(y,str) and math.isnan(y) and cv_type not in nan_list:
-                            nan_list.append(cv_type)
-
-                        if y not in vocab_list and y not in bad_vocab:
-                            if not isinstance(y,str) and math.isnan(y):
+                        #If there's NaN's this whole thing will break so let's get those out of the way
+                        if not isinstance(y,str) and math.isnan(y):
+                            #Add to the nan list 
+                            if cv_type not in nan_list:
+                                nan_list.append(cv_type)
                                 continue
                             else:
-                                bad_vocab.append(y)
+                                continue
+
+                        #Check for bad vocab
+                        if y not in vocab_list and y not in bad_vocab:
+                            bad_vocab.append(y)
 
     else:
+        #Parse through the JSON and find which CV is needed
+
         for x in j["attributes"]:
+
+            #Checks to see if the vocabulary field is filled out. If so, use the vocab. Also, we avoid chunk_freq because it's currently broken.
             if list(x.values())[1] and str(list(x.values())[0]) != 'chunk_freq':
                 cv_url = list(x.values())[1]
                 df = pd.read_json(cv_url)
-                
-                for y in df['frequency'].keys():
+
+                #This will probably break if formatting is different. Will adjust if necessary.
+                for y in df[list(x.values())[0]].keys():
                     vocab_list.append(y)
 
+                #Look for "bad vocab" in the CSV
                 for z in catalog[list(x.values())[0]]:
                     if z not in vocab_list and z not in bad_vocab:
                         if not isinstance(z,str) and math.isnan(z):
@@ -77,12 +97,13 @@ def main(json_path=None, cv_dir_path=None):
                         else:
                              bad_vocab.append(z)
 
-    print("WARNING: NaN's found in: " + str(nan_list))
+    if nan_list:
+        print("WARNING: NaN's found in: " + str(nan_list))
 
-    if len(bad_vocab) > 0:
+    if bad_vocab:
         print("Found inconsistent value(s):" + str(bad_vocab))
     else:
-       print("Check passed.")
+        print("Check passed.")
 
 if __name__ == '__main__':
     main()
