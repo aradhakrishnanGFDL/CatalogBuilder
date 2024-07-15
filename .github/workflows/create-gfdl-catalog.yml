@@ -29,7 +29,7 @@ jobs:
       run: python tests/make_sample_data.py
     - name: 'Generate catalog'
       run: |
-        $CONDA/envs/catalogbuilder/bin/python scripts/gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp cats/gfdl_autotest
+        $CONDA/envs/catalogbuilder/bin/python scripts/gen_intake_gfdl.py archive/am5/am5/am5f3b1r0/c96L65_am5f3b1r0_pdclim1850F/gfdl.ncrc5-deploy-prod-openmp/pp gfdl_autotest
     - name: 'Generate catalog with yaml'
       run: |
          $CONDA/envs/catalogbuilder/bin/python scripts/gen_intake_gfdl.py --config tests/test_config.yaml
@@ -38,8 +38,8 @@ jobs:
       with:
           name: workflow-artifacts1 
           path: |
-            cats/gfdl_autotest.csv
-            cats/gfdl_autotest.json
+            gfdl_autotest.csv
+            gfdl_autotest.json
             cats/gfdl_autotest_from_yaml.csv
             cats/gfdl_autotest_from_yaml.json
     - name: Download all workflow run artifacts
