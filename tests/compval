@@ -113,7 +113,7 @@ def main(json_path=None, cv_dir_path=None):
         print("WARNING: NaN's found in: " + str(nan_list))
 
     if bad_vocab:
-        print("Found inconsistent value(s):" + str(bad_vocab))
+        print("Found inconsistent value(s): " + str(bad_vocab))
     else:
         print("Check passed.")
 
