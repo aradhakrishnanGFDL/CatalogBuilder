@@ -1,4 +1,4 @@
-name: Use Conda enviroment yaml in the repo to import catalogbuilder and run pytests
+name: Build conda pkg and run tests 
 
 on: [push]
 
