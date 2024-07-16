@@ -58,7 +58,6 @@
     },
     {
       "column_name": "chunk_freq",
-      "vocabulary": "https://raw.githubusercontent.com/NOAA-GFDL/CMIP6_CVs/master/GFDL_chunk_freq.json",
       "required": false
     },
     {
