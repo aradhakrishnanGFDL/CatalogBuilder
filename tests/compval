@@ -37,7 +37,10 @@ def main(json_path=None, cv_dir_path=None):
                 cv_type = re.search('CMIP6_(.*).json',str(filename)).group(1)
 
                 #Open JSON
-                cv = json.load(open(cv_dir_path+'/CMIP6_'+cv_type+'.json'))
+                try:
+                    cv = json.load(open(cv_dir_path+'/CMIP6_'+cv_type+'.json'))
+                except:
+                    sys.exit("Unable to open json: " + cv_type)
 
                 #Ignoring directory structure for now
                 if list(cv.keys())[0] == 'DRS':
@@ -81,9 +84,12 @@ def main(json_path=None, cv_dir_path=None):
         for x in j["attributes"]:
 
             #Checks to see if the vocabulary field is filled out. If so, use the vocab. Also, we avoid chunk_freq because it's currently broken.
-            if list(x.values())[1] and str(list(x.values())[0]) != 'chunk_freq':
+            if list(x.values())[1]:
                 cv_url = list(x.values())[1]
-                df = pd.read_json(cv_url)
+                try:
+                    df = pd.read_json(cv_url)
+                except:
+                    sys.exit("Unable to open json: " + list(x.values())[0]) 
 
                 #This will probably break if formatting is different. Will adjust if necessary.
                 for y in df[list(x.values())[0]].keys():
