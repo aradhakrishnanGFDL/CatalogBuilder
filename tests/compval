@@ -89,7 +89,7 @@ def main(json_path=None, cv_dir_path=None):
                 try:
                     df = pd.read_json(cv_url)
                 except:
-                    sys.exit("Unable to open json: " + list(x.values())[0]) 
+                    sys.exit("Unable to open json: " + list(x.values())[0])
 
                 #This will probably break if formatting is different. Will adjust if necessary.
                 for y in df[list(x.values())[0]].keys():
