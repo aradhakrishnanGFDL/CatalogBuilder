@@ -30,18 +30,35 @@ template_path = os.path.join(package_dir, '../cats/gfdl_template.json')
 
 #Setting up argument parsing/flags
 @click.command()
-#TODO arguments dont have help message. So consider changing arguments to options?
-@click.argument('input_path',required=False,nargs=1)
-#,help='The directory path with the datasets to be cataloged. E.g a GFDL PP path till /pp')
-@click.argument('output_path',required=False,nargs=1)
-#,help='Specify output filename suffix only. e.g. catalog')
-@click.option('--config',required=False,type=click.Path(exists=True),nargs=1,help='Path to your yaml config, Use the config_template in intakebuilder repo')
-@click.option('--filter_realm', nargs=1)
-@click.option('--filter_freq', nargs=1)
-@click.option('--filter_chunk', nargs=1)
-@click.option('--overwrite', is_flag=True, default=False)
-@click.option('--append', is_flag=True, default=False)
-def main(input_path=None, output_path=None, config=None, filter_realm=None, filter_freq=None, filter_chunk=None,
+@click.option('-i',
+              '--input_path', 
+              required=False, 
+              nargs=1,
+              help="The directory path with the datasets to be cataloged. e.g. a GFDL PP path till /pp") 
+@click.option('-o',
+              '--output_path', 
+              required=False, 
+              nargs=1,
+              help="Specify output filename suffix only. e.g. 'catalog'")
+@click.option('-c',
+              '--config',
+              required=False,
+              type=click.Path(exists=True),
+              nargs=1,
+              help="Path to your yaml configuration, use the config_template in intakebuilder repo")
+@click.option('--filter_realm', 
+              nargs=1)
+@click.option('--filter_freq', 
+              nargs=1)
+@click.option('--filter_chunk', 
+              nargs=1)
+@click.option('--overwrite', 
+              is_flag=True, 
+              default=False)
+@click.option('--append', 
+              is_flag=True, 
+              default=False)
+def build(input_path=None, output_path=None, config=None, filter_realm=None, filter_freq=None, filter_chunk=None,
          overwrite=False, append=False):
 
     configyaml = None
@@ -109,4 +126,4 @@ def main(input_path=None, output_path=None, config=None, filter_realm=None, filt
 
 
 if __name__ == '__main__':
-    main()
+    build()
